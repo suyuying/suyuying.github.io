@@ -43,12 +43,6 @@ const config = {
       };
     },
   ],
-  scripts: [
-    {
-      src: "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js",
-      async: true,
-    },
-  ],
   presets: [
     [
       "classic",

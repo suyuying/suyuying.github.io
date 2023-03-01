@@ -13,7 +13,7 @@ export default function FooterWrapper(props: Props): JSX.Element {
   return (
     <>
       <Footer {...props} />
-      {!no_comments && (
+      {/* {!no_comments && (
         <DiscussionEmbed
           shortname="123"
           config={{
@@ -22,7 +22,7 @@ export default function FooterWrapper(props: Props): JSX.Element {
             language: "zh-TW",
           }}
         />
-      )}
+      )} */}
     </>
   );
 }

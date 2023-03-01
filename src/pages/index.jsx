@@ -9,7 +9,7 @@ export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout>
-      <section className="header relative  items-center flex h-screen max-h-860-px">
+      <section className="header relative  items-center flex h-screen max-h-860-px dark:bg-black">
         <div className="container  items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0 ">

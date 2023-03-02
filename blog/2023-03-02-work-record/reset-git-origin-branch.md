@@ -16,4 +16,14 @@ git push --force origin master
 git diff master..origin/master
 ```
 
+```
+pull request
+settings -> branches->Branch protection rules
+// if you just want to try merger just choose
+Require status checks to pass before merging
+// if you choose Require a pull request before merging
+// will get error Pull request authors cannot approve their own pull requests!
+
+```
+
 [參考網址](https://stackoverflow.com/questions/17667023/git-how-to-reset-origin-master-to-a-commit)

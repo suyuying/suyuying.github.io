@@ -85,7 +85,7 @@ const config = {
         title: "Zaxro",
         logo: {
           alt: "Zaxro",
-          src: "img/githubLogoV1.svg",
+          src: "img/logo.svg",
         },
         items: [
           {

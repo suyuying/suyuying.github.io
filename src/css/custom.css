@@ -1,3 +1,20 @@
+.bg-img-light {
+  background-image: url("/img/vintage-g0ecad5e69_1920.jpg");
+}
+.bg-img-dark {
+  background-image: url("/img/bgdark.jpg");
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -28,20 +45,3 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
-.bg-img-light {
-  background-image: url("/img/vintage-g0ecad5e69_1920.jpg");
-}
-.bg-img-dark {
-  background-image: url("/img/bgdark.jpg");
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

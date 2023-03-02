@@ -380,22 +380,12 @@ export default function MyResume() {
                         style={{ background: "rgb(255, 244, 244)" }}
                       >
                         <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2021-2023
+                          2017-2019
                         </span>
-                        <h3 className="text-xl "> Ph.D in Horriblensess</h3>
+                        <h3 className="text-xl "> Master of Science</h3>
                         <p className="dark:text-[#b7b7b7]">
-                          ABC University, Los Angeles, CA
+                          National Taiwan University, Taiwan
                         </p>
-                      </div>
-                      <div
-                        className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2"
-                        style={{ background: "rgb(255, 241, 251)" }}
-                      >
-                        <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2019 - Present
-                        </span>
-                        <h3 className="text-xl "> Sr. Software Tester </h3>
-                        <p className="dark:text-[#b7b7b7]">Google Inc.</p>
                       </div>
                       <div
                         className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2"
@@ -404,9 +394,9 @@ export default function MyResume() {
                         <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
                           2021
                         </span>
-                        <h3 className="text-xl "> Best Developer</h3>
+                        <h3 className="text-xl "> Network Engineer Degree</h3>
                         <p className="dark:text-[#b7b7b7]">
-                          University Of Melbourne, NA
+                          Institute for Information Industry
                         </p>
                       </div>
                     </div>
@@ -433,34 +423,10 @@ export default function MyResume() {
                         style={{ background: "rgb(238, 245, 250)" }}
                       >
                         <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2017-2021
+                          2021 - Present
                         </span>
-                        <h3 className="text-xl "> Computer Science </h3>
-                        <p className="dark:text-[#b7b7b7]">
-                          Imperialize Technical Institute
-                        </p>
-                      </div>
-                      <div
-                        className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2"
-                        style={{ background: "rgb(242, 244, 255)" }}
-                      >
-                        <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2015-2017
-                        </span>
-                        <h3 className="text-xl "> Cr. Web Developer </h3>
-                        <p className="dark:text-[#b7b7b7]">ib-themes ltd.</p>
-                      </div>
-                      <div
-                        className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2"
-                        style={{ background: "rgb(238, 245, 250)" }}
-                      >
-                        <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2008
-                        </span>
-                        <h3 className="text-xl "> Best Writter </h3>
-                        <p className="dark:text-[#b7b7b7]">
-                          Online Typodev Soluation Ltd.
-                        </p>
+                        <h3 className="text-xl "> IT Engineer </h3>
+                        <p className="dark:text-[#b7b7b7]">Cloud Miner Ltd.</p>
                       </div>
                     </div>
                   </div>
@@ -664,22 +630,6 @@ export default function MyResume() {
                   </div>
                 </div>
               </div>
-              <footer className="overflow-hidden rounded-b-2xl bg-slate-50 dark:bg-black">
-                <div className="container">
-                  <p className="text-center py-6 text-gray-lite dark:text-color-910 ">
-                    © 2023 All Rights Reserved by{" "}
-                    <Link
-                      className="hover:text-[#FA5252] duration-300 transition"
-                      to="https://themeforest.net/user/ib-themes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      ib-themes
-                    </Link>
-                    .
-                  </p>
-                </div>
-              </footer>
             </div>
           </div>
         </div>

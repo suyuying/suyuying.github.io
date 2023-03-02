@@ -7,9 +7,10 @@ export default function Highlight({ children, color }) {
     <span
       style={{
         backgroundColor: color,
-        borderRadius: "2px",
+        borderRadius: "20px",
         color: "#fff",
-        padding: "0.2rem",
+        padding: "6px",
+        cursor: "pointer",
       }}
     >
       {children}

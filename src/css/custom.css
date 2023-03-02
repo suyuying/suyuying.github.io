@@ -11,6 +11,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 @tailwind base;
 @tailwind components;
@@ -23,6 +25,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  /* --ifm-font-family-base: "Open Sans Noto Sans TC'"; */
+  --ifm-line-height-base: 1.8;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -31,6 +35,7 @@
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -45,4 +50,73 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   background-color: #171515;
+  /* --ifm-background-color: #171515;
+  --ifm-background-surface-color: #171515; */
+}
+@media screen and (max-width: 996px) {
+  :root {
+    --ifm-font-size-base: 20px;
+  }
+  nav .navbar__items {
+    font-size: 25px;
+    font-family: Caveat;
+  }
+  article header h1 {
+    font-size: 1.5rem !important;
+  }
+  .hero .hero__title {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 997px) {
+  :root {
+    --ifm-font-size-base: 18px;
+  }
+  nav .navbar__items {
+    font-size: 30px;
+    font-family: Caveat;
+  }
+  article header h1 {
+    font-size: 2rem !important;
+  }
+}
+
+html {
+  font-family: Noto Sans TC, sans-serif;
+}
+html h1,
+html h2,
+html h3,
+html h4,
+html h5,
+html h6 {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  --ifm-heading-color: white;
+}
+
+article h1,
+article h2,
+article h3 {
+  text-transform: uppercase;
+  font-family: Caveat, Noto Sans TC;
+}
+markdown {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.markdown > h1 {
+  font-weight: 700;
+}
+
+.markdown > h2 {
+  font-weight: 700;
 }

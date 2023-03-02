@@ -43,6 +43,7 @@ const config = {
       };
     },
   ],
+
   presets: [
     [
       "classic",
@@ -59,7 +60,7 @@ const config = {
         blog: {
           showReadingTime: true, // 如果设置为 false，「x 分钟阅读」的文字就不会显示
 
-          blogSidebarTitle: "全部博文",
+          blogSidebarTitle: "All posts",
           blogSidebarCount: "ALL",
           blogTitle: "Docusaurus blog!", //這個for seo
           blogDescription: "A Docusaurus powered blog!",
@@ -75,7 +76,21 @@ const config = {
       }),
     ],
   ],
-
+  stylesheets: [
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    },
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossorigin: "anonymous",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap",
+    },
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({

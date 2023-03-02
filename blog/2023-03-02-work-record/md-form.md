@@ -1,5 +1,4 @@
 ---
-slug: / #不定義會使用年月日檔名作為route
 title: markdown語法紀錄
 description: demo在Docusaurus官網看到的md格式使用範例，給不熟悉md語法的使用者查詢格式用
 authors: suyuying

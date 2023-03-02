@@ -8,7 +8,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Zaxro Blog",
   tagline: "Dinosaurs are cool",
-  favicon: "img/githubLogoV1.ico",
+  favicon: "img/githubLogoV1.svg",
   themes: ["@docusaurus/theme-live-codeblock"],
   // Set the production url of your site here
   url: "https://suyuying.github.io",
@@ -80,12 +80,12 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: "img/docusaurus-social-card.jpg",
+      image: "img/githubLogoV1.svg",
       navbar: {
         title: "Zaxro",
         logo: {
           alt: "Zaxro",
-          src: "img/logo.svg",
+          src: "img/githubLogoV1.svg",
         },
         items: [
           {

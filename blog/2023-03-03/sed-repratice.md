@@ -2,7 +2,7 @@
 title: linux三大神器之一 sed複習筆記
 description: 整理工作中有使用到的資料
 authors: suyuying
-tags: [css, google font]
+tags: [linux, sed]
 ---
 
 一般打印

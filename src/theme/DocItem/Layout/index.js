@@ -64,7 +64,6 @@ export default function DocItemLayout({ children }) {
           inputPosition="top"
           theme={colorMode}
           lang="en"
-          loading="lazy"
         />
       </div>
       {docTOC.desktop && <div className="col col--3">{docTOC.desktop}</div>}

@@ -1,0 +1,21 @@
+---
+title: linux三大神器之一 sed複習筆記
+description: 整理工作中有使用到的資料
+authors: suyuying
+tags: [css, google font]
+---
+
+一般打印
+印 5~7 行 其他行數 silence
+
+```
+cat -n xxxx.md | sed -n '5,7p'
+
+```
+
+印出指定字樣範圍
+從有關鍵字為 QOO 那一行到以}為開頭的那一行(^代表正則開頭字元)
+
+```
+sed -n "/QOO/,/^}/p" common.js
+```

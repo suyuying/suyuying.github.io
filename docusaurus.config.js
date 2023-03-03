@@ -59,11 +59,9 @@ const config = {
         },
         blog: {
           showReadingTime: true, // 如果设置为 false，「x 分钟阅读」的文字就不会显示
-
-          blogSidebarTitle: "All posts",
-          blogSidebarCount: "ALL",
-          blogTitle: "Docusaurus blog!", //這個for seo
-          blogDescription: "A Docusaurus powered blog!",
+          blogTitle: "Zaxro blog!", //這個for seo
+          blogDescription:
+            "A blog for recording note of coding and daily life!",
           // postsPerPage: 'ALL',//預設是每一page 10 頁，但是可以用這個可以全show在同一頁
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.

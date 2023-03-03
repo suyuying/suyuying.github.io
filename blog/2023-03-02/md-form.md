@@ -333,3 +333,97 @@ Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
   ))}
 </ul>
 ```
+
+<>
+
+<ol>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex max-h-[24px]  w-full max-w-[24px]  items-center justify-center rounded-full text-base  text-white"
+    >
+      1
+    </span>
+    Lorem ipsum dolor sit amet
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      2
+    </span>
+    It is a long established fact reader
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      3
+    </span>
+    The point of using Lorem Ipsum
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      4
+    </span>
+    There are many variations of passages
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      5
+    </span>
+    If you are going to use a of Lorem
+  </li>
+</ol>
+</>
+
+```
+<>
+
+<ol>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex max-h-[24px]  w-full max-w-[24px]  items-center justify-center rounded-full text-base  text-white"
+    >
+      1
+    </span>
+    Lorem ipsum dolor sit amet
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      2
+    </span>
+    It is a long established fact reader
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      3
+    </span>
+    The point of using Lorem Ipsum
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      4
+    </span>
+    There are many variations of passages
+  </li>
+  <li class="text-body-color mb-4 flex text-base">
+    <span
+      class="bg-primary mr-2 flex h-6 w-full max-w-[24px] items-center justify-center rounded-full text-base text-white"
+    >
+      5
+    </span>
+    If you are going to use a of Lorem
+  </li>
+</ol>
+</>
+```

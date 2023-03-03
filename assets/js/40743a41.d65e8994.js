@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[1777],{755:e=>{e.exports=JSON.parse('{"label":"google font","permalink":"/blog/tags/google-font","allTagsPath":"/blog/tags","count":2}')}}]);

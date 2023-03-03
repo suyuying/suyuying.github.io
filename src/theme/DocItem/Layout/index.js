@@ -53,20 +53,18 @@ export default function DocItemLayout({ children }) {
         </div>
         <br></br>
         <Giscus
-          id="comments"
+          src="https://giscus.app/client.js"
           repo="suyuying/suyuying.github.io"
           repoId="R_kgDOJD0JLw"
           category="Announcements"
           categoryId="DIC_kwDOJD0JL84CUnZo"
           mapping="pathname"
-          reactionsEnabled="1"
+          reactionsEnabled="0"
           emitMetadata="0"
-          inputPosition="bottom"
+          inputPosition="top"
           theme={colorMode}
           lang="en"
-          crossOrigin="anonymous"
           loading="lazy"
-          async
         />
       </div>
       {docTOC.desktop && <div className="col col--3">{docTOC.desktop}</div>}

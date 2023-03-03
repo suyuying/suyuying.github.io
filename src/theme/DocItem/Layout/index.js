@@ -11,8 +11,8 @@ import DocItemTOCDesktop from "@theme/DocItem/TOC/Desktop";
 import DocItemContent from "@theme/DocItem/Content";
 import DocBreadcrumbs from "@theme/DocBreadcrumbs";
 import styles from "./styles.module.css";
-import Giscus from "@giscus/react";
 import { useColorMode } from "@docusaurus/theme-common";
+import Giscus from "@giscus/react";
 
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
@@ -36,6 +36,7 @@ function useDocTOC() {
 export default function DocItemLayout({ children }) {
   const docTOC = useDocTOC();
   const { colorMode } = useColorMode();
+
   return (
     <div className="row">
       <div className={clsx("col", !docTOC.hidden && styles.docItemCol)}>
@@ -51,6 +52,22 @@ export default function DocItemLayout({ children }) {
           <DocItemPaginator />
         </div>
         <br></br>
+        <Giscus
+          id="comments"
+          repo="suyuying/suyuying.github.io"
+          repoId="R_kgDOJD0JLw"
+          category="Announcements"
+          categoryId="DIC_kwDOJD0JL84CUnZo"
+          mapping="pathname"
+          reactionsEnabled="1"
+          emitMetadata="0"
+          inputPosition="bottom"
+          theme={colorMode}
+          lang="en"
+          crossOrigin="anonymous"
+          loading="lazy"
+          async
+        />
       </div>
       {docTOC.desktop && <div className="col col--3">{docTOC.desktop}</div>}
     </div>

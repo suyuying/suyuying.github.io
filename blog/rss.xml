@@ -4,10 +4,33 @@
         <title>Zaxro Blog Blog</title>
         <link>https://suyuying.github.io/blog</link>
         <description>Zaxro Blog Blog</description>
-        <lastBuildDate>Fri, 03 Mar 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 06 Mar 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[github action demo,deploy to s3]]></title>
+            <link>https://suyuying.github.io/blog/2023/03/06/github-action</link>
+            <guid>https://suyuying.github.io/blog/2023/03/06/github-action</guid>
+            <pubDate>Mon, 06 Mar 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[use github action to deploy a react structured page to s3]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="基本介紹">基本介紹<a href="#基本介紹" class="hash-link" aria-label="Direct link to 基本介紹" title="Direct link to 基本介紹">​</a></h2><p>GitHub Action 是 continuous integration and continuous delivery (CI/CD)平台，
+除了一般的 build test deploy 他另外有給專案管理的各種小功能，例如給 pull request 打標籤。
+提供免費的 runner 幫你執行任務，也接受 self-hosted runner。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="github-actions-基本元素">GitHub Actions 基本元素<a href="#github-actions-基本元素" class="hash-link" aria-label="Direct link to GitHub Actions 基本元素" title="Direct link to GitHub Actions 基本元素">​</a></h2><div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Workflow-&gt; Job-&gt;Step-&gt;Action</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg class="copyButtonIcon_y97N" viewBox="0 0 24 24"><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg class="copyButtonSuccessIcon_LjdS" viewBox="0 0 24 24"><path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="workflow">Workflow<a href="#workflow" class="hash-link" aria-label="Direct link to Workflow" title="Direct link to Workflow">​</a></h3><p>一個 repository 可以有多個 workflow,每個 workflow 做的事定義在 yml， 包含一次要運行的整個過程，可以用手動觸發或者 yml 檔內制定條件觸發。
+舉例：可以用一條 workflow 做 build and test,另一個 workflow 做 deploy</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="events">Events<a href="#events" class="hash-link" aria-label="Direct link to Events" title="Direct link to Events">​</a></h3><p>觸發 Workflow 的事件稱為 Events。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="jobs">Jobs<a href="#jobs" class="hash-link" aria-label="Direct link to Jobs" title="Direct link to Jobs">​</a></h3><p>由多個 steps 組成，每個 step 可以是一個 shell script 或者 action，step 會依序在同一個 runner 執行，並可以共享 data，
+舉例來說，build 完後的檔案，可以傳給下一個 test step 測試 build 結果。</p><p>一個 workflow 可以有多個 job,job 間彼此預設是平行執行，也可以設定 dependencies 等待另一個 job，
+舉例來說，一包 code 裡面要 build 多個檔案，每個 build 過程可以是一個 job 彼此平行，等到都 build 結束，在執行統一到 packaging 工作。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="actions">Actions<a href="#actions" class="hash-link" aria-label="Direct link to Actions" title="Direct link to Actions">​</a></h3><p>動作是執行複雜但經常重複任務的 GitHub Action 平台的自定義應用程序，簡單說就是把某些會重複出現的 step 做成 module 並使用，因為這格原因，所以也可以引用別人寫好得，或自建得，就像是寫程式用的 package 一樣。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="runners">Runners<a href="#runners" class="hash-link" aria-label="Direct link to Runners" title="Direct link to Runners">​</a></h3><p>執行 workflow 的機器。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="demo">Demo<a href="#demo" class="hash-link" aria-label="Direct link to Demo" title="Direct link to Demo">​</a></h2><h3 class="anchor anchorWithStickyNavbar_LWe7" id="官網-understand-github-actions">官網 understand github actions<a href="#官網-understand-github-actions" class="hash-link" aria-label="Direct link to 官網 understand github actions" title="Direct link to 官網 understand github actions">​</a></h3><div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">name: learn-github-actions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">run-name: ${{ github.actor }} is learning GitHub Actions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">on: [push]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">jobs:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  check-bats-version:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    runs-on: ubuntu-latest</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    steps:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - uses: actions/checkout@v3</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - uses: actions/setup-node@v3</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        with:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          node-version: '14'</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - run: npm install -g bats</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - run: bats -v</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg class="copyButtonIcon_y97N" viewBox="0 0 24 24"><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg class="copyButtonSuccessIcon_LjdS" viewBox="0 0 24 24"><path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div><div class="theme-admonition theme-admonition-info alert alert--info admonition_LlT9"><div class="admonitionHeading_tbUL"><span class="admonitionIcon_kALy"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_S0QG"><p>1.<a href="https://medium.com/starbugs/%E5%AF%A6%E4%BD%9C%E9%96%8B%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7-%E8%88%87-github-actions-%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%9B%B8%E9%81%87-3dd2d70eeb" target="_blank" rel="noopener noreferrer">實作開源小工具，與 Github Actions 的第一次相遇！</a></p><ol start="2"><li><a href="https://docs.github.com/en/actions/quickstart" target="_blank" rel="noopener noreferrer">github action quick start 官網</a>
+:::</li></ol></div></div>]]></content:encoded>
+            <category>cloud</category>
+        </item>
+        <item>
+            <title><![CDATA[deploy my backend server]]></title>
+            <link>https://suyuying.github.io/blog/2023/03/03/cloud-container</link>
+            <guid>https://suyuying.github.io/blog/2023/03/03/cloud-container</guid>
+            <pubDate>Fri, 03 Mar 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[整理網路提供雲端資源，部署服務，並將自己的code做到CICD部署]]></description>
+            <category>cloud</category>
+        </item>
         <item>
             <title><![CDATA[docusaurus add gitcus comment system but meet giscus.app refused to connect.]]></title>
             <link>https://suyuying.github.io/blog/2023/03/03/comment-in-docusaurus</link>
@@ -28,19 +51,6 @@
             <category>dns</category>
             <category>Domain Hijacking</category>
             <category>DNS Poisoning</category>
-        </item>
-        <item>
-            <title><![CDATA[githug action 學習筆記]]></title>
-            <link>https://suyuying.github.io/blog/2023/03/03/github-action</link>
-            <guid>https://suyuying.github.io/blog/2023/03/03/github-action</guid>
-            <pubDate>Fri, 03 Mar 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[整理網路提供的github  action教學，將自己的code做到CICD部署]]></description>
-            <content:encoded><![CDATA[<p>需求：
-免費的 server 跟 db
-server 部分免費滿多的，以下提供：</p><p>db 基本上就沒有了，都 12 個月試用居多，再找找看，不行就先用 squlite 頂著</p><p>規劃：
-1 台 api server(fastapi) + db 前端用 github page 託管頁面打 api server</p><p>目標：
-code 更新以後，透過 CICD(git hub action)部署 api server and github page，然後測試</p>]]></content:encoded>
-            <category>github action</category>
         </item>
         <item>
             <title><![CDATA[linux三大神器之一 sed複習筆記]]></title>

@@ -13,6 +13,8 @@ tags: [docusaurus, comment system]
 
 :::
 
+<!--truncate-->
+
 :::info
 
 1.  [blog 加 disqus system by disqus](https://madrus4u.com/blog/blog-comments)

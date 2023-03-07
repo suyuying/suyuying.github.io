@@ -11,6 +11,8 @@ GitHub Action 是 continuous integration and continuous delivery (CI/CD)平台�
 除了一般的 build test deploy 他另外有給專案管理的各種小功能，例如給 pull request 打標籤。
 提供免費的 runner 幫你執行任務，也接受 self-hosted runner。
 
+<!--truncate-->
+
 ## GitHub Actions 基本元素
 
 ```

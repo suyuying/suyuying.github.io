@@ -27,9 +27,12 @@ tags: [dns, Domain Hijacking, DNS Poisoning]
 
 </ol>
 
-<p>小結：：劫持是官方被駭或故意改的（大陸常發生），污染是官方的 dns server 被駭。
+<p>小結：劫持是官方被駭或故意改的（大陸常發生），污染是路由到dns server過程某台路由器被駭。
 </p>
+
 </>
+
+<!--truncate-->
 
 :::info
 參考資料:

@@ -16,6 +16,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Highlight from "@site/src/components/Highlight";
 ```
+<!--truncate-->
 
 <Highlight color="#25c2a0">Docusaurus green</Highlight> and <Highlight color="#1877F2">
 Facebook blue

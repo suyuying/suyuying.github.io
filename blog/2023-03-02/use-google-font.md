@@ -21,6 +21,8 @@ body {
 </head>
 ```
 
+<!--truncate-->
+
 ### 2.在 css import
 
 ```jsx title="scr/css/custom.css"

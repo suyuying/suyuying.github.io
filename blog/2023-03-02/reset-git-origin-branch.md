@@ -8,6 +8,8 @@ tags: [git]
 需要使用 git push --force,基本上 main branch 都會是保護的，
 也可以考慮用 pull request 先進行測試(不能自己發 pull request 自己審)，過了再 merge。
 
+<!--truncate-->
+
 ```
 git checkout master
 git reset --hard e3f1e37

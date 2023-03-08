@@ -16,11 +16,14 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Highlight from "@site/src/components/Highlight";
 ```
+
 <!--truncate-->
 
 <Highlight color="#25c2a0">Docusaurus green</Highlight> and <Highlight color="#1877F2">
 Facebook blue
 </Highlight> are my favorite colors.
+
+
 
 I can write **Markdown** alongside my _JSX_!
 
@@ -428,3 +431,15 @@ Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 </ol>
 </>
 ```
+
+actions/checkout@v3 參數篇
+
+- `ref`：要檢出的分支、標籤或提交 ID。
+- `repository`：要檢出的儲存庫名稱。
+- `submodules`：是否檢出子模組。
+- `ssh-key`：用於從儲存庫獲取程式碼的 SSH 金鑰。
+- `persist-credentials`：是否在持久化工作區時保存 GITHUB_TOKEN 和 SSH_AUTH_SOCK 環境變數。
+- `fetch-depth`：要檢出的提交數量。
+- `lfs`：是否下載 Git LFS 文件。
+- `clean`：是否在檢出前運行 `git clean`。
+- `workspace`：檢出的儲存庫的目錄。

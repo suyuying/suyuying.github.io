@@ -1,8 +1,8 @@
 ---
-title: Introduction to Azure container service, and deploy my backend server in azure
-description: 使用azure雲端資源，並部署服務
+title: Introduction and demo Azure container service
+description: 介紹azure雲端container資源時，並分析如何選擇服務，最後提供自己使用上遇到的問題及解法
 authors: suyuying
-tags: [cloud]
+tags: [cloud, Azure]
 ---
 
 :::tip
@@ -167,3 +167,10 @@ docker buildx build . --platform linux/arm64,linux/amd64 -t fastapiserver.azurec
 之後使用這個 image 時，docker 內建就會幫你判斷是哪個系統，並起服務！
 
 至於，buildx 跟--use 跟 context 這幾個 docker 指令也是第一次遇到，完全不熟，所以之後會再補上
+
+### ACR 換 git hub container
+
+因為用 ACR 要錢，然後 free plan 也不給開 private registry，所以可以用 github or gitlab，
+因為沒特別想用 private，所以就用 git hub 吧。
+
+### 使用 github action

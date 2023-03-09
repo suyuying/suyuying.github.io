@@ -18,6 +18,8 @@ tags: [cloud, Azure]
 
 server 部分免費滿多的，但都 12 個月試用居多，最後就先挑了 azure，之後會補上 gcp 、 AWS。
 
+ps: [render](https://render.com/) 後來同事推薦，這個是免費的，之後補 CICD 部署到這裡的方法！
+
 db 基本上就沒有了，免費的有 heroku clear db 不過他只有 5MB 可以用...... 所以目前還是乖乖用 squlite 吧
 
 <!--truncate-->
@@ -173,4 +175,4 @@ docker buildx build . --platform linux/arm64,linux/amd64 -t fastapiserver.azurec
 因為用 ACR 要錢，然後 free plan 也不給開 private registry，所以可以用 github or gitlab，
 因為沒特別想用 private，所以就用 git hub 吧。
 
-### 使用 github action
+### 使用 github action 部署到 azure web container

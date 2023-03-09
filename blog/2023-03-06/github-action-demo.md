@@ -50,7 +50,7 @@ Workflow-> Job->Step->Action
 
 ## Demo
 
-### 官網 understand github actions
+### demo github actions
 
 ```
 name: learn-github-actions
@@ -96,7 +96,7 @@ jobs:
 
 `name`: 定義該 run 的名字，不定義就只用 Run + 後面執行 run 得指令
 
-補充:
+### 補充 actions 寫法
 
 actions/checkout@v3 是 GitHub Action 中一個常用的 action，用於將程式碼倉庫的程式碼檢出到工作區。v3 是這個 action 的版本號。這個 action 的代碼倉庫中，有一個 action.yml 文件，定義了這個 action 的輸入和輸出參數。具體如下：
 

@@ -111,7 +111,7 @@ Azure Container Apps。
 
 [官網教學](https://learn.microsoft.com/en-us/azure/app-service/quickstart-custom-container?pivots=container-linux-vscode&WT.mc_id=UI-AQC&tabs=dotnet)
 
-執行的過程都是依據教學，但 Azure 官網教學好像是有名的照著做做不出來。所以記錄一下遇到的問題。
+執行的過程都是依據教學，但之後換自己的 Dockerfile 有遇到狀況，所以記錄一下遇到的問題。
 
 ### 遇到的問題
 
@@ -174,5 +174,3 @@ docker buildx build . --platform linux/arm64,linux/amd64 -t fastapiserver.azurec
 
 因為用 ACR 要錢，然後 free plan 也不給開 private registry，所以可以用 github or gitlab，
 因為沒特別想用 private，所以就用 git hub 吧。
-
-### 使用 github action 部署到 azure web container

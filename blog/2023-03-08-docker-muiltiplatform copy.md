@@ -67,15 +67,22 @@ docker buildx build --platform linux/arm/v7 -t myimage:latest --load .
 ```
 
 在上面的命令中，`--platform` 參數指定了要構建的 CPU 架構，`-t` 參數指定了映像的標籤，`.` 表示當前目錄是 Dockerfile 所在的目錄。
---load 是本地
---push 遠端 registry
+
+--load 相當於`--output=type=docker` 沒有指定會出現 warning
+
+```
+WARN[0000] No output specified for docker-container driver. Build result will only remain in the build cache. To push result image into registry use --push or to load image into docker use --load
+```
+
+--push 遠端 registry 相當於`--output=type=registry`
 
 :::info
 https://github.com/docker/buildx/issues/59
 2023/3/9 使用--platform 配合--load，不能支援多平台，一次一個平台，否則會報錯
+--push 支援一次多平台 image
 
 ```
-WARN[0000] No output specified for docker-container driver. Build result will only remain in the build cache. To push result image into registry use --push or to load image into docker use --load
+error: docker exporter does not currently support exporting manifest lists
 ```
 
 :::

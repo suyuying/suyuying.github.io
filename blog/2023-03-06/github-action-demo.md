@@ -2,7 +2,7 @@
 title: github action basic demo
 description: use github action to demo how to use
 authors: suyuying
-tags: [githu action, CICD]
+tags: [github action, CICD]
 ---
 
 ## 基本介紹

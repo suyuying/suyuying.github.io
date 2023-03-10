@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[775],{8405:e=>{e.exports=JSON.parse('{"label":"githu action","permalink":"/blog/tags/githu-action","allTagsPath":"/blog/tags","count":1}')}}]);

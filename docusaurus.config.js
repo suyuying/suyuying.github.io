@@ -62,7 +62,7 @@ const config = {
           blogTitle: "Zaxro blog!", //這個for seo
           blogDescription:
             "A blog for recording note of coding and daily life!",
-          // postsPerPage: 'ALL',//預設是每一page 10 頁，但是可以用這個可以全show在同一頁
+          // postsPerPage: "ALL", //預設是每一page 10 頁，但是可以用這個可以全show在同一頁
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -109,7 +109,7 @@ const config = {
           },
           { to: "/blog", label: "Daily Blog", position: "left" },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/suyuying",
             label: "GitHub",
             position: "right",
           },

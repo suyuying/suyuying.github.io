@@ -102,7 +102,10 @@ html[data-theme="dark"] h5,
 html[data-theme="dark"] h6 {
   --ifm-heading-color: white;
 }
-
+html[data-theme="dark"] .markdown p,
+html[data-theme="dark"] .markdown li {
+  color: white;
+}
 article h1,
 article h2,
 article h3 {

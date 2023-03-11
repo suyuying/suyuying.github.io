@@ -7,9 +7,11 @@ tags: [github action, CICD]
 
 ## Build code registry
 
-這個就跟一般建立 github 的資訊一樣，可以 google。
+把 code 推到 github 教學很多，可以 google 一下，不過要注意的是現在推 code 都要先在官網申請 token，新手很容易卡在這。
 
 ## ways to build image and push
+
+執行 CI 前，要確認有 Dockerfile 並且在地端可以 docker run 服務起來，CI 過程會用該 Dokcerfile 產生 image。
 
 ### way1. build image and push from local side by docker command,use CI after to renew
 
@@ -107,8 +109,9 @@ jobs:
   </div>
 </>
 
-GHCR_USERNAME="yourusername"
-GHCR_TOKEN="放的那個 token"
+GHCR_USERNAME="yourUserName"
+
+GHCR_TOKEN="classic token 產出的 token"
 :::info
 可以用 Environment secrets 或 Repository secrets
 對 workflow 而言他們都會放在 secrets 這個物件裡面，
@@ -137,7 +140,7 @@ GHCR_TOKEN="放的那個 token"
 
 :::info
 
-1. github action 提供了一大堆 context，[參考資料](https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context) 不知道為啥網路講到這個資源很少，問ＡＩ也不知道
+1. github action 提供了一大堆 context，[參考資料](https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context) ，不知道為啥網路講到這個資源很少
 
 2. 官網教學 CI build image 推到 container registry 使用的是另一個 action，兩個都用過，都可以用。
    [參考 actions](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages)

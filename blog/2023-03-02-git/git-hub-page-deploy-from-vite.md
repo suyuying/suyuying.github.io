@@ -10,6 +10,10 @@ tags: [git]
 創建 repo 資料，網路上很多，可以 google 一下，說一下我遇到的問題是我有兩個 github repo，在 mac m1 電腦上推第二個 repo 會一直報 403 錯誤，解法
 參考 [官網：管理多個帳戶](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-your-personal-account/managing-multiple-accounts)
 
+::: tip
+但是！我後來切回原本那個 repo 他又開始 403 報錯了，而且同樣方式再操作也失敗，之後嘗試用 ssh 方式，就沒遇到上述問題，所以建議用 ssh 來推 code 吧！
+:::
+
 ```
 git config --get credential.helper
 # 如果輸出為osxkeychain，則您使用的是 macOS 鑰匙串。要清除憑據，請輸入以下命令

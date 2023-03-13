@@ -2,7 +2,7 @@
 title: how to input env file to github action
 description: 因為是使用.env file管理環境變數，所以推到github上一定會排除.env，然後再試CICD時候就想說為啥本地build的image跑起來沒問題，一到CI build出來的image就掛了，試了半天才想到是.evn沒給。這邊會demo如何在github action使用.env資料。
 authors: suyuying
-tags: [github action, CICD]
+tags: [github action, CICD, .env]
 ---
 
 ## .env 傳入方法

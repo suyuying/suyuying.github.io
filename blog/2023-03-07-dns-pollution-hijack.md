@@ -1,6 +1,6 @@
 ---
 title: Brief summary of Domain Hijacking vs DNS Poisoning
-description: record what is Domain Hijacking and DNS Poisoning, and the difference between them
+description: record what is Domain Hijacking and DNS Poisoning, and the difference between them,小結：劫持是官方被駭或故意改的（大陸常發生），污染是路由到dns server過程某台路由器被駭。
 authors: suyuying
 tags: [dns, Domain Hijacking, DNS Poisoning]
 ---

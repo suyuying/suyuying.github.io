@@ -1,6 +1,6 @@
 ---
 title: docker context指令
-description: docker 支援多個不同remote docker deamon管理
+description: docker 支援多個不同remote docker deamon管理,`docker create context` 是用來建立一個新的 context，以指向一個 remote Docker daemon，用於管理 Docker 主機和 Docker registry 的機制。
 authors: suyuying
 tags: [docker]
 ---

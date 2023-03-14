@@ -3,18 +3,18 @@ import Link from "@docusaurus/Link";
 import BlogIcon from "@site/static/img/resume_svg/blogIcon.svg";
 import GitHub from "@site/static/img/resume_svg/github.svg";
 import FaceBook from "@site/static/img/resume_svg/facebook.svg";
-import MyResumePic from "@site/static/img/resume_svg/my_resume_pic.png";
-import GitHubAction from "@site/static/img/resume_svg/github-actions.svg";
-import AmazonWebIcon from "@site/static/img/resume_svg/amazon-web.svg";
-import GoogleCloudIcon from "@site/static/img/resume_svg/google-cloud.svg";
-import GrafanaIcon from "@site/static/img/resume_svg/grafana-ar21.svg";
-import KibanaIcon from "@site/static/img/resume_svg/kibana.svg";
-import MicrosoftAzureIcon from "@site/static/img/resume_svg/Microsoft_Azure.svg";
-import NginxIcon from "@site/static/img/resume_svg/nginx.svg";
-import ZabbixIcon from "@site/static/img/resume_svg/zabbix-icon.svg";
-import PythonIcon from "@site/static/img/resume_svg/python.svg";
-import ReactIcon from "@site/static/img/resume_svg/reacticon.svg";
-import CloudflareIcon from "@site/static/img/resume_svg/cloudflare.svg";
+// import MyResumePic from "@site/static/img/resume_svg/my_resume_pic.png";
+// import GitHubAction from "@site/static/img/resume_svg/github-actions.svg";
+// import AmazonWebIcon from "@site/static/img/resume_svg/amazon-web.svg";
+// import GoogleCloudIcon from "@site/static/img/resume_svg/google-cloud.svg";
+// import GrafanaIcon from "@site/static/img/resume_svg/grafana-ar21.svg";
+// import KibanaIcon from "@site/static/img/resume_svg/kibana.svg";
+// import MicrosoftAzureIcon from "@site/static/img/resume_svg/Microsoft_Azure.svg";
+// import NginxIcon from "@site/static/img/resume_svg/nginx.svg";
+// import ZabbixIcon from "@site/static/img/resume_svg/zabbix-icon.svg";
+// import PythonIcon from "@site/static/img/resume_svg/python.svg";
+// import ReactIcon from "@site/static/img/resume_svg/reacticon.svg";
+// import CloudflareIcon from "@site/static/img/resume_svg/cloudflare.svg";
 
 import { useColorMode } from "@docusaurus/theme-common";
 import clsx from "clsx";
@@ -40,61 +40,28 @@ function MyResumeSide() {
         </div>
         <div className="flex justify-center space-x-4 bg-[#F3F6F6] dark:bg-[#1D1D1D] rounded-2xl ">
           <Link
-            to="http://localhost:3000/"
+            to="https://suyuying.github.io/"
             target="_blank"
             className="btn bg-white dark:bg-black shadow-md p-2 my-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500"
           >
             <BlogIcon />
           </Link>
           <Link
-            to="https://twitter.com/"
+            to="https://github.com/suyuying"
             target="_blank"
             className="btn bg-white dark:bg-black shadow-md px-1 my-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500 "
           >
             <GitHub />
           </Link>
           <Link
-            to="https://dribbble.com/"
+            to="https://github.com/suyuying/"
             target="_blank"
             className="btn bg-white dark:bg-black shadow-md px-1 my-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500 "
           >
             <FaceBook />
           </Link>
-          <Link
-            to="https://www.linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          ></Link>
         </div>
         <div className="p-7 rounded-2xl mt-7 bg-[#F3F6F6] dark:bg-[#1D1D1D]">
-          <div className="flex py-2.5 border-b border-[#E3E3E3] dark:border-[#3D3A3A]">
-            <span className="flex-shrink-0 btn bg-white dark:bg-black text-[#E93B81] shadow-md">
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 320 512"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path>
-              </svg>
-            </span>
-            <div className="text-left ml-2.5">
-              <p className="m-0 text-xs text-[#44566C] dark:text-[#A6A6A6]">
-                Phone
-              </p>
-              <p className="m-0  break-all">
-                <Link
-                  className="m-0 hover:text-[#FA5252] duration-300 transition"
-                  to="tel:+1234567890"
-                >
-                  +886 XDDDD
-                </Link>
-              </p>
-            </div>
-          </div>
           <div className="flex py-2.5 border-b border-[#E3E3E3] dark:border-[#3D3A3A]">
             <span className="flex-shrink-0 btn bg-white dark:bg-black text-[#6AB5B9]  shadow-md">
               <svg
@@ -166,48 +133,6 @@ function MyResumeSide() {
               <p className="m-0  break-all">???, 1993</p>
             </div>
           </div>
-
-          <Link
-            to="/"
-            download=""
-            className="m-0 border-spacing-1 inline-flex items-center mx-auto bg-gradient-to-r from-[#FA5252] to-[#DD2476] duration-200 transition ease-linear hover:bg-gradient-to-l from-[#DD2476] to-[#fa5252ef] px-8 py-3 text-lg text-white rounded-[35px] "
-          >
-            <svg
-              width="22px"
-              height="23px"
-              viewBox="0 0 1024.00 1024.00"
-              className="icon"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M768 810.7c-23.6 0-42.7-19.1-42.7-42.7s19.1-42.7 42.7-42.7c94.1 0 170.7-76.6 170.7-170.7 0-89.6-70.1-164.3-159.5-170.1L754 383l-10.7-22.7c-42.2-89.3-133-147-231.3-147s-189.1 57.7-231.3 147L270 383l-25.1 1.6c-89.5 5.8-159.5 80.5-159.5 170.1 0 94.1 76.6 170.7 170.7 170.7 23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7c-141.2 0-256-114.8-256-256 0-126.1 92.5-232.5 214.7-252.4C274.8 195.7 388.9 128 512 128s237.2 67.7 297.3 174.2C931.5 322.1 1024 428.6 1024 554.7c0 141.1-114.8 256-256 256z"
-                  fill="#3688FF"
-                />
-
-                <path
-                  d="M512 938.7c-10.9 0-21.8-4.2-30.2-12.5l-128-128c-16.7-16.7-16.7-43.7 0-60.3 16.6-16.7 43.7-16.7 60.3 0l97.8 97.8 97.8-97.8c16.6-16.7 43.7-16.7 60.3 0 16.7 16.7 16.7 43.7 0 60.3l-128 128c-8.2 8.3-19.1 12.5-30 12.5z"
-                  fill="#5F6379"
-                />
-
-                <path
-                  d="M512 938.7c-23.6 0-42.7-19.1-42.7-42.7V597.3c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7V896c0 23.6-19.1 42.7-42.7 42.7z"
-                  fill="#5F6379"
-                />
-              </g>
-            </svg>
-            Download CV
-          </Link>
         </div>
       </div>
     </div>
@@ -226,7 +151,7 @@ export default function MyResume() {
         <MyResumeSide />
         <div className="col-span-12 lg:col-span-8 ">
           <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
-            <div data-aos="fade" className="aos-init aos-animate">
+            <div data-aos="fade">
               <div className="pt-12 md:py-12 px-2 sm:px-5 md:px-10 lg:px-14">
                 <h2 className="after-effect after:left-52">About Me</h2>
                 <div className="lg:grid grid-cols-12 md:gap-10 pt-4 md:pt-[30px] items-center ">
@@ -245,190 +170,6 @@ export default function MyResume() {
                         my aim is to bring Accurate, Automation, Safety to the
                         sever.
                       </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <section className="pb-12 px-2 sm:px-5 md:px-10 lg:px-14 ">
-                <h3 className="text-[35px]  font-medium pb-5">What I do!</h3>
-                <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2 ">
-                  <div
-                    className=" dark:bg-transparent bg-violet-50 "
-                    // style={{ background: "rgb(252, 244, 255)" }}
-                  >
-                    <GitHubAction className=" bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <MicrosoftAzureIcon className="ml-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <div className="space-y-2 break-all">
-                      <h3 className=" text-xl font-semibold">Pipline</h3>
-                      <p className=" leading-8 text-gray-lite dark:text-[#A6A6A6] break-normal">
-                        Experience in azure pipline and gitlab. Make changes to
-                        code that are then automatically tested and pushed out
-                        for delivery and deployment.{" "}
-                        <Link to="https://github.com/suyuying" className="link">
-                          Check my webiste demo.
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="about-box dark:bg-transparent bg-amber-50"
-                    // style={{ background: "rgb(254, 250, 240)" }}
-                  >
-                    <PythonIcon className=" bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <ReactIcon className="ml-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-
-                    <div className="space-y-2 break-all">
-                      <h3 className=" text-xl font-semibold">
-                        App Development
-                      </h3>
-                      <p className=" leading-8 text-gray-lite dark:text-[#A6A6A6] break-normal">
-                        Use React to structure front-end of my website, and
-                        Fastapi to develop my backend server. Build my api
-                        documenation and blog based on docusaurus.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="about-box dark:bg-transparent"
-                    style={{ background: "rgb(252, 244, 255)" }}
-                  >
-                    <ZabbixIcon className=" bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <KibanaIcon className="ml-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <GrafanaIcon className="ml-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-
-                    <div className="space-y-2 break-all">
-                      <h3 className=" text-xl font-semibold">Monitor</h3>
-                      <p className=" leading-8 text-gray-lite dark:text-[#A6A6A6] break-normal">
-                        Experienced in monitor Software, such us Zabbix
-                        ,Grafana,Elk.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="about-box dark:bg-transparent"
-                    style={{ background: "rgb(255, 244, 244)" }}
-                  >
-                    <CloudflareIcon className=" bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <AmazonWebIcon className="ml-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <div className="space-y-2 break-all">
-                      <h3 className=" text-xl font-semibold">CDN</h3>
-                      <p className=" leading-8 text-gray-lite dark:text-[#A6A6A6]">
-                        Experienced in setting of Cloudflare, Aws Cloudfront.
-                        Use ssl for saas and rate limit rules to strengthen
-                        WebSite Information security.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="about-box dark:bg-transparent"
-                    style={{ background: "rgb(255, 240, 248)" }}
-                  >
-                    <GoogleCloudIcon className=" bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <AmazonWebIcon className="ml-2 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <div className="space-y-2 break-all">
-                      <h3 className="text-xl font-semibold">Cloud System</h3>
-                      <p className=" leading-8 text-gray-lite dark:text-[#A6A6A6]">
-                        Experienced in aws and gcp.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="about-box dark:bg-transparent"
-                    style={{ background: "rgb(243, 250, 255)" }}
-                  >
-                    <NginxIcon className=" bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500" />
-                    <div className="space-y-2 break-all">
-                      <h3 className=" font-semibold">HTTP Server</h3>
-                      <p className=" leading-8 text-gray-lite dark:text-[#A6A6A6] break-normal">
-                        Be familier with setting of nginx, get used to check the
-                        official website of Nginx and stackoverflow to get the
-                        answer, always conform to the request, well done!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-        <div className="col-span-12  lg:col-start-5 col-end-13">
-          <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
-            <div data-aos="fade" className="aos-init aos-animate">
-              <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
-                <div className="py-12">
-                  <h2 className="after-effect after:left-44">Resume</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-6 gap-y-6 mt-[30px]">
-                    <div>
-                      <div className="flex items-center space-x-2 mb-4">
-                        <div className="text-6xl text-[#F95054]">
-                          <svg
-                            stroke="currentColor"
-                            fill="currentColor"
-                            strokeWidth={0}
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path fill="none" d="M0 0h24v24H0V0z" />
-                            <path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-3H9v3H4V9zm9 6h-2v-2h2v2zm6 4H5v-3h4v1h6v-1h4v3z" />
-                          </svg>
-                        </div>
-                        <h4 className="text-5xl  font-medium">Education</h4>
-                      </div>
-                      <div
-                        className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2"
-                        style={{ background: "rgb(255, 244, 244)" }}
-                      >
-                        <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2017-2019
-                        </span>
-                        <h3 className="text-xl "> Master of Science</h3>
-                        <p className="dark:text-[#b7b7b7]">
-                          National Taiwan University, Taiwan
-                        </p>
-                      </div>
-                      <div
-                        className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2"
-                        style={{ background: "rgb(255, 244, 244)" }}
-                      >
-                        <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2021
-                        </span>
-                        <h3 className="text-xl "> Network Engineer Degree</h3>
-                        <p className="dark:text-[#b7b7b7]">
-                          Institute for Information Industry
-                        </p>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center space-x-2 mb-4">
-                        <div className="text-6xl text-[#F95054]">
-                          <svg
-                            stroke="currentColor"
-                            fill="currentColor"
-                            strokeWidth={0}
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path fill="none" d="M0 0h24v24H0V0z" />
-                            <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
-                          </svg>
-                        </div>
-                        <h4 className="text-5xl  font-medium">Experience</h4>
-                      </div>
-                      <div
-                        className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2"
-                        style={{ background: "rgb(238, 245, 250)" }}
-                      >
-                        <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                          2021 - Present
-                        </span>
-                        <h3 className="text-xl "> IT Engineer </h3>
-                        <p className="dark:text-[#b7b7b7]">Cloud Miner Ltd.</p>
-                      </div>
                     </div>
                   </div>
                 </div>

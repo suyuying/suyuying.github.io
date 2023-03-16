@@ -54,7 +54,7 @@ CMD [ "npm", "run", "start" ]
 執行過程到這一步`- docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY`遇到報錯，
 `error during connect: Post "http://docker:2375/v1.24/auth": dial tcp: lookup docker on 1.1.1.1:53: no such host`。
 
-解法:
+### 解法:
 
 在你掛到 gitlab runner 中 /etc/gitlab-runner 裡面的 config.toml，去修改
 `volumes = ["/cache"]` 變成
@@ -62,7 +62,8 @@ CMD [ "npm", "run", "start" ]
 
 並執行`docker restart gitlab-runner`!
 
-可能原因：
+### 可能原因：
+
 執行這個修改，volumes 改為 ["/var/run/docker.sock:/var/run/docker.sock", "/cache"]，讓 Runner Executor 使用主機外部的 Docker Engine。
 
 所以推測，這可能是 gitlab runner 跟 gitlab server 上面驗證的機制，如果沒有這樣加，dind 就找不到 gitlab server 的驗證那關，所以就會失敗

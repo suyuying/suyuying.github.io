@@ -1,5 +1,5 @@
 ---
-title: use github action to build image and push to git hub container registry
+title: CI:use github action to build image and push to git hub container registry
 description: use CI in github action ,and variable in environments to build image and push to registry. github action 入門攻略，CI 推image到github
 authors: suyuying
 tags: [github action, CICD]

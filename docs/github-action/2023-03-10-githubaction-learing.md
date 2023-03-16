@@ -3,6 +3,7 @@ title: learn github action from github docs
 description: github action在設計上提供許多表示式，跟內建函示，上下文，這邊將整理官網教學知識，以及使用心得。
 authors: suyuying
 tags: [github action, CICD]
+sidebar_position: 2
 ---
 
 ## 前言
@@ -249,13 +250,25 @@ Context 種類超多，這邊會大致講他的作用
 
 ```
 
+name: Test matrix
+on: push
+
 jobs:
-test:
-runs-on: ${{ matrix.os }}
-strategy:
-matrix:
-os: [ubuntu-latest, windows-latest]
-node: [14, 16]
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [14, 16]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
 
 ```
 
@@ -273,10 +286,10 @@ name: Build and deploy
 on: push
 
 jobs:
-build:
-runs-on: ubuntu-latest
-outputs:
-build_id: ${{ steps.build_step.outputs.build_id }}
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build_id: ${{ steps.build_step.outputs.build_id }}
     steps:
       - uses: actions/checkout@v3
       - name: Build
@@ -284,15 +297,19 @@ build_id: ${{ steps.build_step.outputs.build_id }}
         run: |
           ./build
           echo "build_id=$BUILD_ID" >> $GITHUB_OUTPUT
-deploy:
-needs: build
-runs-on: ubuntu-latest
-steps: - uses: actions/checkout@v3 - run: ./deploy --build ${{ needs.build.outputs.build_id }}
-debug:
-needs: [build, deploy]
-runs-on: ubuntu-latest
-if: ${{ failure() }}
-steps: - uses: actions/checkout@v3 - run: ./debug
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./deploy --build ${{ needs.build.outputs.build_id }}
+  debug:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./debug
 
 ```
 
@@ -315,23 +332,21 @@ steps: - uses: actions/checkout@v3 - run: ./debug
 
 ```
 
-name: Greeting on variable day
-
-on:
-workflow_dispatch
-
 env:
-DAY_OF_WEEK: Monday
+  DAY_OF_WEEK: Monday
 
 jobs:
-greeting_job:
-runs-on: ubuntu-latest
-env:
-Greeting: Hello
-steps: - name: "Say Hello Mona it's Monday"
-run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
-env:
-First_Name: Mona
+  greeting_job:
+    runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
+    steps:
+      - name: "Say Hello Mona it's Monday"
+        if: ${{ env.DAY_OF_WEEK == 'Monday' }}
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
+
 
 ```
 

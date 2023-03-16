@@ -1,5 +1,5 @@
 ---
-title: linux三大神器之一
+title: linux command 三神器
 description: 從有關鍵字為 QOO 那一行到以}為開頭的那一行(^代表正則開頭字元),sed -n "/QOO/,/^}/p" common.js.
 authors: suyuying
 tags: [linux, sed]

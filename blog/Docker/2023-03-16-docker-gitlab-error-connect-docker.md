@@ -56,7 +56,7 @@ CMD [ "npm", "run", "start" ]
 
 ### 解法:
 
-在你掛到 gitlab runner 中 /etc/gitlab-runner 裡面的 config.toml，去修改
+在你掛到 gitlab runner 中 /etc/gitlab-runner 裡面的 config.toml，請先用 docker inspect 觀察 volume 掛載位置，如果你是用官網 local volume 掛載方法，那就是在 VM 上去 vim /srv/gitlab-runner/config/config.toml，去修改
 `volumes = ["/cache"]` 變成
 `volumes = ["/var/run/docker.sock:/var/run/docker.sock","/cache"]`。
 

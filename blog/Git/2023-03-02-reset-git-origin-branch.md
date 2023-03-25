@@ -1,5 +1,5 @@
 ---
-title: 將遠端分枝退版方法
+title: reset git remote origin branch
 description: 在local端發現build完東西fail，但是已經推到main branch了，所以執行遠端registry退版，需要使用 git push --force,基本上 main branch 都會是保護的，也可以考慮用 pull request 先進行測試(不能自己發 pull request 自己審)，過了再 merge。
 authors: suyuying
 tags: [git]

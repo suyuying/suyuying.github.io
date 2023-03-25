@@ -1,5 +1,5 @@
 ---
-title: 在docusaurus使用google font的方法
+title: Use Google Fonts in Docusaurus
 description: 整理網路提供的使用google font方法，最後是採用一般css import的方法,寫法上來說，直接在 custom css import 比較方便的,傳送的大小跟時間也是沒啥差,所以目前都用 css import 的方法,有寫錯麻煩指正
 authors: suyuying
 tags: [docusaurus, css, google font]

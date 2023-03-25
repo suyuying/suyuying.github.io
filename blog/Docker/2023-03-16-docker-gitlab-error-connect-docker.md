@@ -1,5 +1,5 @@
 ---
-title: gitlab runner error during connect Post "http://docker:2375/v1.24/auth" dial tcp lookup docker on 1.1.1.1:53 no such host
+title: docker gitlab runner error during connect Post "http://docker:2375/v1.24/auth" dial tcp lookup docker on 1.1.1.1:53 no such host
 description: 執行這個修改，volumes 改為 ["/var/run/docker.sock:/var/run/docker.sock", "/cache"]，讓 Runner Executor 使用主機外部的 Docker Engine。所以推測，這可能是 gitlab runner 跟 gitlab server 上面驗證的機制，如果沒有這樣加，dind 就找不到 gitlab server 的驗證那關，所以就會失敗
 authors: suyuying
 tags: [docker]

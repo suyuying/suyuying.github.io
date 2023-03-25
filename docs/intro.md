@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# How to star this blog
+# How to start this blog
 
 Let's discover **Docusaurus in less than 5 minutes**.
 

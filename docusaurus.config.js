@@ -97,9 +97,17 @@ const config = {
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+
+    {
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
       // Replace with your project's social card
       image: "img/githubLogoV1.svg",
+
       navbar: {
         title: "Zaxro",
         logo: {
@@ -114,6 +122,7 @@ const config = {
             label: "Code Note",
           },
           { to: "/blog", label: "Daily Blog", position: "left" },
+
           {
             href: "https://github.com/suyuying",
             label: "GitHub",
@@ -199,7 +208,7 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-    }),
+    },
 };
 
 module.exports = config;

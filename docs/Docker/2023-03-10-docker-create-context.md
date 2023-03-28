@@ -10,7 +10,7 @@ tags: [docker]
 可以使用 `docker context use` 指令來切換 context，切換完成後即可使用 docker 指令操作 remote Docker daemon。如果使用雲端 container，例如 azure web container service，就可以用這個指令去管理雲端 container。包含新建 刪除都可以使用，所以不要太開心一次起一大堆雲端 container 這樣會被 charging 到爆。
 :::info
 如果有用到 docker buildx 可能會把 docker context 跟 docker buildx create --name 搞混，
-兩個是不同的，[可以看這裡](./docker-muiltiplatform%20copy#docker-buildx-create---name-my-node-%E6%98%AF%E5%BB%BA%E7%AB%8B%E7%AF%80%E9%BB%9E%E5%97%8E])
+兩個是不同的.
 :::
 
 以下是 `docker create context` 指令的教學：

@@ -134,7 +134,7 @@ jobs:
 
 ## 基本功
 
-[回顧一下 github action basic demo](./1.github-action-demo)，github action 是由 git 根目錄同層的
+回顧一下 github action basic demo，github action 是由 git 根目錄同層的
 .github/workflows 中的 xxxx.yml 組成，workflow 的結構通常是
 
 ```

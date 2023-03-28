@@ -1,5 +1,5 @@
 ---
-title: docker multiplatform build - docker buildx指令
+title: dockermultiplatform build - docker buildx指令
 description: docker 支援多平台image的build指令,Docker Buildx 是 Docker 官方提供的一個命令行工具，用於通過 Dockerfile 构建 Docker 映像。它的主要特點是可以跨平臺構建 Docker 映像，並支持多種 CPU 架構（如 x86、ARM、IBM Power 等），是一個用來建立和管理 multi-arch Docker image 的工具。
 authors: suyuying
 tags: [docker]

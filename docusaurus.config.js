@@ -180,7 +180,8 @@ const config = {
         appId: "H9WLDZ1QEH",
 
         // Public API key: it is safe to commit it
-        apiKey: "2b8e46cac316c58b6a9059d3100e8843",
+        // apiKey: "2b8e46cac316c58b6a9059d3100e8843",
+        apiKey: "decd4523eca277e9f29685347c124fe2",
 
         indexName: "suyuyingio",
 

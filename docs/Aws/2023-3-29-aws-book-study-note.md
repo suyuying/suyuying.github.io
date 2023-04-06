@@ -7,11 +7,19 @@ tags: [AWS]
 
 ## 名詞解釋
 
+IAAS: 雲端業者提供硬體設施、網路。不包含作業系統(Linux or Windows),中介軟體(MySql,Pika)，以及應用程式。
+
+PAAS: 雲端業者提供硬體設施、網路、作業系統、中介軟體，因次伺服器故障跟備份資料庫等工作可以由雲端業者負責。
+
+SAAS: 雲端業者提供硬體設施、網路、作業系統、中介軟體、應用程式。Gmail 就屬這類型.
+
 Region: aws 基礎設施的一個單位，每個區域都是獨立數據中心群集，由多個 Availability Zone 組成，所以像新加坡區，aws 目前就 3 個可用區域。
 
 Availability Zone: 具有獨立的電源、網絡和冷卻系統，以及與其他可用區域之間高帶寬、低延遲的網絡連接。每個可用區域都是一個獨立的數據中心群集，具有高度的冗餘性和可靠性，並且可以通過低延遲的連接實現可用區域之間的容錯和負載平衡。
 
 VPC(Virtual Private Cloud): VPC 只能限在單個 region 內，但可以跨同一格 region 內的多個 Availability Zone
+
+<!--truncate-->
 
 Network Access Control List(NACL):子網路層級的安全性管理，主要用於管理 OSI 模型中的 3、4 層，也就是可以管理連入 IP 跟 Port 號限制以及協議限制。舉例: 可以只讓自己家 ip 66.66.66.66 進來，允許所有 port，但禁止 Ping(ICMP 協議)。
 
@@ -22,6 +30,16 @@ IGW: 互聯網閘道器，主要用於外網跟內網的訊號路由。
 Metadata: 執行個體中繼資料，可以用來管理執行個體，包含主機名稱跟 IP 等
 
 Placement Group: 一群 EC2 的啟動策略，分為叢集、分區、分散
+
+Serverless 應用程式: 開發人員開發程式後，都會遇到要開多少規格的問題，在 Serverless 解決方案下，雲端廠商提供設定自動擴展或者提高性能等服務，適合突發性高附載的服務，如:售票系統.Serverless 背後使用的是 lambda 服務。
+
+機器學習: 需要高性能電腦進行資料訓練，建模，並部署應用程式.
+
+IoT:利用感測器等小型設備建立物聯網系統
+
+Data Lake House: 為滿足各種資料分析需求的分析選擇.
+
+AWS Resources: 指用 AWS 各服務所建立而成的實體(instance)
 
 ## IAM
 
@@ -62,6 +80,8 @@ Effect + Principal + Condition + Action + Resource
 ```jsx title="基本aws確認權限流程"
 使用者-> AWS辨認身份->確認權限->授權操作
 ```
+
+### IAM 權限管理
 
 root 權限過大問題，透過設定不同權限帳號切割，在 aws 就是透過多個用戶群組切分權限，跟 linux 管理類似。
 
@@ -122,7 +142,7 @@ AWS 快照服務有多種,以下列出常用的:
 
 ## Elastic Network Interface 網路卡
 
-EC2 透過 Elastic Network Interface(ENI)連接網路，要固定使用的 IP 要綁定 Elastic IP.
+EC2 透過 Elastic Network Interface(ENI)連接網路，要固定使用的 IP 要綁定 Elastic IP,綁定後開關機不會改變對外 IP.
 
 ## SSH KeyPair
 
@@ -140,8 +160,49 @@ Bucket and Object,你的資料就是 Object，會被放在 Bucket 內保存，�
 
 1. Block Public Access:這個算是防呆機制，就很簡單的直接決定檔案是否公開
 2. Access Control List: 分為對 Bucket 跟 Object 的 ACL,可以設定讀取，寫入，列舉，權限擁有者等。
-3. Bucket Policy: 用 json 格式做規範，可以規範的東西有存取權限(IAM user or Role)，路徑，條件(日期 ip bucket 名稱)
+3. Bucket Policy: 要做最精細設定要透過 Bucket Policy 去用 json 格式做規範，可以規範的東西有存取權限(IAM user or Role)，路徑，條件(日期 ip bucket 名稱)
 
 ### 存取監控紀錄
 
 對 Bucket 跟 Object 都有監控紀錄
+
+### Access Point Policy
+
+Access Point 可以匡列 Bucket 中一系列 object，針對這些 Object 設計新的一套 Access Point Policy.
+
+## RDS
+
+Amazon Relational Database Service (RDS)是一項托管關聯式數據庫服務.
+在使用 RDS 時，會自動開機器來完成任務，有開機器就要探討是在哪個網段開機器，因此要先設定 subnet group,RDS 會在 group 內挑選合適的 subnet 放置機器
+
+### 與自建資料庫差別
+
+在 EC2 建立資料庫需要管理 VM ，且可以連入機器做參數調整.
+
+而 RDS 主要協助
+
+1. 資料備援: 資料遺失可以有效回復
+2. 系統高可用性: 故障轉移和擴展等功能
+
+### RDS 性能調校
+
+AWS 提供 Parameter Group 功能，讓資料庫所使用的參數能匯入,硬體部分可以將 EBS Volume 改成 Provision iops 類型的 EBS Volume.
+
+### RDS 高可用與備援
+
+#### 備援
+
+可以對資料庫(一般用主庫)做 snapshot,又分為自己手動備份跟 aws 定期備份，差別在未來刪除資料庫時，aws 定期備份會被刪到剩最終備份，而用戶手動備份不會被 AWS 刪除。
+
+另外，儲存體磁碟區快照在單一 AZ 中建立會導致 I/O 短暫停用！異地同步備份 I/O 不會受此 I/O 影響，因為是在待命狀態下進行備份。
+
+#### 高可用
+
+為紓緩主資料庫流量，RDS 提供唯獨副本服務，把主庫資料異步複製到另外一個 AZ 的 ReadOnly DB(Read Replica) 單純用來查詢。
+
+:::info
+Read Replica 跟 slave DB 相似，差別在前者可以做到跨 Region ，且可以轉成 standalone DB instance.
+
+:::
+
+另外，為避免主庫失效，也可以使用 Multi-AZ 服務啟用備用資料庫(Standby)，平時主庫資料會同步複製到 standby，唯獨副本跟快照備份工作都交給 Standby，當主庫不小心掛了就會切換用備用資料庫。

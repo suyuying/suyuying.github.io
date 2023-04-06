@@ -119,7 +119,7 @@ html[data-theme="dark"] h6 {
 }
 html[data-theme="dark"] .markdown p,
 html[data-theme="dark"] .markdown li {
-  color: white;
+  color: #d1d5db;
 }
 article h1,
 article h2,

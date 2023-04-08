@@ -13,7 +13,7 @@ tags: [gitlab action, CICD]
 ### Concepts
 
 - Pipelines: CI/CD 透過 pipeline 建立。
-- CI/CD variables: 有 GitLab 預設變數（可以在 script 用 export 取得）、自定義環境變數和秘密變數。
+- CI/CD variables: 有 GitLab [預設變數](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)（可以在 script 用 export 取得）、自定義環境變數和[secure files](https://docs.gitlab.com/ee/ci/secure_files/)。
 - Environments: 要把應用部署在不同環境要使用。
 - Job artifacts: 程式過程中執行的產物（例如 xxx.csv）檔案的輸出以及其他 job 使用等。
 - Cache dependencies: 使用 cache 關鍵字可以幫助減少 pipeline 的運行時間，提高 CI/CD 效率。通過緩存依賴項，可以避免在每次運行 pipeline 時都從頭開始安裝相同的依賴項。

@@ -2,6 +2,7 @@
 title: Zabbix Sender monitor key word in log, and show data in grafana
 description: 定時抓取某log file其中的特定關鍵字，用zabbix-sender傳送資訊給zabbix server，並把資料設定報警到telegram，資訊會用grafana的log顯示。
 authors: suyuying
+image: https://github.com/suyuying.png
 tags: [Zabbix, Grafana]
 ---
 

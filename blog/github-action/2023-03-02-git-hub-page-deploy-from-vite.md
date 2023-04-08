@@ -2,6 +2,7 @@
 title: use react to build your own static website by github page
 description: 記錄一下github page配合git hub action的部署react vite過程，並提供github multiple repo管理辦法，主要步驟1.建立一個repo名為your_github_username.github.io 2.建立gh-pages分枝3.地端建立CI yml檔 4.設定github page使用branch gh-pages 5.推地端資料到main branch 6.CI會幫你執行build並把資源放到gh-pages branch ,Done
 authors: suyuying
+image: https://github.com/suyuying.png
 tags: [git]
 ---
 

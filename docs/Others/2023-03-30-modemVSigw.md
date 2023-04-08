@@ -1,7 +1,7 @@
 ---
 title: Do Internet gateways and modem need to be used together?
 description: 簡言之，如果你家使用撥接或有線電視提供的網路，就會需要數據機，如果你家用光纖、DSL、電纜等，就可以不用轉換訊號，直接透過 Igw 將訊號 routing 到外部網路。
-
+image: https://github.com/suyuying.png
 authors: suyuying
 tags: [curl]
 ---

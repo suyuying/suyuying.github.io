@@ -2,6 +2,7 @@
 title: learn github action from github docs
 description: github action在設計上提供許多表示式，跟內建函示，上下文，這邊將整理官網教學知識，以及使用心得。
 authors: suyuying
+image: https://github.com/suyuying.png
 tags: [github action, CICD]
 sidebar_position: 2
 ---

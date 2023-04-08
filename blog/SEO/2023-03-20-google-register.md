@@ -2,6 +2,7 @@
 title: How to let google find my website?
 description: register my website to google
 authors: suyuying
+image: https://github.com/suyuying.png
 tags: [google]
 ---
 

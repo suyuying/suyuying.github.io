@@ -2,6 +2,7 @@
 title: environment variable and  secrets variable config in github
 description: 使用 CI 跟寫程式都會遇到要從 env 拿取變數值的時候，在 github 管理方式如下，主要判斷是這個變數是否要給多個 workflow 使用。如果您不確定，也可以從存儲庫密鑰開始為所有東西創建密鑰。如果之後有引入需要不同密鑰的不同環境，例如 prod,dev,test 等，則可以將存儲庫密鑰移動到特定環境。然後在特定環境用特定變數值。
 authors: suyuying
+image: https://github.com/suyuying.png
 tags: [github action, CICD]
 ---
 

@@ -2,6 +2,7 @@
 title: gitcus comment system add to docusaurus but meet giscus.app refused to connect.
 description: how to add comment system to docusaurus and problem giscus.app refused to connect.
 authors: suyuying
+image: https://github.com/suyuying.png
 tags: [docusaurus, comment system]
 ---
 

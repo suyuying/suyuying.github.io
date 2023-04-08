@@ -200,7 +200,8 @@ addGitFile:
 
 1. entrypoint: [""] 這是個神奇的 issue 設定 image run 起來後面要執行 script 要這樣加,不這樣加會遇到報錯 git: 'sh' is not a git command. See 'git --help',相關[issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/4027)
 
-2. repo 通常指 Git 版本控制系統中的存儲庫,registry 是一個存儲 image 的地方,兩者有差別歐！
+2. repo 通常指 Git 版本控制系統中的存儲庫,registry 是一個存儲 image 的地方,兩者有差別歐,不過這也看各家定義,
+   在 docker 裡 registry 會包含多個 repo,而 repo 會有不同版本的 image.
 
 :::info
 參考資料

@@ -99,7 +99,7 @@ deploy:
 
 :::tip
 一般預設工作目錄都是在/builds 資料夾底下，他會把你 git repo 的東西 clone 到每個 img 的 build 資料夾裡面,所以工作目錄基本上在/builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME 裡面,用說的很難懂,改用舉例吧:
-如果 namespace 是 ford, repo 名稱也會是 ford,所以工作目錄會在/builds/ford/ford 底下,也就是 CI_PROJECT_DIR='/builds/it/nginx-log-session-clear',內容會是你的 git repo 內容.
+如果 namespace 是 it, repo 名稱也會是 nginx-log-session-clear,所以工作目錄會在/builds/it/nginx-log-session-clear 底下,也就是 CI_PROJECT_DIR='/builds/it/nginx-log-session-clear',內容會是你的 git repo 內容.
 
 也可以在 script 裡面用 export 求證歐
 <>

@@ -206,7 +206,8 @@ addGitFile:
 :::info
 參考資料
 
-- [官網](https://docs.gitlab.com/ee/ci/yaml/index.html)
+- [官網首頁](https://docs.gitlab.com/ee/ci/yaml/index.html)
+- [官網 pipline demo](https://docs.gitlab.com/ee/ci/examples/)
 - [GitLab CI 流水线配置文件.gitlab-ci.yml 详解](https://meigit.readthedocs.io/en/latest/gitlab_ci_.gitlab-ci.yml_detail.html#gitlab-ci-gitlab-ci-yml)
 
 :::

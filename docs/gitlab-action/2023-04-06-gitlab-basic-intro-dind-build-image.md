@@ -13,7 +13,7 @@ tags: [gitlab action, CICD]
 ### Concepts
 
 - Pipelines: CI/CD 透過 pipeline 建立。
-- CI/CD variables: 有 GitLab 預設變數（可以在 script 用 export 取得）、自定義環境變數和秘密變數。
+- CI/CD variables: 有 GitLab [預設變數](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)（可以在 script 用 export 取得）、自定義環境變數和[secure files](https://docs.gitlab.com/ee/ci/secure_files/)。
 - Environments: 要把應用部署在不同環境要使用。
 - Job artifacts: 程式過程中執行的產物（例如 xxx.csv）檔案的輸出以及其他 job 使用等。
 - Cache dependencies: 使用 cache 關鍵字可以幫助減少 pipeline 的運行時間，提高 CI/CD 效率。通過緩存依賴項，可以避免在每次運行 pipeline 時都從頭開始安裝相同的依賴項。
@@ -200,12 +200,14 @@ addGitFile:
 
 1. entrypoint: [""] 這是個神奇的 issue 設定 image run 起來後面要執行 script 要這樣加,不這樣加會遇到報錯 git: 'sh' is not a git command. See 'git --help',相關[issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/4027)
 
-2. repo 通常指 Git 版本控制系統中的存儲庫,registry 是一個存儲 image 的地方,兩者有差別歐！
+2. repo 通常指 Git 版本控制系統中的存儲庫,registry 是一個存儲 image 的地方,兩者有差別歐,不過這也看各家定義,
+   在 docker 裡 registry 會包含多個 repo,而 repo 會有不同版本的 image.
 
 :::info
 參考資料
 
-- [官網](https://docs.gitlab.com/ee/ci/yaml/index.html)
+- [官網首頁](https://docs.gitlab.com/ee/ci/yaml/index.html)
+- [官網 pipline demo](https://docs.gitlab.com/ee/ci/examples/)
 - [GitLab CI 流水线配置文件.gitlab-ci.yml 详解](https://meigit.readthedocs.io/en/latest/gitlab_ci_.gitlab-ci.yml_detail.html#gitlab-ci-gitlab-ci-yml)
 
 :::

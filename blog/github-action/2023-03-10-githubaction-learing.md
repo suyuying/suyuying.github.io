@@ -332,6 +332,10 @@ jobs:
     <br />
 
 ```
+name: Greeting on variable day
+
+on:
+  workflow_dispatch
 
 env:
   DAY_OF_WEEK: Monday
@@ -343,11 +347,9 @@ jobs:
       Greeting: Hello
     steps:
       - name: "Say Hello Mona it's Monday"
-        if: ${{ env.DAY_OF_WEEK == 'Monday' }}
         run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
         env:
           First_Name: Mona
-
 
 ```
 
@@ -368,33 +370,33 @@ run: env：您可以通過在步驟中使用然後檢查步驟的輸出來列出
     <br />
 
 ```
-
 on:
-workflow_dispatch:
+  workflow_dispatch:
 env:
-
-# Setting an environment variable with the value of a configuration variable
-
-env_var: ${{ vars.ENV_CONTEXT_VAR }}
+  # Setting an environment variable with the value of a configuration variable
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
 jobs:
-display-variables:
-name: ${{ vars.JOB_NAME }} # You can use configuration variables with the `vars` context for dynamic jobs
-if: ${{ vars.USE_VARIABLES == 'true' }}
-runs-on: ${{ vars.RUNNER }}
-environment: ${{ vars.ENVIRONMENT_STAGE }}
-steps: - name: Use variables
-run: |
-echo "repository variable : ${{ vars.REPOSITORY_VAR }}"
-echo "organization variable : ${{ vars.ORGANIZATION_VAR }}"
-echo "overridden variable : ${{ vars.OVERRIDE_VAR }}"
-echo "variable from shell environment : $env_var"
+  display-variables:
+    name: ${{ vars.JOB_NAME }}
+    # You can use configuration variables with the `vars` context for dynamic jobs
+    if: ${{ vars.USE_VARIABLES == 'true' }}
+    runs-on: ${{ vars.RUNNER }}
+    environment: ${{ vars.ENVIRONMENT_STAGE }}
+    steps:
+    - name: Use variables
+      run: |
+        echo "repository variable : ${{ vars.REPOSITORY_VAR }}"
+        echo "organization variable : ${{ vars.ORGANIZATION_VAR }}"
+        echo "overridden variable : ${{ vars.OVERRIDE_VAR }}"
+        echo "variable from shell environment : $env_var"
 
     - name: ${{ vars.HELLO_WORLD_STEP }}
       if: ${{ vars.HELLO_WORLD_ENABLED == 'true' }}
       uses: actions/hello-world-javascript-action@main
       with:
         who-to-greet: ${{ vars.GREET_NAME }}
+
 
 ```
 
@@ -415,20 +417,20 @@ echo "variable from shell environment : $env_var"
     <br />
 
 ```
-
 env:
-DAY_OF_WEEK: Monday
+  DAY_OF_WEEK: Monday
 
 jobs:
-greeting_job:
-runs-on: ubuntu-latest
-env:
-Greeting: Hello
-steps: - name: "Say Hello Mona it's Monday"
-if: ${{ env.DAY_OF_WEEK == 'Monday' }}
+  greeting_job:
+    runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
+    steps:
+      - name: "Say Hello Mona it's Monday"
+        if: ${{ env.DAY_OF_WEEK == 'Monday' }}
         run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
-env:
-First_Name: Mona
+        env:
+          First_Name: Mona
 
 ```
 
@@ -459,10 +461,10 @@ The default environment variables that GitHub sets are available to every step i
 ```
 
 jobs:
-my_first_job:
-name: My first job
-my_second_job:
-name: My second job
+  my_first_job:
+    name: My first job
+  my_second_job:
+    name: My second job
 
 ```
 
@@ -482,7 +484,3 @@ name: My second job
 
 [參考的管網資料-variables](https://docs.github.com/en/actions/learn-github-actions/variables)
 :::
-
-```
-
-```

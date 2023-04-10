@@ -100,12 +100,11 @@ deploy:
 以下是範例應用,CI 建立 image 並推倒 container registry
 
 ```jsx title=".gitlab-ci.yml"
-stages:
-  - build-moni
-
-
+variables:
+    IMAGE_NAME: vmnotconnect
+    CI_IMAGE: $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
 # 構建 moni
-build-moni:
+build-img:
   # 定義 job 所在的階段
   stage: build
   # 定義 job 所使用的 Docker 鏡像

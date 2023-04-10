@@ -95,17 +95,34 @@ deploy:
 
 以上是一些常用的 key word.
 
+### gitlab CI working directory
+
+:::tip
+一般預設工作目錄都是在/builds 資料夾底下，他會把你 git repo 的東西 clone 到每個 img 的 build 資料夾裡面,所以工作目錄基本上在/builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME 裡面,用說的很難懂,改用舉例吧:
+如果 namespace 是 ford, repo 名稱也會是 ford,所以工作目錄會在/builds/ford/ford 底下,也就是 CI_PROJECT_DIR='/builds/it/nginx-log-session-clear',內容會是你的 git repo 內容.
+
+也可以在 script 裡面用 export 求證歐
+<>
+
+  <div style={{ display: "flex", justifyContent: "center" }}>
+    <img
+      src={require("./CI_DIR_GITLAB.png").default}
+      alt="CI_WORK_DIR_GITLAB.png"
+    />
+  </div>
+</>
+:::
+
 ## basic example
 
 以下是範例應用,CI 建立 image 並推倒 container registry
 
 ```jsx title=".gitlab-ci.yml"
-stages:
-  - build-moni
-
-
+variables:
+    IMAGE_NAME: vmnotconnect
+    CI_IMAGE: $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
 # 構建 moni
-build-moni:
+build-img:
   # 定義 job 所在的階段
   stage: build
   # 定義 job 所使用的 Docker 鏡像

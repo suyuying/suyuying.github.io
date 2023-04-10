@@ -73,6 +73,14 @@ Resource :"麥當勞"
 
 #### 根使用者
 
+Root 可以存取所有 aws 資源,且權限最高,aws 建議日常工作事項都用一般使用者,除非是以下工作:
+
+- 管理一般使用者權限
+- 停用 AWS 帳戶
+- 帳戶花費管理
+
+更多資料可以看[官網這篇](https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html)
+
 #### IAM 使用者
 
 具備單一人員或應用程式的特定許可，AWS 建議人員金鑰長期憑證者要定期更換，而相比長期憑證更建議用暫時性憑證.

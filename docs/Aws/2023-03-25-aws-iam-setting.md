@@ -4,7 +4,7 @@ description: 官方建議大多情況都會適用 IAM role，使用 IMA role 的
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [AWS]
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 ## what is aws IAM
@@ -135,7 +135,7 @@ Root 可以存取所有 aws 資源,且權限最高,aws 建議日常工作事項�
 在設定完 root 的基本安全設定後,接著就是要建立日常的 IAM 使用者.流程為以下:
 
 - 建立個別 IAM 使用者
-- 建立群組,並連結 Policies 設定
+- 建立群組,並連結 Policies 設定以其使用者
 - 套用 IAM 密碼政策
 
 ### 刪除 Root 存取金鑰

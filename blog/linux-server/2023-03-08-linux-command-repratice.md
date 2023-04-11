@@ -16,6 +16,12 @@ cat -n xxxx.md | sed -n '5,7p'
 
 ```
 
+把 whois 檢查 domain 中的 Registry Expiry Date 的前面的空格去掉,以下意思是把 0 個以上的 space 去掉
+
+```
+sed 's/\s\{0,\}Registry Expiry Date: //'
+```
+
 <!--truncate-->
 
 印出指定字樣範圍

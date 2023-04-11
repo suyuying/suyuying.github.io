@@ -4,6 +4,7 @@ description: 記錄筆記,Region aws 基礎設施的一個單位，每個區域�
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [AWS]
+sidebar_position: 1
 ---
 
 ## 名詞解釋
@@ -91,8 +92,17 @@ root 權限過大問題，透過設定不同權限帳號切割，在 aws 就是�
 ### aws 網路環境組成
 
 ```
-封包->IGW->Route Table ->NACL->Public Subnet->Instance
+封包->IGW->Route Table ->Network Access Control Lists(NACL)->Public Subnet->Security group -> Instance
 ```
+
+### NACL vs Security group
+
+這兩者都是控制網路流量，那差別又為何呢?
+
+- NACL 是在子網路級別運作, Security group 是在 instance 級別
+- NACL 是無狀態的(stateless),不跟蹤狀態,也就是要規定 7.7.7.7 能進來也能出去,才會放行跟 7.7.7.7 的流量. Security group 是有狀態的(stateful),這代表會自動允許出站或入站的返回流量,舉例來說:如果對外可以連接 7.7.7.7:80,那 7.7.7.7 回來的流量也會自動允許,但注意,7.7.7.7 不會自己進來.
+- NACL 有允許和拒絕規則,Security group 只有允許規則 。
+- NACL 只能引用 IP 地址或 CIDR 塊,Security group 可以在其規則中引用其他安全組。
 
 ### VPC 服務對接方式
 

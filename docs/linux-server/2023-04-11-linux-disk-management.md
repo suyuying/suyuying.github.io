@@ -23,6 +23,8 @@ tmpfs           7.7G     0  7.7G   0% /sys/fs/cgroup
 tmpfs           1.6G     0  1.6G   0% /run/user/1000
 ```
 
+<!--truncate-->
+
 `du -sh *`: 列出當前目錄下所有文件和子目錄的大小
 
 ```

@@ -217,3 +217,18 @@ Read Replica 跟 slave DB 相似，差別在前者可以做到跨 Region ，且�
 :::
 
 另外，為避免主庫失效，也可以使用 Multi-AZ 服務啟用備用資料庫(Standby)，平時主庫資料會同步複製到 standby，唯獨副本跟快照備份工作都交給 Standby，當主庫不小心掛了就會切換用備用資料庫。
+
+## Route 53
+
+主要是 DNS Registry 中建立並管理 DNS Record, 常用的 Record 形式有 A,CName,另外 aws 還有提供 alias record(底層依舊是 A record). 並選擇路由政策,最常用間的會是 simple routing policy,有特殊需求會依據地理位置,效能(延遲最少,故障轉移),伺服器客製.
+
+### alias record
+
+要把 dns record 接上某個 aws 資源,例如 alb,可以使用以下方式
+
+1. 自己公司域名 CNAME 到 aws 資源產生的隨機域名,該筆隨機域名在 aws 那邊會被 A record 到 ELB ip.
+2. A record 在 Alias 情況下連接到 aws 資源
+
+## CloudWatch
+
+監控 aws 服務資源的 log,硬體服務他可以直接收集,

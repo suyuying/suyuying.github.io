@@ -288,6 +288,7 @@ for index, row in group_df.iterrows():
 or
 
 法二、這段程式碼會先用 groupby 方法按照 'name' 列進行分組，然後對 'filePath' 列進行聚合操作，使用 lambda 函數來將相同的 filePath 合併成一個字符串，並將字符串中的重複值去除。最後用 sort_index() 方法對結果進行排序，按照 'name' 列的字母順序排序。
+
 接下來的 for 循環，對 df_join 中的每一行進行迭代，其中 index 是當前行的索引值，row 是當前行的 Series 對象。在循環體中，先打印出 index，然後打印出 row，發現 row 是一個 Series 對象，包含了當前行的所有列。
 
 ```
@@ -311,8 +312,10 @@ pivot_table 方法將資料集按照某些欄位進行分類，並根據另一�
 
 ### 排序
 
-主要有 sort_index 跟 sort_values,將表進行排序
+主要有 sort_index 跟 sort_values,將表進行排序.
+
 sort_values: 根據數據值對 DataFrame 或 Series 進行排序,預設是升序(也就是 ascending=True),將數值由低到高排列,常用參數 ascending,inplace. inplace=True 時會修改原本 df 並 return None.
+
 sort_index: 根據索引對 DataFrame 或 Series 進行排序
 
 sort_values:

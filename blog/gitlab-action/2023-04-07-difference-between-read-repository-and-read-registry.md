@@ -3,7 +3,7 @@ title: difference between read_repository and read_registry in gitlab
 description: 在gitlab裡,read_repository 主要是讓你只能抓 image 下來,read_repository 則是可以檢查 repo 裡面所有分支,commit 等,並可以 clone repository,但不能 push!
 authors: suyuying
 image: https://github.com/suyuying.png
-tags: [gitlab action, CICD]
+tags: [gitlab CI/CD, CICD]
 ---
 
 ## gitlab 權限管理

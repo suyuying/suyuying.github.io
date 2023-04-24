@@ -13,7 +13,6 @@ tags: [linux, sed]
 
 ```
 cat -n xxxx.md | sed -n '5,7p'
-
 ```
 
 把 whois 檢查 domain 中的 Registry Expiry Date 的前面的空格去掉,以下意思是把 0 個以上的 space 去掉
@@ -29,6 +28,12 @@ sed 's/\s\{0,\}Registry Expiry Date: //'
 
 ```
 sed -n "/QOO/,/^}/p" common.js
+```
+
+印出指定時間範圍 log,注意開關範圍沒東西會變全抓.
+
+```
+sed -n "/2023-04-20 05:10/,/2023-04-20 05:21/p" chanxxxe*out* > /tmp/lyapi.log
 ```
 
 ## grep

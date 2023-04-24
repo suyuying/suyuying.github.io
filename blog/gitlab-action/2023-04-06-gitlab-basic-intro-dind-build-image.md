@@ -3,7 +3,7 @@ title: CI:gitlab basic intro about  CI/CD, build image and push to git-lab conta
 description: 介紹官網資料,並提供gitlab ci使用範例,補充alpine/git:latest要用script要用到的entrypoint[""]
 authors: suyuying
 image: https://github.com/suyuying.png
-tags: [gitlab action, CICD]
+tags: [gitlab CI/CD, CICD]
 ---
 
 ## basic tutorial

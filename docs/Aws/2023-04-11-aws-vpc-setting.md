@@ -4,7 +4,6 @@ description: 基本上網路部分會圍繞著VPC 設定,依序:建立 VPC ->建
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [AWS]
-draft: true
 ---
 
 :::tip

@@ -178,3 +178,8 @@ IAM -> Access management -> User groups
 步驟:
 
 IAM ->Access management-> Account settings -> Password policy -> Edit ->Custom
+
+:::tip
+可以到 aws 裡面的 IAM 服務找關鍵字: Sign-in URL for IAM users in this account,複製他給的網址然後加到瀏覽器書籤內歐！這樣登入會較方便!
+複製網址都會長類似這樣: https://878783396812.signin.aws.amazon.com/console
+:::

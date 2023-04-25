@@ -12,9 +12,27 @@ tags: [docker]
 
 docker 掛載 volume 會有三種方式，綁定掛載（Bind Mount），命名卷（Named Volume），匿名卷（Anonymous Volume），前兩種在 container 被刪除時不會被刪，會永久保存，docker 內沒被掛載或使用 Anonymous Volume 則都會被刪除。
 
-:::info
-docker logs 資料包含哪些？
+:::tip
+
+1. docker logs 資料包含哪些？
+
 Docker 會捕捉所有容器的標准輸出（和標准錯誤），並以 JSON 格式將其寫入文件中。 JSON 格式將每行注釋為其源（stdout 或 stderr）和其時間戳。 每個日誌文件僅包含有關一個容器的信息。
+
+2. docker logs 什麼時候會被刪除?
+   當 container 被 rm -f 掉的時候 (單純 restart 還會在)!如果要刪除 container 又想保留 docker log,請用`docker logs CONTAINER_ID > container.log` .
+
+   如果是一般非 docker log,要把打掛載出來
+
+```
+    # Copy the logs out to the host
+docker copy CONTAINER_ID:/path/to/your/log_file /host/path/to/store
+
+# Mount a directory for them
+docker run -d \
+-v /host/path/to/store/logs:/container/path/stored/logs \
+your-image
+```
+
 :::
 
 ### 如何減少不必要的硬體佔用

@@ -4,7 +4,7 @@ description: GitHub Action 是 continuous integration and continuous delivery (C
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [github action, CICD]
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 ## 基本介紹

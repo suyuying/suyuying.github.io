@@ -4,6 +4,7 @@ description: 基本上網路部分會圍繞著VPC 設定,依序:建立 VPC ->建
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [AWS]
+sidebar_position: 3
 ---
 
 :::tip
@@ -19,7 +20,7 @@ tags: [AWS]
 
 :::
 
-## aws internet setting introduction
+## aws internet introduction
 
 一般地端要讓網路進到 server,結構簡單的長這樣
 
@@ -96,6 +97,8 @@ NAT gateway 是要付費的! 項目包含 elastic IP 跟 NAT gateway.
 
 ## lab
 
+- 目標:Region 內建立 VPC,並使用 elb 將流量導到兩個不同 AZ 中的 web server,避免因為單一 AZ 故障導致的服務中斷.日常管理透過堡壘機(bastion)進入 web server 做管理.本篇主要講網路設定部分,而 elb,EC2 等服務設定會留到下一篇.
+
 1. [建立 VPC](#建立-vpc)
 2. [建立 public subnet & private subnet(需連結 VPC)](#建立-subnet)
 3. [建立 Internet gateway(需連結 VPC)](#建立-internet-gateway)
@@ -105,8 +108,6 @@ NAT gateway 是要付費的! 項目包含 elastic IP 跟 NAT gateway.
 7. 網路到這邊,去設定服務囉！
 
 ### CIDR 規劃
-
-- 目標:Region 內建立 VPC,並使用 elb 將流量導到兩個不同 AZ 中的 web server,避免因為單一 AZ 故障導致的服務中斷.日常管理透過堡壘機進入 web server 做管理.本篇主要講網路設定部分,而 elb,EC2 等服務設定會留到下一篇.
 
 - CIDR 規劃:VPC 用 10.0.0.0/16.這邊預計只用 4 個 subnet,不過為了保險所以會切出 16 個(2 的 4 次方)所以子網段 CIDR 會是 20,每個 subnet 扣掉 aws 預留的 5 個 ip 還會有 4091 個 ip 可用.
 
@@ -193,4 +194,4 @@ forElb:允許 HTTP and HTTPS
 
 ## 小結
 
-網路基本設定在這邊,下一篇是有關 EC2 跟 ELB.
+網路基本設定在這邊,下一篇是有關 EC2 跟 ELB 的設定.

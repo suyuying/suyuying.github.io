@@ -1,6 +1,6 @@
 ---
-title: CI:gitlab basic intro about  CI/CD, build image and push to git-lab container
-description: 介紹官網資料,並提供gitlab ci使用範例,補充alpine/git:latest要用script要用到的entrypoint[""]
+title: gitlab CI/CD basic introduction
+description: 官網的基本介紹資料,並提供gitlab ci使用範例,補充alpine/git:latest要用script要用到的entrypoint[""]
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [gitlab CI/CD, CICD]
@@ -115,7 +115,7 @@ deploy:
 
 ## basic example
 
-以下是範例應用,CI 建立 image 並推倒 container registry
+以下是範例應用,CI 建立 image 並推到 container registry
 
 ```jsx title=".gitlab-ci.yml"
 variables:

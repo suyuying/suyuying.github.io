@@ -7,11 +7,38 @@ tags: [AWS]
 draft: true
 ---
 
-## bastion server
+這邊接續[AWS 網路篇](/docs/Aws/2023-04-11-aws-vpc-setting)的 lab.
 
-堡壘機的建立用來管控跟紀錄使用者操作,透過本機的私有金鑰以及對應放在堡壘機的公有金鑰連線,連線到堡壘機,再透過放在堡壘機的各機台私鑰連線到對應在內部資源的公鑰做機台管理.
+目標:Region 內建立 VPC,並使用 elb 將流量導到兩個不同 AZ 中的 web server,避免因為單一 AZ 故障導致的服務中斷.日常管理透過堡壘機進入 web server 做管理.
 
-mac,linux,window 10 以上主要支援的金鑰檔案格式為\*.pem.
+:::tip
+基本上 EC2 跟 ELB 設定相關依序:
+
+1. [建立 KeyPair 公私鑰](#建立-vpc)
+2. [建立 EC2 for web server and bastion server](#建立-subnet)
+3. [設定跳板機 ssh 連線](#建立-internet-gateway)
+4. [建立 target group](#建立-nat-gateway)(optional,需連結 subnet,配置 eip,前提是 private subnet 需要連外時)
+5. [建立 ELB](#建立-route-table)(設定是否連內網 local,連外 Igw,NAT gateway,VPN gateway,peering 等) 以及要給哪個 subnet 用,一個 route table 可以給多個 subnet 用
+6. [啟 HTTP 伺服器](#設定-security-group) 對服務開啟 ip and port
+7. 網路到這邊,去設定服務囉！
+
+:::
+
+## AWS EC2 introduction
+
+堡壘機的建立用來管控跟紀錄使用者操作,透過本機的私有金鑰以及對應放在堡壘機的公有金鑰連線,連線到堡壘機後,再透過放在堡壘機的私鑰連線到對應在內部資源的公鑰做機台管理,另外,也可以透過 multi-hop 方式,在私鑰只放在本機的情況下,透過堡壘機跳到目標管理機器中.
+
+本篇會將 bastion server 放在 public subnet 底下,會有對外 ip,不過其實也可以改成透過 ELB 把 ssh 連線導進 private subnet,再透過他連入 web server,差別是後者就沒有對外 ip,可以減少不小心暴露真實 ip,被攻擊者攻擊的風險.
+
+:::info
+mac,linux,windows 10 以上主要支援的金鑰檔案格式為\*.pem.
+
+windows 9 以前是支援 ppk 格式.
+:::
+
+## AWS ELB introduction
+
+## lab
 
 ### generating keys
 
@@ -26,13 +53,8 @@ EC2 service -> Network & Security -> Key Pairs ->Create Key Pairs-> choose RSA ,
 ### create bastion server
 
 ```
-EC2 ->instances -> launch instances ->Name(product-resource-purpose-region)ex. ford-ec2-bastion-uw1 -> app and os image(my ami or aws market ,or community AMIs) -> instance type(choose cpu ,memory) -> key pair(login)-> choose ur vpc,and use public subnet, enable auto-assign public ip -> select security group-> DONe
+EC2 ->instances -> launch instances ->Name(product-resource-purpose-region)ex. ford-ec2-bastion-uw1 -> app and os image(my ami or aws market ,or community AMIs) -> instance type(choose cpu ,memory) ->choose key pair for login-> choose ur vpc(public subnet), enable auto-assign public ip -> select security group(default and bastion)-> DONe
 ```
-
-:::info
-當公司某些服務需要連外開放,例如. 網頁,Mail Server,FTP Server 等,就會在外部防火牆後面新增內部防火牆,將網頁,Mail Server,FTP Server 等放在這之間,用以控制可能由 DMZ 區進入內部網路(db 等)的流量.
-
-:::
 
 ### use ssh to client
 

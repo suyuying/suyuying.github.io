@@ -1,5 +1,5 @@
 ---
-title: aws book study note
+title: AWS Basic Introduction
 description: 記錄筆記,Region aws 基礎設施的一個單位，每個區域都是獨立數據中心群集，由多個 Availability Zone 組成，所以像新加坡區，aws 目前就 3 個可用區域。
 authors: suyuying
 image: https://github.com/suyuying.png

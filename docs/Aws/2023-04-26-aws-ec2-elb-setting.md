@@ -17,7 +17,7 @@ draft: true
 1. [建立 KeyPair 公私鑰](#建立-vpc)
 2. [建立 EC2 for web server and bastion server](#建立-subnet)
 3. [設定跳板機 ssh 連線](#建立-internet-gateway)
-4. [建立 target group](#建立-nat-gateway)(optional,需連結 subnet,配置 eip,前提是 private subnet 需要連外時)
+4. [建立 target group](#建立-nat-gateway)
 5. [建立 ELB](#建立-route-table)(設定是否連內網 local,連外 Igw,NAT gateway,VPN gateway,peering 等) 以及要給哪個 subnet 用,一個 route table 可以給多個 subnet 用
 6. [啟 HTTP 伺服器](#設定-security-group) 對服務開啟 ip and port
 7. 網路到這邊,去設定服務囉！

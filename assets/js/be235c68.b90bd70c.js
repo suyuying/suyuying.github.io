@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[9791],{7738:a=>{a.exports=JSON.parse('{"label":"Domain Hijacking","permalink":"/blog/tags/domain-hijacking","allTagsPath":"/blog/tags","count":1}')}}]);

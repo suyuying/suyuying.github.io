@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[1965],{8658:s=>{s.exports=JSON.parse('{"label":"disk command","permalink":"/blog/tags/disk-command","allTagsPath":"/blog/tags","count":1}')}}]);

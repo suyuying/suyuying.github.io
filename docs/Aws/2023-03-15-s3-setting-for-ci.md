@@ -3,7 +3,7 @@ title: s3 set iam permissions for Github Actions to achieve CIBuild an AWS s3 st
 description: 建立aws靜態網站接上cloudfront，最後設定 github action 在 code 更新以後會把 build 好的資料由 build 資料夾底下東西發到 S3.
 authors: suyuying
 image: https://github.com/suyuying.png
-tags: [AWS]
+tags: [AWS, github action, CICD]
 ---
 
 ## S3 靜態網站設定
@@ -155,7 +155,9 @@ SAML: Security Assertion Markup Language（安全斷言標記式語言）的縮�
 }
 ```
 
-github 設定檔，以下會執行 build，驗證 aws,把編譯後資料推到 s3。
+另外因為需要執行 cloudfront purge,也請給該 Role: CloudFrontFullAccess 的權限.
+
+github 設定檔，以下會執行 build，驗證 aws,把編譯後資料推到 s3,並 purge cloudfront。
 
 :::info
 permissions 一定要設定成 write，這樣設定是要設寫入權限才能請求 OpenID Connect JWT 令牌。沒設定就會跑出以下報錯
@@ -163,7 +165,7 @@ Error: Credentials could not be loaded, please check your action inputs: Could n
 :::
 
 ```jsx title=".github/workflows/deploy.yml" {10-11}
-name: Deploy to GitHub Pages
+name: Deploy to S3 and purge cloudfront
 
 on:
   push:
@@ -197,6 +199,8 @@ jobs:
           role-session-name: OIDCSession
       - name: Deploy to S3 bucket
         run: aws s3 sync ./build/ s3://yours3 --delete
+      - name: Purge cloudfront
+        run: aws cloudfront create-invalidation --distribution-id yourCloudFrontID(ex.E2HL0T0J5GSDCG) --paths /*
 
 ```
 

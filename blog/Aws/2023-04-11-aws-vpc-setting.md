@@ -192,6 +192,9 @@ forElb:允許 HTTP and HTTPS
 
 - inbound rules: allow 0.0.0.0/0 HTTP,HTTPS 進來.
 
+操作
+EC2 -> Network & Security -> Security Groups -> Create security group -> input Security group name , associate VPC -> add inbound and outbound rule.
+
 ## 小結
 
 網路基本設定在這邊,下一篇是有關 EC2 跟 ELB 的設定.

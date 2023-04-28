@@ -80,7 +80,7 @@ docker-compose -f docker-compose.yml up -d --force-recreate mm
 3. docker 指令
 
 ```
-docker run -d --log-opt max-size=1g nginx
+docker run --log-opt max-size=10m --log-opt max-file=5 nginx
 ```
 
 [官網 log 管理](https://docs.docker.com/config/containers/logging/json-file/)，管理 docker log 方式很多，預設都適用 json-file，設定可已透過修改/etc/docker/daemon.json 並重啟達成。

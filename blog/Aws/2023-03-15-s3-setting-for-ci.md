@@ -4,7 +4,6 @@ description: 建立aws靜態網站接上cloudfront，最後設定 github action 
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [AWS]
-sidebar_position: 6
 ---
 
 ## S3 靜態網站設定

@@ -4,6 +4,7 @@ description: 基本EC2連入管理,堡壘機跟web server設定.並使用ELB作�
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [AWS]
+sidebar_position: 4
 ---
 
 這邊接續[AWS 網路篇](/docs/Aws/2023-04-11-aws-vpc-setting)的 lab.

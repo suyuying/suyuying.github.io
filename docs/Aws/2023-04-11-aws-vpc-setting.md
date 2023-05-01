@@ -153,7 +153,24 @@ VPC -> Internet Gateway ->click on the "Attach to VPC" option in the "Actions" m
 
 操作:
 
-VPC(verify AZ first) -> NAT Gateways -> Create NAT Gateway -> bind EIP to NAT Gateway -> done and wait for status become available ->associate NAT Gateway with public subnet -> private route table add destination 0.0.0.0/0 to NAT Gateway.
+VPC(verify AZ first) -> NAT Gateways -> Create NAT Gateway -> bind EIP to NAT Gateway -> done and wait for status become available ->associate NAT Gateway with public subnet -> private route table add destination 0.0.0.0/0 to NAT Gateway -> Ensure that the outbound rules in the security group are configured to allow traffic ot targe ip.
+
+:::danger
+NAT 很貴,lab 做完記得要關掉
+:::
+
+:::info
+如果開了 NAT gateway,連到 route table,網路還是不通,這時候就分別檢查以下設定
+
+1. NACL
+2. security group
+3. VM 防火牆
+
+設定 security group 會跟開放使用的協議的有關係,常用的網路測試工具
+ping 跟 traceroute 都是走 ICMP 協議,如果你只開 TCP 是不過是正常的.
+
+ICMP 是一種基於 IP 協定的網路協定，它不使用 TCP 或 UDP 協定。ICMP 主要用於網路診斷、錯誤報告和路由選擇。
+:::
 
 ### 建立 route table
 

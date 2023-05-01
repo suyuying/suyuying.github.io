@@ -158,17 +158,11 @@ export default function MyResume() {
                   <div className="col-span-12 space-y-2.5">
                     <div className="lg:mr-16">
                       <p className="text-gray-lite dark:text-color-910 leading-7">
-                        I'm Creative Director and Studious Engineer from Nantou,
-                        Taiwan, working in IT apartment. I am experienced Python
-                        developer, also familier with linux shell script and JS,
-                        enjoy turning trifling process into simple, reliable
-                        Code.
+                        如果自認
+                        沒有比別人幸運,沒有比別人有天份,沒有比別人有背景,那能做的就是比別人有更多的耐心跟努力.
                       </p>
                       <p className="text-gray-lite leading-7 mt-2.5 dark:text-color-910">
-                        Besides knowledge of coding, i am a good coordinator in
-                        team work, too. I understand the position of Devops, and
-                        my aim is to bring Accurate, Automation, Safety to the
-                        sever.
+                        Life is too short to live someone else's dream
                       </p>
                     </div>
                   </div>

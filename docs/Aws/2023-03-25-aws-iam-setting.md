@@ -67,6 +67,32 @@ Resource :"麥當勞"
 }
 ```
 
+:::info
+在 AWS IAM (Identity and Access Management) 的策略,effet, resource, action 是必須,condition 跟 principal 不是.
+
+Principal 部分,分兩種:
+
+1. 身份策略：附加到 IAM 用戶、群組或角色上的策略。在這種情況下，主體（Principal）是隱式的，因為策略附加到特定的 IAM 實體上。因此，您不需要在策略語句中指定 Principal。也就是說,你不設定 Principal,當這個政策賦予在 user 上就直接得到該權限!
+
+2. 資源策略：直接附加到 AWS 資源（例如 Amazon S3 存儲桶或 AWS Lambda 函數）上的策略。在這種情況下，您需要在策略語句中指定主體（Principal），以確定允許或拒絕哪些 AWS 身份對資源執行操作。如以下政策是有限定哪個帳號是可以用 s3 資源！如果 Principal 不符合資源策略中指定的身份，則該用戶將無法根據該策略訪問或執行操作。
+
+```
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:user/my-user"
+      },
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::my-bucket/*"
+    }
+```
+
+3. Condition 沒有設定,意味著任何符合上述 Action 和 Resource 的操作都會被允許。如果要精細的控制資源存取,ex.限制存取某個特定的 IP 範圍,s3 的 prefix 帶啥才會過等等.
+
+:::
+
 ### IAM identities
 
 共有根使用者、IAM 使用者、IAM 使用者群組、IAM 角色、暫時性憑證

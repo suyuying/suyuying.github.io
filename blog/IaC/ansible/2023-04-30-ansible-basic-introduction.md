@@ -1,9 +1,9 @@
 ---
 title: Basic introduction of ansible
-description: 123
+description: ansible 是組態管理工具 Configuration management Tool ,含有自動化工具,配置系統、部署軟件和編排更高級的 IT 任務，例如持續部署或零停機滾動更新.此部分主要是用官網的介紹內容,寫下個人了解後的筆記,跟做lab的紀錄！
 authors: suyuying
 image: https://github.com/suyuying.png
-tags: [dns, Domain Hijacking, DNS Poisoning]
+tags: [Ansible, IaC]
 ---
 
 這邊放學習經驗,未來工作中如果發現有其他做法,或者發現觀念有錯，都會滾動式修改,請多多見諒～
@@ -24,7 +24,7 @@ Ansible 是 Python 陣營的組態管理工具,不用幫每台機器 (instance) 
 基本上,RD 的習慣會是需要的工具先上網找輪子,找不到的自己寫,IT 人員的習慣就是找輪子,並透過輪子寫好的的設定檔去管理任何事情,所以要習慣查官網資料才行,也要了解一隻程式總共有哪些設定檔,及設定檔可能出現的位置！
 :::
 
-### 環境需求
+### 環境名詞定義
 
 基本環境需要要有以下幾點
 
@@ -32,7 +32,7 @@ Ansible 是 Python 陣營的組態管理工具,不用幫每台機器 (instance) 
 
 - 被管理節點 (Managed node)：Ansible 客戶端,由 Ansible 控制主機端所控制的遠端系統或主機,透過 Control node 以 SSH 方式近來這台機器。
 
-### 操作文檔
+### 文檔名詞定義
 
 - 庫存清單 (Inventory)：一個按邏輯分類的被管理節點列表。您在控制節點上建立庫存清單，以便描述主機部署情況給 Ansible,舉例來說,你的一個服務可能由多台機器組成,Inventory 方便你一次操作這群機器們.
 
@@ -54,7 +54,9 @@ Ansible 是 Python 陣營的組態管理工具,不用幫每台機器 (instance) 
 
 - AAP: Ansible 自動化平台的簡稱。這是一種包含企業級功能的產品，並整合了 Ansible 生態系統中的許多工具：ansible-core、awx、galaxyNG 等等。
 
-### installation
+<!--truncate-->
+
+### How to install
 
 這邊以 centos 為例,預設設定檔的取得方式參考他的[官網](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg),詳細安裝資訊[看這](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
@@ -136,7 +138,7 @@ ansible all --list-hosts
 
 Ansible 每一版都可能會更新 Best practices 指導,所以如果[這個連結](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html)404 了,自己 google`ansible best practices`吧.
 
-### ansible 建議結構 1
+#### ansible 建議結構 1
 
 ```
 production                # inventory file for production servers
@@ -184,7 +186,7 @@ roles/
 
 ```
 
-### ansible 建議結構 2
+#### ansible 建議結構 2
 
 ```
 inventories/
@@ -440,22 +442,65 @@ server {
 網路掛掉,它任務會 hang 在那邊,這時要想看看你的網路設定是不是設定錯！
 :::
 
+## module 怎麼找?
+
+看完官網的介紹後,對於 Module,Plugin,Collection 還是有許多疑問,包含
+
+1. [Module 跟 Plugin 差別](#module-跟-plugin-差別)
+2. [Collection 跟 Ansible galaxy 是什麼？](#collection-跟-ansible-galaxy-是什麼)
+3. [我要使用某項功能,例如:管理 AWS 等要怎麼找工具？](#我要使用某項功能例如管理-aws-等要怎麼找工具)
+
+### Module 跟 Plugin 差別
+
+Ansible 插件在 Ansible 控制器節點上進行本地工作，這意味著一些數據被交給了插件，而插件會處理這些數據。然後,模塊使用這些處理過的數據，在遠程目標機上執行一些任務. 透過插件,可以提供 Ansible 額外功能,例如:輸出日誌,數據轉換等!
+
+### Collection 跟 Ansible galaxy 是什麼？
+
+在 Ansible 中，可以使用 Ansible Galaxy 來分享和發布集合、角色、模組、插件和其他內容。而集合是在較新版本中新增的一種發布內容的方式，包含了多個模組、角色、插件和其他資源，可以更加輕鬆地管理和共享 Ansible 內容。透過 Ansible Galaxy，使用者可以輕鬆地找到和安裝他們需要的 Ansible 內容，並且也可以輕鬆地貢獻自己的內容給社群使用。
+
+### 我要使用某項功能,例如:管理 AWS 等要怎麼找工具？
+
+[官網](https://docs.ansible.com/ansible/latest/index.html)這邊,你可以看到一大堆工具,playbook,modules,plugin,這邊都看得到.但必須得說,他資訊給太多,會不知道要怎麼選擇,所以最簡單的方法是問 AI 關鍵字,但目前 AI 還是不一定正確情況下,知道怎麼找文件是很重要滴！
+[官網給的建議](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules.html#should-you-develop-a-module)是,先找[list of included collections](https://docs.ansible.com/ansible/latest/collections/index.html#list-of-collections) or [Ansible Galaxy](https://galaxy.ansible.com/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW)
+
+以下先示範單純找文件,接著進階一點就是問完 AI 然後找文件確認 AI 沒有唬爛我,或者他有遺漏沒寫出的地方！
+
+1. [純找 module 文件](https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html#all-modules)
+   或找[list of included collections](https://docs.ansible.com/ansible/latest/collections/index.html)
+
+   因為東西太多,建議如果你要的功能是 apt 安裝模組,可以 google "ansible apt module" 會快點.要找就是到[list of included collections](https://docs.ansible.com/ansible/latest/collections/index.html),因為推測 apt-get 這個功能一定是內建,就猜會在 ansible.builtin 裡面,點進去後 F12 找 apt,你就會看到 Modules 底下有一個 apt module,點進去你就會發現[apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html#ansible-collections-ansible-builtin-apt-module),裡面會有可用的參數,attributes,還有使用 Examples,跟 return values 等.
+
+2. 直接問 AI
+
+   apt 模块是 Ansible 的一个内置模块，用于在基于 Debian 的系统上安装、升级或删除软件包。该模块具有一些可配置的参数，下面是 apt 模块的几个常用参数：
+
+- name：指定要安装、升级或删除的软件包名称。
+- state：指定软件包的状态。可以是 present（安装软件包）、latest（更新软件包）或 absent（删除软件包）。
+- update_cache：指定是否在安装软件包之前更新软件包缓存。可以是 yes 或 no。
+- cache_valid_time：指定软件包缓存的有效时间。
+- allow_unauthenticated：指定是否允许安装未验证的软件包。可以是 yes 或 no。
+
+```jsx title="demo.yml"
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+```
+
 ## 結論
 
-Ansible 官網基本入門到這邊,接下來會去探討進階情境.
+Ansible 官網基本入門到這邊,因為資訊實在太多,看起來是用到什麼再去找需要用到的工具,全學太浪費時間,接下來會去探討進階情境.
 
 :::info
-
-這邊的[基本資訊會來自官網](https://docs.ansible.com/ansible/latest/index.html).
-
 參考資料:
 
 1. [官網](https://docs.ansible.com/ansible/latest/index.html)
-2. [現代 IT 人一定要知道的 Ansible 自動化組態技巧 系列](https://ithelp.ithome.com.tw/users/20031776/ironman/1022)
-3. [30 天入門 Ansible 及 Jenkins](https://ithelp.ithome.com.tw/users/20103346/ironman/1473)
+2. [官網 config 介紹](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html)
+3. [一步到位玩透 Ansible (原 51cto 专栏)](https://www.junmajinlong.com/ansible/index/)
+4. [热气球！Ansible config 設定大全！](https://www.cnblogs.com/liushiya/p/17281725.html)
+5. [Ansible Pluginsr 介紹 by 迪鲁宾](https://juejin.cn/post/7108949934035959838)
+6. [yml/yaml 語法基本規則](https://www.junmajinlong.com/ansible/4_ansible_soul_playbook/)
 
 :::
-
-to be continue: 進階 lab. 部署東東
-進進階 lab,使用 terraform 開機器
-然後用 ansible 部署程式

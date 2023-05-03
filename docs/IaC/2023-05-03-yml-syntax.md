@@ -121,13 +121,13 @@ is_featured: false;
 
 ```jsx title="yaml dict and list"
 ---
-# 值是純list
+# 值是純list,有三個-,所以有三個元素.
 languages:
   - Shell
   - JS
   - Python
 
-# 值是dict in list,只有一個dict歐！
+# 值是dict in list,因為只有一個-,代表只有一個元素,該元素type為dict.
 services:
   - name: nginx
     status: running
@@ -152,6 +152,8 @@ services:
 ```
 
 到這邊,基本上對 yml 就有一定熟悉度,在寫 config 時,腦袋也跟著跑出 json 的檔案範例.
+
+<!--truncate-->
 
 ## 進階使用解析
 

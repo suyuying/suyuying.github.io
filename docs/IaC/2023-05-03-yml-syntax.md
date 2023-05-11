@@ -256,3 +256,10 @@ services:
 ### 總結
 
 yaml 看起來對複雜結構好懂一些,很多程式的 config 檔都會用到它,所以要好好熟悉一下！
+
+:::info
+參考資料:
+
+1. [4. 嘿，瞧瞧 Ansible 的灵魂：playbook](https://www.junmajinlong.com/ansible/4_ansible_soul_playbook/)
+
+:::

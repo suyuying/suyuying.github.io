@@ -71,17 +71,20 @@ Resource 更新為您的儲存貯體名稱!
 
 名詞定義：
 
-STS: AWS Security Token Service API,提供信任的使用者暫時安全憑證，控制對於 AWS 資源的存取。
+- STS: AWS Security Token Service API,提供信任的使用者暫時安全憑證，控制對於 AWS 資源的存取。
 
-OIDC: OpenID Connect,Google 或 Salesforce。如果想要在 OIDC 相容的 IdP 和您的 AWS 帳戶 之間建立信任，請使用 IAM OIDC 身分提供者。
+- IdP: Identity Provider 身分識別資訊提供者
 
-IdP: Identity Provider 身分識別資訊提供者
+- OIDC: OpenID Connect,Google 或 Salesforce。如果想要在 OIDC 相容的 IdP 作識別身份並和您的 AWS 帳戶 之間建立信任，請使用 IAM OIDC 身分提供者。
 
-SAML: Security Assertion Markup Language（安全斷言標記式語言）的縮寫，是指在身分識別資訊提供者（IdP）與服務提供者（Service Provider，SP）之間傳送驗證以及授權資料的一種公開標準。
+- SAML: Security Assertion Markup Language（安全斷言標記式語言）的縮寫，是指在身分識別資訊提供者（IdP）與服務提供者（Service Provider，SP）之間傳送驗證以及授權資料的一種公開標準。
 
 ### lab 1.用 IAM role 配合 ODIC 執行 CI
 
-這邊示範用 ODIC，讓 aws 認可的 IdP 作身份驗證並連線到 AWS 存取並更新 S3.
+這邊示範用 ODIC，讓 aws 認可的 IdP 作身份驗證並連線到 AWS 存取並更新 S3
+:::tip
+因為 github 對 aws 屬於外部資源,需要透過權威單位(OIDC)對你的非 AWS 資源做驗證身份,驗證這個資源是否是你的,通過驗證後,就會被當作一個 AWS 主體,透過給這個主體授予假設角色(sts:AssumeRoleWithWebIdentity)以給予臨時安全憑證,這樣就算是完成一個有暫時憑證的 role. 接下來就是透過 IAM policy 給這個 role 適當操作 aws 資源的權限！
+::
 
 在建立 IAM OIDC 身分提供者之後，必須建立一個或多個 IAM 角色。角色是 AWS 中的一個身分，並不擁有自己的憑證 (與 IAM 使用者不同)。在此情況中，角色以動態指派給聯合身分使用者，而該使用者由您組織的身分提供者 (IdP) 進行驗證。
 
@@ -105,6 +108,7 @@ SAML: Security Assertion Markup Language（安全斷言標記式語言）的縮�
 自訂信任政策->連結許可
 ```
 
+這邊是比較難懂的一步,主要設定是為了讓 github 的 repo 能被 oidc 驗證
 授權 聯合使用者主體，給 github repo 是 USERNAME/YOUR_REPO 的 pull or main 可以用此角色，以下記得替換成你的 repo 名稱歐！
 
 ```jsx title="信任政策(關係)"

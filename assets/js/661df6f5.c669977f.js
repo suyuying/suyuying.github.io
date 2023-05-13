@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[1971],{51012:e=>{e.exports=JSON.parse('{"label":"cloudtrail","permalink":"/blog/tags/cloudtrail","allTagsPath":"/blog/tags","count":1}')}}]);

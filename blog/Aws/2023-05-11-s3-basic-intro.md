@@ -3,7 +3,7 @@ title: aws s3 basic introduction and attach iam role to operate s3
 description: 簡單整理，S3類型一般使用 standard,如果可能是幾小時拿一次用IA系列,不擔心東西掛掉就放在one-zone省錢,如果是長期封存資料就考慮用Glacier系列.
 authors: suyuying
 image: https://github.com/suyuying.png
-tags: [AWS]
+tags: [AWS, S3]
 sidebar_position: 5
 ---
 
@@ -34,6 +34,10 @@ S3(simple storage service)負責檔案儲存跟管理,你可以當他是個 NAS,
 ### 從 VPC 當中伺服器存取 S3 檔案
 
 透過建立 IAM role,並將適當的 IAM policy 賦給該 IAM Role,並經該 role 指派給 ec2,就可以讓 EC2 透過暫時性的安全憑證向 S3 或其他 AWS 資源做請求！
+
+#### EC2 透過 VPC endpoint 連結 S3
+
+[官網](https://docs.aws.amazon.com/zh_tw/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) ,主要優勢在於可以使用 VPC Endpoint 將 EC2 實例連接到 S3 資源，使其可以在 VPC 內部訪問 S3 而無需通過 Internet。這樣可以提高安全性並降低流量的出口。
 
 #### 如何設定 role 給 ec2
 

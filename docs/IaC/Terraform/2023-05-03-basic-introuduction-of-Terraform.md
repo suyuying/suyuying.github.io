@@ -151,6 +151,131 @@ terraform.tfstate 是不需要進版控的，因為它是 Terraform 建置過程
 
    這邊要建立 QA!
 
+### Import Terraform Configuration
+
+[官網以這篇為主](https://developer.hashicorp.com/terraform/tutorials/cli/state-import)
+把服務起在雲或地都可以透過 terraform 做`terraform import`把相關設定匯入產生 terrform.state 檔案,但首先要先產生 define an empty docker_container resource in your docker.tf file,但要實際操作該資源需要生出設定檔，當然可以直接複製貼上做出設定檔,但會有很多多餘項目,而且會遇到一些狀況,例如 terraform 匯出的 docker 設定檔,就有很多是 docker 內部管理,不能透過 terraform 做設定,所以會報錯
+
+Terraform 導入使用 Terraform 提供商報告的基礎設施的當前狀態。它無法確定：
+
+基礎設施的健康狀況。
+基礎設施的意圖。
+對不受 Terraform 控制的基礎設施所做的更改，例如 Docker 容器文件系統的狀態
+
+將變數定義放在 variable.tf 文件中，然後在 terraform.tfvars 文件中為這些變數賦值，可以更好地組織和管理您的 Terraform 項目。 不同環境也可以用歐！
+
+優質好文：詳細說明如何用[terraformer](https://betterprogramming.pub/terraformer-converting-infrastructure-into-reusable-terraform-code-afe543ad0b15),以及東西拉下來以後如何管理比較好
+
+1. 為了要 reuse,要把會可能變動的值改用變數方式送進來(var)
+2. 把需要重複用的模組化,這邊因為你前面把資料挖空放變數,所以很好用
+
+```
+resource "aws_s3_bucket" "s3_bucket" {
+  bucket = var.bucket_name
+
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_website_configuration" "s3_bucket" {
+  bucket = aws_s3_bucket.s3_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+
+resource "aws_s3_bucket_acl" "s3_bucket" {
+  bucket = aws_s3_bucket.s3_bucket.id
+
+  acl = "public-read"
+}
+
+resource "aws_s3_bucket_policy" "s3_bucket" {
+  bucket = aws_s3_bucket.s3_bucket.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "PublicReadGetObject"
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:GetObject"
+        Resource = [
+          aws_s3_bucket.s3_bucket.arn,
+          "${aws_s3_bucket.s3_bucket.arn}/*",
+        ]
+      },
+    ]
+  })
+}
+```
+
+用 module,其實就是帶入變數,另外可以用模組實例都有一個獨特的名稱（s3_bucket_1 和 s3_bucket_2），這可以幫助你辨識每個實例所代表的資源。
+
+```
+module "s3_bucket_1" {
+  source      = "./modules/s3_bucket"
+  bucket_name = "my-custom-bucket-name-1"
+}
+
+module "s3_bucket_2" {
+  source      = "./modules/s3_bucket"
+  bucket_name = "my-custom-bucket-name-2"
+}
+
+
+```
+
+變數範例
+
+```
+# String
+variable "instance_type" {
+  description = "The type of instance to start."
+  type        = string
+  default     = "t2.micro"
+}
+
+# List
+variable "subnet_ids" {
+  description = "A list of subnet IDs to associate with the EC2 instance"
+  type        = list(string)
+  default     = ["subnet-abcde012", "subnet-bcde012a", "subnet-fghi345a"]
+}
+
+# Map
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default     = {
+    Environment = "Test"
+    Owner       = "DevOps Team"
+  }
+}
+
+# Number
+variable "max_size" {
+  description = "The maximum size of the autoscale group"
+  type        = number
+  default     = 5
+}
+
+# Boolean
+variable "enable_public_ip" {
+  description = "Enable/Disable public IP on the instance"
+  type        = bool
+  default     = false
+}
+
+```
+
+https://github.com/GoogleCloudPlatform/terraformer
+
 :::info
 參考資料
 

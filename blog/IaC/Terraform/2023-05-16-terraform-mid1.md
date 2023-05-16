@@ -1,5 +1,5 @@
 ---
-title: Basic introduction of Terraform
+title: mid iac
 description: HashiCorp 公司打造的 IaC 工具,使用者透過可閱讀的設定檔以達到版控,重複使用,共享設定,管理本地端(on-premises resources)跟雲端(cloud resources)由低階組件,例如:計算、存儲、網路資源,到高層級組件,例如 DNS record,SAAS 功能等的管理.
 authors: suyuying
 image: https://github.com/suyuying.png
@@ -7,9 +7,12 @@ tags: [Terraform, IaC]
 draft: true
 ---
 
-## What is Terraform?
-
-HashiCorp 公司打造的 IaC 工具,使用者透過可閱讀的設定檔以達到版控,重複使用,共享設定,管理本地端(on-premises resources)跟雲端(cloud resources)由低階組件,例如:計算、存儲、網路資源,到高層級組件,例如 DNS record,SAAS 功能等的管理.
+接下來,了解 module,import reosrce 方法,terraformer 怎麼用？基本排錯判斷流程！保護敏敢資訊？動態語言跟資源參考,常用函示 foreach,count,如何用 locals 簡化?,版本管理
+terraform console 是啥,他可以幫助你什麼？
+https://developer.hashicorp.com/terraform/tutorials/state/resource-lifecycle (如何先建立後拆除,如何保護不被拆,如何 ignore 細小改變,ex.改 tag)
+https://developer.hashicorp.com/terraform/tutorials/modules
+為和藥用 module? 環境變多,設定變多,會增加自己跟別人維護難易度！ 優點: 重複,穩定性高,A Terraform
+terraformer
 
 ## How does Terraform work?
 
@@ -133,7 +136,7 @@ The state file is empty. No resources are represented.
 
 terraform.tfstate 是不需要進版控的，因為它是 Terraform 建置過程中動態生成的檔案，包含了當前基礎架構的狀態。因為此檔案會隨著基礎架構狀態的改變而不斷變動，進版控會增加檔案冲突的風險，也可能導致版本控制不當而丟失更新的基礎架構狀態。
 
-1. terraform 指令發生啥事,HCL 語言,版本管理,terraform init -upgrade 啥時用,可以指定資源？ import reosrce 方法,如何刷新 state,基本排錯判斷流程！保護敏敢資訊？動態語言跟資源參考,常用函示 foreach,count,如何用 locals 簡化?
+1. terraform apply 指令會發生啥事？HCL 語言是啥,有哪些資料型態？,terraform init -upgrade 啥時用,可以指定資源？terraform 規劃檔案的內容放置方式? 常用區塊有哪些？ import reosrce 方法,如何刷新 state,基本排錯判斷流程！保護敏敢資訊？動態語言跟資源參考,常用函示 foreach,count,如何用 locals 簡化?,版本管理
    terraform console 是啥,他可以幫助你什麼？
    https://developer.hashicorp.com/terraform/tutorials/state/resource-lifecycle (如何先建立後拆除,如何保護不被拆,如何 ignore 細小改變,ex.改 tag)
    https://developer.hashicorp.com/terraform/tutorials/modules
@@ -275,10 +278,3 @@ variable "enable_public_ip" {
 ```
 
 https://github.com/GoogleCloudPlatform/terraformer
-
-:::info
-參考資料
-
-1. [Terraform 官網](https://developer.hashicorp.com/terraform/intro)
-
-:::

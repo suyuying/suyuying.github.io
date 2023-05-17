@@ -42,6 +42,8 @@ export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 ```
 
+<!--truncate-->
+
 ### 基本資料型態
 
 HCL 是 terraform 公司為了提升 config 閱讀性,所開發的配置語言,檔名是\*.tf, 專門用於配置和描述基礎設施的狀態跟資源！
@@ -394,7 +396,12 @@ State（狀態）在 Terraform 中是一個核心概念和架構,是個抽象層
 - Performance: 預設下,每次 apply 都會先打ＡＰＩ同步遠端架構,在小架構如果每次執行確認 state 是沒問題的,但大公司就會遇到設施太多可能超過 API 限速,所以會透過-refresh=false 直接用目前 state 檔案當作遠端狀態！
 - Syncing: 在多人協作場合下,建議用[Remote state](https://developer.hashicorp.com/terraform/language/state/remote)做管理,可以做到遠端鎖定\*.tf 避免執行過程中被編輯.
 
-基本上 backend 分成 local 跟 remote,前者是把 state 維護在地端,後者是把 state 維護在遠端,並可以對遠端產生 lock,多人協作(公司)是建議用 remote 做管理！
+基本上 backend 分成 local 跟 remote,主要功能是
+
+1. 儲存 State 的資料,提供團隊多人協作
+2. 提供 state locking,避免多人同時修改,[為何需要 state locking](https://github.com/chechiachang/terraform-30-days/blob/main/lecture/zh/04-basic-backend.md#state-locking)可以看這篇
+
+前者是把 state 維護在地端,後者是把 state 維護在遠端,並可以對遠端產生 lock,多人協作(公司)是建議用 remote 做管理！
 
 ### local backend 管理 state
 
@@ -464,7 +471,7 @@ rm terraform.tfstate
 
 ### 小結
 
-用 IaC 最重要的是多人協作,如果做不到多人協作,version control,嚴謹的控管原則,那就建議不要導入！除非單純就拿來開資源.
+用 IaC 最重要的是多人協作,如果做不到多人協作,version control,嚴謹的控管原則,那風險有點高！除非單純就拿來開資源.
 
 透過以上,應該要了解
 

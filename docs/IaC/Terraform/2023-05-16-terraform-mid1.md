@@ -1,11 +1,34 @@
 ---
-title: mid iac
+title: Terraform module
 description: HashiCorp 公司打造的 IaC 工具,使用者透過可閱讀的設定檔以達到版控,重複使用,共享設定,管理本地端(on-premises resources)跟雲端(cloud resources)由低階組件,例如:計算、存儲、網路資源,到高層級組件,例如 DNS record,SAAS 功能等的管理.
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [Terraform, IaC]
 draft: true
 ---
+
+，for_each 元引數要求接受一個集合作為輸入由於列表和集合是不同的類型，因此需要使用 toset 函數進行轉換。
+locals {
+my_list = ["element1", "element2", "element3"]
+}
+
+resource "aws_instance" "my_instance" {
+for_each = toset(local.my_list)
+
+# 其他設定
+
+}
+
+## Terraform module
+
+1. 為何要用 module?
+   因為類似的機器會設定很多次,如果 tf 檔複製貼上,不只看起來很累,之後要一個一個改也很麻煩,使用 module 可以減少重複的內容.
+
+2. Terraform 裡面的 module 定義?
+
+- 每個 module 都必須存在於一個目錄中，該目錄包含一個根模塊（root module）
+- 根模塊中，你可以通過 module 塊來引用其他模塊,並指定模塊的輸入變數值
+- 可以透過 module 輸入變數是模塊內部的參數 , 輸出變數是由模塊返回的值
 
 接下來,了解 module,import reosrce 方法,terraformer 怎麼用？基本排錯判斷流程！保護敏敢資訊？動態語言跟資源參考,常用函示 foreach,count,如何用 locals 簡化?,版本管理
 terraform console 是啥,他可以幫助你什麼？

@@ -1,6 +1,6 @@
 ---
 title: linux disk management command used commonly
-description: 在管理上會去檢視硬碟使用量,資料夾資料大小,如果掛硬碟跟卸下硬碟也會有專用 command,雖然各家申請硬碟方式不一樣,但是 linux command 是可以共用的！
+description: 在管理上會去檢視硬碟使用量,資料夾資料大小,如果掛硬碟跟卸下硬碟也會有專用 command,雖然各家申請硬碟方式不一樣,但是 linux command 是可以共用的！並說明掛載硬碟跟卸載硬碟方法
 image: https://github.com/suyuying.png
 authors: suyuying
 tags: [linux, disk command, aws]
@@ -73,30 +73,41 @@ vda
 2. 選擇要掛載硬碟的實例，並在左側選單點擊「Volumes」
 3. 在「Volumes」頁面點擊「Create Volume」
 4. 設定硬碟大小、AZ、類型等資訊，並點擊「Create Volume」
-5. 等待硬碟創建完成
+5. 等待硬碟創建完成,沒有完成你 attach volume 做
 6. 在「Volumes」頁面勾選剛剛創建的硬碟，點擊「Actions」，選擇「Attach Volume」
 7. 在「Attach Volume」彈出框中選擇要掛載硬碟的 EC2 實例，以及設定掛載路徑和裝置名稱
 8. 點擊「Attach」
-9. 登入 EC2 實例，執行指令 lsblk -f 確認硬碟是否掛載成功,去找那個沒有 FSTYPE 的 NAME,EX:
+9. 登入 EC2 實例，執行指令 `lsblk -f` 確認硬碟是否掛載成功,去找那個沒有<highlight color="#1877F2"> FSTYPE 的 NAME,EX:xvdf</highlight>,:
 
 ```
 NAME		FSTYPE	LABEL	UUID						MOUNTPOINT
-nvme1n1	        xfs		7f939f28-6dcc-4315-8c42-6806080b94dd
-nvme0n1
-├─nvme0n1p1	xfs	    /	90e29211-2de8-4967-b0fb-16f51a6e464c	        /
-└─nvme0n1p128
-nvme2n1
+xvda
+├─xvda1   xfs          /     d0c265c4-6ea1-4060-b815-520e1c2aae05    5.8G    26% /
+├─xvda127
+└─xvda128 vfat   FAT16       606C-CF35
+xvdf
 ```
 
 10. 如果硬碟還沒有格式化，執行指令 sudo mkfs -t xfs /dev/xvdf 格式化硬碟（假設硬碟裝置名稱是 /dev/xvdf）
 11. 建立要掛載硬碟的目錄，例如 sudo mkdir /data
 12. 將硬碟掛載到目錄上，例如 sudo mount /dev/xvdf /data
-13. 確認掛載成功，執行指令 df -h 查看硬碟使用情況
-14. 用 lsblk -f 去看 UUID
-15. 若要在每次系統開機時掛載連接的 EBS 磁碟區,先用 lsblk -f 看 UUID,並 vim /etc/fstab 加入以下(UUID 換成自己的).
+13. 確認掛載成功，執行指令 df -h 查看！
+14. 用 `lsblk -f` 去看 UUID
 
 ```
-UUID=aebf131c-6957-451e-8d34-ec978d9581ae  /data  xfs  defaults  0  2
+[root@ford-ec2-bastion-uw1 ~]# lsblk -f
+NAME      FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+xvda
+├─xvda1   xfs          /     d0c265c4-6ea1-4060-b815-520e1c2aae05    5.8G    26% /
+├─xvda127
+└─xvda128 vfat   FAT16       606C-CF35
+xvdf      xfs                8dbb60fe-5653-4668-8a7f-7cdeba1e7839
+```
+
+15. 若要在每次系統開機時掛載連接的 EBS 磁碟區,先用 lsblk -f 看 UUID,並 vim /etc/fstab 加入以下(UUID 換成自己的).
+
+```jsx title="/etc/fstab"
+UUID=8dbb60fe-5653-4668-8a7f-7cdeba1e7839  /data  xfs  defaults  0  0
 ```
 
 :::info

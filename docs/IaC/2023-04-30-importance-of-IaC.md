@@ -43,6 +43,8 @@ tags: [IaC]
 
 code 的穩定性那段由 CI 管理,部署過程是 CD,而部署有許多方法,但討論 CD 如何做需要從根本『環境』開使談起,要怎麼選擇你的運算資源這個問題很常見,aws 官方提供的講解如以下
 
+<!--truncate-->
+
 1. [How do you select your compute solution?](https://wa.aws.amazon.com/wat.question.PERF_2.en.html)
 2. [運算選項：虛擬機器、容器或是無伺服器？](https://aws.amazon.com/tw/startups/start-building/how-to-choose-compute-option/)
 3. [運算資源分類](https://aws.amazon.com/products/compute/)

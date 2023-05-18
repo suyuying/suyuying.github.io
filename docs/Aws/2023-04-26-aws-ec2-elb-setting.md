@@ -257,6 +257,19 @@ ACM 申請要用 wildcard certificate 在申請時一定要用\*
 因為加解密發生在 ELB,所以 target group 那邊 listen 的 port 就是你前端起服務的 port 就搞定！不用另外設定成 HTTPS.
 :::
 
+### aws ec2 建立 ami
+
+建立 ami 過程,你的 ec2 可以為運行狀態,或關機狀態,兩者差別在前者創建的 AMI 是基於實例的快照，但實例上的數據可能不是實時的,後者因為整個狀態停止,所以數據會是最新的！
+
+- 登入 AWS 管理控制台並進入 EC2 服務。
+- 在左側導覽窗格中，選擇 "實例" 選項。
+- 選擇您要創建 AMI 的 EC2 實例。是否停機再建立 ami 看個人需求.
+- 在選中實例後，點擊上方選單中的 "動作"（Actions）。
+- 在下拉選單中，選擇 image and templates。
+- 選擇 create image,為 AMI 提供一個描述性的名稱和描述,如果你不希望拍攝時重新開機,在 no reboot 那邊一定要勾 Enable.
+- 拍攝快照會跟你確認是否要所有 ebs 都拍(預設會都納入),以及是否 delete on termination.
+- DONe
+
 ## 小結
 
 基本的 EC2 跟 AWS internet 相關設定到這邊,接下來是 RDS,然後把後端程式透過 IaC 方式部署,不要再透過 UI 點擊.

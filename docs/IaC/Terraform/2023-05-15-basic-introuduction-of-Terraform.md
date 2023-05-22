@@ -107,6 +107,95 @@ variable "enable_public_ip" {
 }
 ```
 
+### 基本區塊型態
+
+- terraform 區塊: 這邊就是定義 terraform 版本跟使用的雲端廠商套件版本,以及是使用 remote backend, or local backend
+
+```
+terraform {
+  required_version = ">= 0.12"  # 定義所需的 Terraform 版本
+
+  required_providers {
+    aws = ">= 3.0"  # 配置所需的 AWS 提供者版本
+    google = ">= 3.0"  # 配置所需的 Google Cloud 提供者版本
+  }
+
+  backend "s3" {
+    bucket = "my-terraform-state"  # 遠端後端設定，如 AWS S3 存儲桶
+    key    = "terraform.tfstate"
+    region = "us-west-2"
+  }
+
+  # 或者使用本地後端
+  # backend "local" {
+  #   path = "terraform.tfstate"
+  # }
+}
+```
+
+- provider 區塊：用於指定所使用的提供者（如 AWS、Azure、Google Cloud 等）以及相關的配置。
+  通常長這樣,以 aws 為例
+
+```
+provider "aws" {
+  region = data.aws_region.current.id
+  alias  = "default"
+
+  default_tags {
+    tags = local.tags
+  }
+}
+```
+
+- resource 區塊：用於定義要創建的資源，例如 EC2 實例、S3 存儲桶、VPC 等。在 resource 區塊中，您可以指定資源的類型、屬性和相關配置。
+
+```
+resource "aws_instance" "app_server" {
+  ami           = var.ami_id
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.example_subnet.id
+  tags = {
+    Name = "ExampleAppServerInstance"
+  }
+}
+```
+
+- variable 區塊：用於定義變數，這些變數可以在 Terraform 的配置文件中使用，以實現可配置性和重用性。在 variable 區塊中，您可以指定變數的名稱、類型和預設值。
+
+```
+variable "ami_id" {
+  default = "ami-0ee3e1e65adeef858"
+}
+```
+
+- output 區塊：用於定義要從 Terraform 配置中輸出的值。這些值可以供其他 Terraform 環境或外部系統使用。在 output 區塊中，您可以指定要輸出的值的名稱和相關設置。
+
+```
+output "latest_instance_id" {
+  value = aws_instance.app_server.id
+}
+```
+
+- locals 區塊：locals 區塊可以用於定義多個本地變數,variables 用於接收外部傳遞的值，以在部署過程中提供參數化的配置，而 locals 則用於在配置文件內部計算和儲存中間值.簡言之,你的 config 都會對 variable,而要在執行過程中進行程式處理值,就可以用 locals.以下就定義了多個本地變數,並運算使用！
+
+```
+locals {
+  tags = {
+    created-by = "eks-workshop-v2"
+    env        = local.environment_name
+  }
+
+  prefix           = "eks-workshop"
+  environment_name = var.environment_suffix == "" ? local.prefix : "${local.prefix}-${var.environment_suffix}"
+  shell_role_name  = "${local.environment_name}-shell-role"
+  map_roles = [for i, r in var.eks_role_arns : {
+    rolearn  = r
+    username = "additional${i}"
+    groups   = ["system:masters"]
+  }]
+}
+```
+
 ### 常見基礎結構
 
 - main.tf：主要的 Terraform 設定檔。通常包含定義基礎設施的 Terraform 資源配置。

@@ -196,6 +196,32 @@ locals {
 }
 ```
 
+- data 區塊,主要是拿來動態查詢資料,然後可以作為程式執行過程中的中繼變數
+
+```
+data "aws_ami" "latest_ami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  owners = ["amazon"]
+
+}
+```
+
 ### 常見基礎結構
 
 - main.tf：主要的 Terraform 設定檔。通常包含定義基礎設施的 Terraform 資源配置。

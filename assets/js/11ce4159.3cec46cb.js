@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[1531],{75034:e=>{e.exports=JSON.parse('{"permalink":"/blog/page/5","page":5,"postsPerPage":10,"totalPages":5,"totalCount":49,"previousPage":"/blog/page/4","blogDescription":"A blog for recording note of coding and daily life!","blogTitle":"Zaxro blog!"}')}}]);

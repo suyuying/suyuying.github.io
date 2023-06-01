@@ -12,7 +12,7 @@ tags: [Python]
 
 ### 請求 api 失敗後 retry
 
-有時候對方 server 不知道啥問題,會出現報錯,過一下又好了,這邊用 while 配合數字開關,去執行 retry
+有時候對方 server 不知道啥問題,會出現報錯,過一下又好了,這邊用 while 配合數字開關,去執行 retry,不過要記得 try,except 只存在於當下文檔,不會跨文檔接 Error.
 
 ```
 max_retries = 3
@@ -30,6 +30,39 @@ while retries<max_retries:
     return  None
 ```
 
+或者配合嘗試不同 key,同時做連線 retry
+
+<!--truncate-->
+
+```
+max_retries = 3
+retries = 0
+skip_while=False
+client = None
+try:
+    while retries < max_retries and not skip_while:
+        for i in range(len(api_keys) - 1, -1, -1):
+            # 建立 VirusTotal 的客戶端連線，使用提供的 API 金鑰
+            api_key = api_keys[i]
+            print(api_key)
+
+            try:
+                client = vt.Client(api_key)
+                # 嘗試從 VirusTotal 獲取檔案物件
+                virustotal_scan_file = client.get_object(f"/files/{sha256_hash}")
+                if virustotal_scan_file is not None:
+                    print(f"本次檢查{file_tg}成功")
+                    print(f"取得{file_tg}掃描結果{virustotal_scan_file.last_analysis_stats}")
+                    skip_while=True
+                    break
+            except Exception as e:
+                retries += 1
+                if e.args == ('QuotaExceededError', 'Quota exceeded'):
+                    print("API key quota exceeded. Changing to next key.")
+                    api_keys.pop(i)
+                    continue
+```
+
 ### 如何取出物件底下所有屬性跟其值
 
 ```
@@ -42,8 +75,6 @@ for attribute in file_attributes:
 ```
 
 `dir()`函式列出物件的所有屬性名稱,return list[str],使用 for 打開並用 getattr(物件,屬性)去取得對應的值,最後就會得到屬性跟對應 value.
-
-<!--truncate-->
 
 ## 使用 virustotal 的 api 掃描檔案是否有病毒
 

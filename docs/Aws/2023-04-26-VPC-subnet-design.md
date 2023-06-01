@@ -7,6 +7,8 @@ tags: [AWS]
 draft: true
 ---
 
+以測試為例,在一個 VPC 底下依據產品劃分 CIDR,各產品 server 在 private,nginx 在 public,主要會通
+
 這邊要討論公司 VPC 規劃,不同 VPC 彼此要怎麼串.
 建議使用 24-bit block: 10.0.0.0 - 10.255.255.255 規劃
 規劃不同的 AWS Account、用途 (Prodution, Test, Development)，各個 CIDR Space

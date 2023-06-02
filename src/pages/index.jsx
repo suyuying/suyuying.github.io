@@ -9,14 +9,14 @@ export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout>
-      <section className="header relative  items-center flex h-screen max-h-860-px dark:bg-black">
-        <div className="container  items-center flex flex-wrap">
-          <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0 ">
-              <h2 className="inline-block font-lobster pb-1 mb-0 text-4xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 hover:from-pink-500 hover:to-yellow-500">
+      <section className="header relative items-center flex h-screen max-h-860-px sm:max-h-full dark:bg-black">
+        <div className="container items-center flex flex-col sm:flex-row flex-wrap lg:w-6/12 lg:ml-10">
+          <div className="w-full px-4">
+            <div className="pt-16 sm:pt-32">
+              <h2 className="text-2xl sm:text-4xl inline-block font-lobster pb-1 mb-0 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 hover:from-pink-500 hover:to-yellow-500">
                 {siteConfig.title}
               </h2>
-              <p className="mt-1 text-lg leading-loose text-blueGray-500">
+              <p className="mt-1 text-xl leading-loose text-blueGray-500">
                 This blog will focus on DevOps tool, cloud platform,
                 coding(currently most is python), and some Knowledge about IT,
                 That's share what we learn!
@@ -24,15 +24,13 @@ export default function Home() {
               <div className="mt-12">
                 <Link
                   to="/docs/intro"
-                  // target="_blank"
-                  className="link get-started font-bold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-4 rounded outline-double hover:animate-bounce  mr-10 mb-1 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  className="link get-started font-bold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-4 rounded outline-double hover:animate-bounce mr-10 mb-1 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  Code Note
+                  Note
                 </Link>
                 <Link
                   to="/blog"
-                  className="link ml-1 font-bold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-4 rounded outline-double hover:animate-bounce mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                  // target="_blank"
+                  className="hidden sm:inline-block link ml-1 font-bold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-4 rounded outline-double hover:animate-bounce mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   Blog
                 </Link>
@@ -41,7 +39,7 @@ export default function Home() {
           </div>
         </div>
         <img
-          className="absolute top-0 b-auto right-0  sm:w-6/12 -mt-48 sm:mt-0  max-h-860px lg:h-screen"
+          className=" absolute top-0 b-auto right-0 w-auto h-auto sm:w-6/12 -mt-48 sm:mt-0 hidden max-h-860px  lg:block"
           src={TwoColorPic}
           alt="square with blue and white mixed pictures"
         />

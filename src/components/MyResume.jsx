@@ -150,18 +150,14 @@ export default function MyResume() {
       <div className="container grid grid-cols-12 md:gap-10 justify-between my-[100px]">
         <MyResumeSide />
         <div className="col-span-12 lg:col-span-8 ">
-          <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
+          <div className="rounded-2xl bg-white dark:bg-[#111111]">
             <div data-aos="fade">
-              <div className="pt-12 md:py-12 px-2 sm:px-5 md:px-10 lg:px-14">
+              <div className="py-12 px-2 sm:px-5 md:px-10 lg:px-14">
                 <h2 className="after-effect after:left-52">About Me</h2>
                 <div className="lg:grid grid-cols-12 md:gap-10 pt-4 md:pt-[30px] items-center ">
                   <div className="col-span-12 space-y-2.5">
                     <div className="lg:mr-16">
-                      <p className="text-gray-lite dark:text-color-910 leading-7">
-                        如果自認
-                        沒有比別人幸運,沒有比別人有天份,沒有比別人有背景,那能做的就是比別人有更多的耐心跟努力.
-                      </p>
-                      <p className="text-gray-lite leading-7 mt-2.5 dark:text-color-910">
+                      <p className="text-2xl md:text-3xl  leading-7 mt-2.5 dark:text-color-910 text-blue-400 animate-pulse">
                         Life is too short to live someone else's dream
                       </p>
                     </div>

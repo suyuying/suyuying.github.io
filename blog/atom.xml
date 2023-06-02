@@ -6,7 +6,7 @@
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://suyuying.github.io/blog"/>
     <subtitle>Zaxro Blog Blog</subtitle>
-    <icon>https://suyuying.github.io/img/githubLogoV1.ico</icon>
+    <icon>https://suyuying.github.io/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[multi-thead introduction in python3]]></title>
         <id>https://suyuying.github.io/blog/2023/05/31/Python/multi-thead</id>

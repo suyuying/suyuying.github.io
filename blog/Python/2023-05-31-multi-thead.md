@@ -1,6 +1,6 @@
 ---
 title: multi-thead introduction in python3
-description: 123
+description: 如果你有一個套件,他是 I/O 密集的套件,例如 python 的 request,會對對方 server 請求,且這個時候會 block 住 thread,在這種情況下,你無法使用異步(因為同一 thread 會被 block 住),這時候就可以考慮用 multithread 做加速,concurrent.這邊用python內建套件futures.ThreadPoolExecutor()做示範,也就是用並行執行方式提速,以下就是我自己在應用的其中一段 code,這樣用也要注意速率限制就是！
 
 image: https://github.com/suyuying.png
 authors: suyuying
@@ -95,6 +95,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=4) as e:
 看起來`submit()`跟`map()`很像,使用`submit`允許你檢查任務狀態,而使用`map`則是能夠簡潔的並行執行！
 
 以下是我學習的過程,主要是用 request 網站來做 demo.
+基本會用到的 function 跟套件,跟變數:list-`url_will_request=["https://www.google.com",'https://www.yahoo.com'," https://www.youtube.com","https://www.nba.com"]`
 
 ```
 import urllib.request
@@ -112,7 +113,11 @@ def fetch_yahoo_homepage(url):
     except urllib.error.URLError as e:
         print(f'Error: {e}')
         return None
+```
 
+### 單 thread 一般版本
+
+```
 #single_thead
 start_time_single_thead=time.time()
 for i in url_will_request:
@@ -121,18 +126,24 @@ for i in url_will_request:
 end_time_single_thead=time.time()
 all_time_single_thead=end_time_single_thead-start_time_single_thead
 
-# multi-thead  use map
+```
+
+### multi-thead use map
+
+```
 start_time=time.time()
-# 使用示例
+# 使用示例ex
 with ThreadPoolExecutor() as executor:
-    for html in executor.map(fetch_yahoo_homepage,url_will_request ):
+    for html in ecutor.map(fetch_yahoo_homepage,url_will_request ):
         print(html[:100])
 end_time=time.time()
-all_time=end_time-start_time
+all_time=end_time-start_time`
+```
 
+### multi-thead and use submit
 
-# multi-thead use submit
-start_time_single_thead_submit=time.time()
+```
+start_time_multi_thread_submit=time.time()
 
 # 使用 ThreadPoolExecutor 作為上下文管理器
 # 當離開這個區塊時，將自動清理並關閉所有線程
@@ -152,12 +163,29 @@ with ThreadPoolExecutor() as executor:
         # 如果 HTML 不為空（也就是說，操作成功返回了 HTML），則打印 HTML 的前 100 個字符
         if html:
             print(html[:100])
-end_time_single_thead_submit=time.time()
-all_time_single_thead_submit=end_time_single_thead_submit-start_time_single_thead_submit
+end_time_multi_thread_submit=time.time()
+all_time_multi_thread_submit=end_time_multi_thread_submit-start_time_multi_thread_submit
 
+```
 
+以上的 time 做時間比較
 
+```
 print(f"all_time_single_thead is {all_time_single_thead}")
 print(f"all map time is {all_time}")
-print(f"all_time_single_thead_submit is {all_time_single_thead_submit}")
+print(f"all_time_single_thead_submit is {all_time_multi_thread_submit}")
 ```
+
+- all_time_single_thead is 2.3154239654541016
+- all map time is 1.4191679954528809
+- all_time_single_thead_submit is 1.0428180694580078
+
+可以看出用 multi_thread 運行還是比較快的！
+
+## 小結
+
+- `excutor.map(fetch_yahoo_homepage,url_will_request )`當使用 map 方法時,第一個參數需要是可調用的對象(一個 function,或帶有`__call__`方法的物件),第二個參數則是可迭代物件(ex.string,set,list,str,dict)基本上只要實現`__iter__`就是.
+
+- `executor.submit()`:一樣第一個參數需要是可調用的對象,第二個參數是可迭代物件
+
+至於使用上可以參考上面的方法

@@ -17,21 +17,9 @@ export default function Home() {
                 {siteConfig.title}
               </h2>
               <p className="mt-1 text-lg leading-loose text-blueGray-500">
-                This blog is built on
-                <Link to="https://docusaurus.io/" target="_blank">
-                  {} docusaurus {}
-                </Link>
-                which is a optimized site generator in React. CSS framework is{" "}
-                <Link to="https://tailwindcss.com/" target="_blank">
-                  {}tailwind {}
-                </Link>
-                and Infima. Backend server is {}
-                <Link to="https://fastapi.tiangolo.com/" target="_blank">
-                  FastApi {}
-                </Link>
-                which is a web framework for building APIs with type hint.
-                Tutorial on how to build this webise is in {}
-                <Link to="/docs/intro">here</Link>! Nice to see you!
+                This blog will focus on DevOps tool, cloud platform,
+                coding(currently most is python), and some Knowledge about IT,
+                That's share what we learn!
               </p>
               <div className="mt-12">
                 <Link

@@ -8,7 +8,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Zaxro Blog",
   tagline: "Dinosaurs are cool",
-  favicon: "img/githubLogoV1.svg",
+  favicon: "img/githubLogoV1.ico",
   themes: ["@docusaurus/theme-live-codeblock", "@docusaurus/theme-mermaid"],
   // Set the production url of your site here
   url: "https://suyuying.github.io",

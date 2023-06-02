@@ -109,7 +109,7 @@ const config = {
         },
       },
       // Replace with your project's social card
-      image: "img/githubLogoV1.svg",
+      image: "img/favicon.ico",
 
       navbar: {
         title: "Zaxro",

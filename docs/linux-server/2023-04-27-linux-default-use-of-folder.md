@@ -2,7 +2,6 @@
 title: Common folder and their uses in Linux
 description: 介紹linux系統規劃各資料夾要放置哪需檔案,透過本篇,你可以知道假如你要找你的mysql資料夾(透過yum安裝),你應該去哪找.1. 用 yum 安裝 mysql 之後,請問他的數據位置會在哪個資料夾? 設定檔會在哪?數據文件會放在/var/lib 底下,以 mariadb 為例,到/var/lib/mysql 底下會看到各數據庫的數據(每個 database 一個 folder)還有 crash recovery 時用於儲存 metadata 的 log 檔案等,這是因為/var 規劃是放數據文件跟日誌文件.設定檔在/etc 底下,依據系統,centos 可能在/etc/my.cnf 或/etc/mysql/my.cnf,不過基本上都會在/etc,因為/etc 規劃放系統或應用程序的 config 的,注意 my.cnf 會用!includedir /etc/my.cnf.d 去進一步包設定檔,需要 cnf 為結尾.
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [linux]
 ---
 

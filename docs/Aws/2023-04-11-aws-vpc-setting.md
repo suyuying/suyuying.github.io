@@ -2,7 +2,6 @@
 title: aws internet setting introduction
 description: 基本上網路部分會圍繞著VPC 設定,依序:建立 VPC ->建立 public subnet & private subnet(需連結 VPC) ->建立 Internet gateway(需連結 VPC) ->建立 NAT gateway(需連結 subnet,配置 eip) -> 建立 route table(設定是否連內網 local,連外 Igw,NAT gateway,VPN gateway,peering 等) 以及要給哪個 subnet 用,一個 route table 可以給多個 subnet 用 -> 設定 Security group 對服務開啟 ip and port -> 網路到這邊,去設定服務囉！
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [AWS]
 sidebar_position: 3
 ---
@@ -172,7 +171,7 @@ ping 跟 traceroute 都是走 ICMP 協議,如果你只開 TCP 是不過是正常
 ICMP 是一種基於 IP 協定的網路協定，它不使用 TCP 或 UDP 協定。ICMP 主要用於網路診斷、錯誤報告和路由選擇。
 :::
 
-### 建立 route table
+## 建立 route table
 
 #### route table 語法
 

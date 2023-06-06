@@ -1,7 +1,6 @@
 ---
 title: linux disk management command used commonly
 description: 在管理上會去檢視硬碟使用量,資料夾資料大小,如果掛硬碟跟卸下硬碟也會有專用 command,雖然各家申請硬碟方式不一樣,但是 linux command 是可以共用的！並說明掛載硬碟跟卸載硬碟方法
-image: https://github.com/suyuying.png
 authors: suyuying
 tags: [linux, disk command, aws]
 ---

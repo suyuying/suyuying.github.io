@@ -2,7 +2,6 @@
 title: aws s3 basic introduction and attach iam role to operate s3
 description: 簡單整理，S3類型一般使用 standard,如果可能是幾小時拿一次用IA系列,不擔心東西掛掉就放在one-zone省錢,如果是長期封存資料就考慮用Glacier系列.
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [AWS, S3]
 sidebar_position: 5
 ---

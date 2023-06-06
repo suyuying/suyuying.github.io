@@ -2,7 +2,6 @@
 title: create k8s cluster
 description: 列出centos建立k8s cluster過程及遇到的報錯解法RI v1 runtime API is not implemented for endpoint以及docker跟podman安裝衝突解法
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [k8s, docker]
 ---
 

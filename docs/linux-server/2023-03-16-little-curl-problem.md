@@ -1,7 +1,6 @@
 ---
 title: A small issue with curl related to using different versions of curl between IDE and local terminal
 description: 前陣子因為需要檢查域名設定，測試過程中發現在 pycharm 運行 curl 指令，運行結果跟 iterm2 的運行結果不同，以下是 demo 指令，最後使用which curl發現兩邊curl有差別，進一步檢查發現兩者檔案 size 也有差，使用的相關套件也有差。心得：基本上連自己電腦環境都可能用髒了，之後排查類似的bug順序會先檢查彼此使用指令的版本，確認沒差太多，在開始往其他方向排查。
-image: https://github.com/suyuying.png
 authors: suyuying
 tags: [curl]
 ---

@@ -2,7 +2,6 @@
 title: Basic introduction of Terraform
 description: HashiCorp 公司打造的 IaC 工具,使用者透過可閱讀的設定檔以達到版控,重複使用,共享設定,管理本地端(on-premises resources)跟雲端(cloud resources)由低階組件,例如:計算、存儲、網路資源,到高層級組件,例如 DNS record,SAAS 功能等的管理.
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [Terraform, IaC]
 ---
 

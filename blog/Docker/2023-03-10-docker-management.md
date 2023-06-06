@@ -2,7 +2,6 @@
 title: docker manage logs in Docker to prevent service failure caused by excessively large container logs
 description: 當遇到container log太大 造成服務掛掉的排查方向，以及如何避免。因為 docker 運行過程本身 log 也會佔用硬碟資源，為了不讓這個 log 過度膨脹，可以用以下方式限制
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [docker]
 ---
 

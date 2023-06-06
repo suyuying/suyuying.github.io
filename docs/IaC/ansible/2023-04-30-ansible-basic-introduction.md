@@ -2,7 +2,6 @@
 title: Basic introduction of ansible
 description: ansible 是組態管理工具 Configuration management Tool ,含有自動化工具,配置系統、部署軟件和編排更高級的 IT 任務，例如持續部署或零停機滾動更新.此部分主要是用官網的介紹內容,寫下個人了解後的筆記,跟做lab的紀錄！
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [Ansible, IaC]
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: introduction of pandas
 description: 處理資料很常會用到datetime,這邊紀錄一下使用上面會用過的方法,之後等資料齊全再彙整.
-image: https://github.com/suyuying.png
 authors: suyuying
 tags: [Python, pandas, data analysis]
 ---

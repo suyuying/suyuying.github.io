@@ -2,7 +2,6 @@
 title: linux command(sed grep awk)
 description: 從有關鍵字為 QOO 那一行到以}為開頭的那一行(^代表正則開頭字元),sed -n "/QOO/,/^}/p" common.js.
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [linux, sed]
 ---
 

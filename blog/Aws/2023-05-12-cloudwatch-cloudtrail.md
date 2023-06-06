@@ -2,7 +2,6 @@
 title: Basic introduction of cloudwatch and  cloudtrail
 description: 以下內文會提供的資訊：- cloudwatch and cloudtrail 是什麼,- 什麼時候會用到 cloudwatch and cloudtrail？,- 基本建立 cloudwatch 監控 ec2 CPU
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [AWS, cloudwatch, cloudtrail]
 sidebar_position: 6
 ---

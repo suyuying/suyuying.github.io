@@ -2,7 +2,6 @@
 title: The importance of IaC
 description: 域名,憑證,網路及伺服器環境(防火牆、subnet 切分、路由表、gateway、CDN、security group 等等),應用程式部署,監控程式,日誌管理這些在IaC過程都會用到,IaC 精神就是把這整個過程的建置,用程式的方式建立,也就是發生了什麼事情,怎麼建立的,都是用程式去控制,如果某段掛掉或被看你不順眼的工程師砍掉,可以迅速地用程式執行備援方案把這段掛掉的補上. 以下的小節,會去討論每階段 IaC 有哪些工具可以使用.
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [IaC]
 ---
 

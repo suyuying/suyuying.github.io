@@ -2,7 +2,6 @@
 title: s3 set iam permissions for Github Actions to achieve CIBuild an AWS s3 static website
 description: 建立aws靜態網站接上cloudfront，最後設定 github action 在 code 更新以後會把 build 好的資料由 build 資料夾底下東西發到 S3.
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [AWS, github action, CICD]
 ---
 

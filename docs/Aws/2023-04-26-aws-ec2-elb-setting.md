@@ -2,7 +2,6 @@
 title: aws EC2 and ELB setting introduction
 description: 基本EC2連入管理,堡壘機跟web server設定.並使用ELB作為反向代理以web server.ELB 設定部分,一開始的 listener 只有基本的 rule,目前只有一條 If (all match)Request is not otherwise routed to target group.正常使用情況會是,你自己的域名(ex. modontou.don69.store)設定到該 ELB,再透過 ELB 依據請求的設定,把請求轉到 Target Group.
 authors: suyuying
-image: https://github.com/suyuying.png
 tags: [AWS]
 sidebar_position: 4
 ---

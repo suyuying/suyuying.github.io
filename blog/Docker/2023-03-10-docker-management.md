@@ -22,6 +22,11 @@ Docker 會捕捉所有容器的標准輸出（和標准錯誤），並以 JSON �
 
    如果是一般非 docker log,要把打掛載出來
 
+3. 沒有掛載出來的資料,例如你把 log(非 stdout)寫到某檔案,但該檔案沒被掛載,在本機找得到嗎？
+   如果沒有掛載出來的資料,例如,程式把特定 log 寫到特定資料夾內(非 standard-out),且你 docker 沒有掛載該資料夾,這樣你在你的 host 主機是不會看到該資料夾的檔案的,他不會在/var/lib/docker 底下,而是在 docker 維護的可寫層中(/var/lib/docker/overlay2),這時候要拿到該檔案,只能透過`docker cp`指令,把檔案拿出來！
+
+   基本上是建議把 app log 放在 std-out 中,透過 docker 管理 log 的機制去限制 log 大小,[像這篇提到的解法](https://stackoverflow.com/questions/70354934/docker-overlay2-size-too-big),不然可能會遇到的情況像是 db 資料把/var/lib/docker/overlay2 塞爆之類的情況,[像這篇](https://ithelp.ithome.com.tw/questions/10212135)
+
 ```
     # Copy the logs out to the host
 docker copy CONTAINER_ID:/path/to/your/log_file /host/path/to/store
@@ -126,6 +131,25 @@ image 指令:刪除沒有被活動的 container 使用的 image
 
 container 指令：刪除停止的 container
 `docker container prune`
+
+### 檢查 /var/lib/docker/overlay2
+
+如果沒有掛載,他會持續把資料寫入這隻,也可能會造成硬碟爆掉
+
+### 整理
+
+檢查順序
+
+1. `docker system df`
+2. 檢查 local volume,docker logs,image,container 佔用情況
+3. 檢查 /var/lib/docker/overlay2
+
+可以的對策有
+
+1. 如果是 docker logs 那可以限制 docker logs 大小
+2. 如果是 local volume 那就要跟 rd 討論 log 格式了
+3. 如果是/var/lib/docker/overlay2,這個狀況就比較多,ex mysql 對 binary log 的自動清除要開之類的
+4. 沒有在用的 container volume image 用指令清掉就好
 
 :::info
 

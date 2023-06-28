@@ -1,10 +1,10 @@
 ---
 title: Object-Oriented Programming，OOP
-description: 因為工作上有些測試機會架在雲端,為了省錢沒有綁定eip,那為了要在每次開機都不用去看新的外部ip然後再改ssh的連線ip,所以程式自動執行以上事情,同時因為管理的過程是適合拿來改成oop風格,所以順便練習oop風格的寫法
+description: 因為工作上有些測試機會架在雲端,為了省錢沒有綁定eip,那為了要在每次開機都不用去看新的外部ip然後再改ssh的連線ip,所以程式自動執行以上事情,同時因為管理的過程是適合拿來改成oop風格,所以順便練習oop風格的寫法.以下實作項目 抽象化,就是code開頭在用abc規劃架構多型 因為目前只寫aws的,但是要用到gcp那些也都會使用父輩的VM class,畢竟每一台機器,無論是gcp,azure,aws都會需要 開機 關機 重開等功能.繼承,EC2會繼承至VM架構.封裝 要做到stop, start, restart並加入一些小東西,並把這些東西集合在各個公開介面.另外補充,該程式碼功能主要是拿來再起動ec2後,用程式幫我修改ssh config,避免每次都要自己上去查詢並修改. 基本上把ssh config裡面的host拉出來做變數再帶入寫會更好,不過這邊偷懶就先這樣寫囉.
 
 image: https://github.com/suyuying.png
 authors: suyuying
-tags: [Python]
+tags: [Python,OOP]
 ---
 ## Object-Oriented Programming
 
@@ -18,7 +18,17 @@ tags: [Python]
 
 以上東西文字看了會不太懂,所以我這邊用ec2做舉例.
 aws提供一個api,它提供了很多方法去他的server撈資料,今天我要撈某區的ec2,會先建立連接,然後查詢有哪些ec2,然後把資料匯出並配合他的資訊做管控. 以上過程可以用幾個function串起來,像是`connect_api` `check_ec2_info` `start_ec2` `stop_ec2` `reboot_ec2` `get_ec2_public_dns`(這邊只是舉例,不是實際功能).
-那用oop來設計就會把建立`check_ec2_info` 查到的ec2,封裝到一個定義有`start_ec2` `stop_ec2` `reboot_ec2` `get_ec2_public_dns`方法的物件,你操作就會變成ec2.start(),stop(),reboot()這樣. 我個人是覺得管理跟理解上更好.
+那用oop來設計就會把建立`check_ec2_info` 查到的ec2,封裝到一個定義有`start` `stop` `reboot` `get_public_dns`方法的物件,你操作就會變成ec2.start(),stop(),reboot()這樣. 我個人是覺得管理跟理解上更好.
+
+### 實作oop
+
+以下實作項目:
+- 抽象化:就是code開頭在用abc規劃架構
+- 多型: 因為目前只寫aws的,但是要用到gcp那些也都會使用父輩的VM class,畢竟每一台機器,無論是gcp,azure,aws都會需要 開機 關機 重開等功能.
+- 繼承: EC2會繼承至VM架構
+- 封裝: 要做到stop, start, restart並加入一些小東西,並把這些東西集合在各個公開介面.
+
+另外補充,該程式碼功能主要是拿來再起動ec2後,用程式幫我修改ssh config,避免每次都要自己上去查詢並修改. 基本上把ssh config裡面的host拉出來做變數再帶入寫會更好,不過這邊偷懶就先這樣寫囉.
 
 ```jsx title="main.py"
 from abc import ABC, abstractmethod
@@ -26,7 +36,7 @@ import boto3
 from typing import Iterable
 import argparse
 
-# 規劃VM結構 會適用於所有vm 
+# 抽象化去規劃VM結構 會適用於所有vm 
 class VM(ABC):
 
     @abstractmethod
@@ -49,7 +59,7 @@ class VM(ABC):
     def create_instance(cls, instance_id, instance_type):
         pass
 
-# for aws vm 示範
+# 繼承至VM,for aws vm 示範
 class EC2(VM):
     def __init__(self, ec2_client, instance_id, instance_type, instance_state, public_dns_name, tags):
         self.ec2_client = ec2_client
@@ -166,7 +176,7 @@ class EC2Cluster:
 #     if isinstance(obj, datetime):
 #         return obj.isoformat()
 
-
+# 取得ec2資訊,並製作物件
 def get_instances(ec2_client_side):
     response = ec2_client_side.describe_instances()
 

@@ -10,6 +10,37 @@ tags: [Python]
 
 ## coding 部分
 
+### False 跟 None 使用時機
+
+False 主要做條件判斷,None 則用於表示缺少值,或變量沒有被給值的請況.
+舉例來說,今天 request 想要取得資料放入變數 stock_info, 如果判斷取出來資料不合預期,或者報錯,那就適合用 None.
+那 False 就是拿來表達條件成不成立的情況,例如判斷股票是否上漲,可以這樣定義變數,`is_price_up`,`True`代表上漲,`False`代表下跌.
+
+```
+# 使用 None 表示缺少值或變量尚未被賦予任何值
+name = None
+if name is None:
+    print("名字尚未被賦值")
+
+# None 作為函式的返回值
+def divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+
+result = divide(10, 0)
+if result is None:
+    print("無效的操作")
+
+# 使用 False 進行條件判斷
+flag = False
+if flag:
+    print("這個條件不成立")
+else:
+    print("這個條件成立")
+
+```
+
 ### 請求 api 失敗後 retry
 
 有時候對方 server 不知道啥問題,會出現報錯,過一下又好了,這邊用 while 配合數字開關,去執行 retry,不過要記得 try,except 只存在於當下文檔,不會跨文檔接 Error.

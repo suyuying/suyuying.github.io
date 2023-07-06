@@ -299,4 +299,24 @@ variable "enable_public_ip" {
 
 ```
 
+```
+#要刪除某資源
+terraform state rm module.backend.aws_instance.pmm-env
+```
+
+```
+要把資源由resource送入module
+https://medium.com/swlh/terraform-imports-resources-modules-for-each-and-count-bab7660c8ecd
+
+主要就是resource要訂億,之後module要import
+勿忘,簡單說就是module.(module冥).resoucetype.resource name
+terraform import module.ford_pmm_server1.aws_instance.prometheus-env i-02ee5e83d0d17bde5
+```
+
+```
+出現有問題的狀態,查證後可以用terraform state rm <resource_address>
+
+ex.terraform state rm aws_instance.prometheus
+```
+
 https://github.com/GoogleCloudPlatform/terraformer

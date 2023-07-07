@@ -358,7 +358,7 @@ vm02                       : ok=3    changed=0    unreachable=0    failed=0    s
 
 這邊只修改 playbook.yml,而 ansible.cfg 不會動.
 
-```jsx title="/etc/ansible/product/playbook.yml"
+```bash title="/etc/ansible/product/playbook.yml"
 - name: My first play
   hosts: virtualmachines
   tasks:

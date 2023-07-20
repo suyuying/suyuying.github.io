@@ -4,18 +4,25 @@ description: Prometheus及串接kibana基礎介紹跟使用之後的感想.
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [Prometheus, Grafana]
+draft: true
 ---
+
+:::info
+
+1. 跑版測試
+2. ooooo
+
+:::
+
 ## prometheus
 
-相較於Zabbix系統使用mysql之類的關聯式資料庫,prometheus使用是的TSDB時序資料庫,因其主要功能聚焦在看log跟分析數據,並不需要對不同表格做關聯.採用tsdb的prometheus最最直觀的差別就是
+相較於Zabbix系統使用mysql之類的關聯式資料庫,prometheus使用是的TSDB時序資料庫,因其主要功能聚焦在看log跟分析數據,並不需要對不同表格做關聯.
+
+採用tsdb的prometheus最最直觀的差別就是
 
 1. 使用 TSDB，它對系統資源的需求相對較低，這避免了 MySQL 等關聯式資料庫可能對系統資源的大量消耗
 2. 由於 TSDB 專為時間序列數據設計，它可以更有效地索引和查詢此類數據，使 Prometheus 的查詢速度比使用傳統關聯式資料庫的系統更快
 在我自己的測試環境,用一台free tier的機器運行prometheus,也可以跑很順！
-
-### prometheus設定
-
-相對於Zabbix把一些權限設定跟通知群組這些設定藏在UI藏得到處都是(ex.Zabbix那篇設定telegram),讓新手或者久沒操作的人很難找,如果之後有需要建一台新的zabbix,那也是很神奇的折磨,那用Prometheus的優點,就在於它所有東西都在設定檔內,無論設定使用者,設定告警轉發這些都是在設定檔內的,個人認為在管理上方便管理！
 
 ### prometheus安裝
 
@@ -25,7 +32,7 @@ tags: [Prometheus, Grafana]
 useradd --no-create-home --shell /bin/false prometheus
 ```
 
-建立之料夾並授予使用者
+建立資料夾並授予使用者
 
 ```bash
 mkdir -p /etc/prometheus /var/lib/prometheus
@@ -130,7 +137,7 @@ systemctl enable prometheus
 
 相較於Zabbix有推拉模式,在Prometheus世界裡面基本上都是prometheus server主動去找prometheus target拉資料,也就是zabbix的主動模式！
 那他到底怎麼拉資料？ prometheus target透過官方exporter,或者自建的exporter 安裝在自己身上,並開啟特定port讓prometheus server來撈資料.
-其中最常用的是node_exporter! 就是收集ram,cpu,disk這些最基本！
+其中最常用的是node_exporter! 就是收集ram,cpu,disk這些！
 
 ```bash
 #!/bin/bash
@@ -162,4 +169,76 @@ sudo systemctl start node_exporter
 sudo systemctl enable node_exporter
 ```
 
+ps.你也可以用docker起,他也可以透過主機接口去取到主機硬體數據
+
+### prometheus設定
+
+相對於Zabbix把一些權限設定跟通知群組這些設定藏在UI藏得到處都是(ex.Zabbix那篇設定telegram),讓新手或者久沒操作的人很難找,如果之後有需要建一台新的zabbix,那也是很神奇的折磨,那用Prometheus的優點,就在於它所有東西都在設定檔內,無論設定使用者,設定告警轉發這些都是在設定檔內的,個人認為在管理上方便管理！
+
+[config很多,可以看官網這](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)
+
+主要要知道
+1.怎麼scrape到你的主機,方法有很多
+2.觸發告警要怎麼寫
+
+### 查詢語法
+
+使用`PromQL`語法做查詢,並依據對應的`Metric`跟`Label`做查詢數據！
+數據的組成是由Metric,跟Label組成,直接查詢Metric你會拿到其底下的所有label的數據,使用label則會過濾掉一些不符合者！
+例如,你要查詢某台機器的ram使用率,你會先在上面安裝node_exporter,然後讓prometheus server去拉資料. 並使用以下語法做查詢
+
+用`node_memory_MemAvailable_bytes`會看到
+
+```bash
+node_memory_MemAvailable_bytes{instance="10.0.0.112:9100", job="dummy", origin_prometheus="UAT", project="UAT"}
+node_memory_MemAvailable_bytes{instance="10.0.0.112:9100", job="node", origin_prometheus="UAT", project="UAT"}....
+```
+
+那如果用`node_memory_MemAvailable_bytes{job="node"}`
+就只會看到`job=node`的數據！
+
+```bash
+node_memory_MemAvailable_bytes{instance="10.0.0.112:9100", job="node", origin_prometheus="UAT", project="UAT"}....
+```
+
 ## kibana
+
+這邊用docker-compose起服務,不過會有conatiner一個使用者,而非預設的root
+
+```bash
+mkdir -p ./data
+chown -R 472:472 ./data
+```
+
+```yaml
+version: "3.3"
+services:
+  grafana:
+    image: grafana/grafana-enterprise:9.5.6
+    user: "472"
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+     - GF_SERVER_ROOT_URL=http://*.948787.store/
+     - GF_INSTALL_PLUGINS=grafana-clock-panel
+    ports:
+     - '3000:3000'
+    volumes:
+     - '$PWD/data:/var/lib/grafana'
+```
+
+基本上,grafana只要設定資料源去拉prometheues,然後知道怎麼找適合的dashboard,以及變數如何設定就差不多！
+![variable](image.png)
+
+```bash
+| Variable       | Definition |
+| -------------- | ---------- |
+| project        | `label_values(node_uname_info, project)` |
+| job            | `label_values(node_uname_info{project=~"$project"}, job)` |
+| node           | `label_values(node_uname_info{job=~"$job",nodename=~"$hostname"},instance)` |
+| hostname       | `label_values(node_uname_info{job=~"$job"}, nodename)` |
+| device         | `label_values(node_network_info{instance=~'$node',device!~'tap.*|veth.*|br.*|docker.*|virbr.*|lo.*|cni.*'},device)` |
+| maxmount       | `query_result(topk(1,sort_desc (max(node_filesystem_size_bytes{instance=~'$node',fstype=~"ext.?|xfs",mountpoint!~".*pods.*"}) by (mountpoint)))` |
+| show_hostname  | `label_values(node_uname_info{job=~"$job",instance=~"$node"}, nodename)` |
+
+```

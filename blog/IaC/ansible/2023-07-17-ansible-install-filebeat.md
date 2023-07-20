@@ -1,5 +1,5 @@
 ---
-title: Install filebeat through filebeat
+title: Install filebeat through ansible
 description: To install Filebeat through Ansible, you can follow these steps,Set up your Ansible environment->Create an Ansible playbook->Define the inventory->Write the pllaybook tasks->Check the changes is proper or not ->Run the playbook.
 authors: suyuying
 tags: [Ansible, IaC]

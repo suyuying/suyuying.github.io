@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[1362],{62285:e=>{e.exports=JSON.parse('{"label":"modem","permalink":"/blog/tags/modem","allTagsPath":"/blog/tags","count":1}')}}]);

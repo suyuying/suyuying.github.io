@@ -2,11 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://suyuying.github.io/blog</id>
     <title>Zaxro Blog Blog</title>
-    <updated>2023-07-17T00:00:00.000Z</updated>
+    <updated>2023-07-24T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://suyuying.github.io/blog"/>
     <subtitle>Zaxro Blog Blog</subtitle>
     <icon>https://suyuying.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[basic introudction of osi 7 layer  and their use]]></title>
+        <id>https://suyuying.github.io/blog/2023/07/24/Others/osi-seven-layer</id>
+        <link href="https://suyuying.github.io/blog/2023/07/24/Others/osi-seven-layer"/>
+        <updated>2023-07-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[123]]></summary>
+        <content type="html"><![CDATA[<p>osi建立目的是確保網路可以通信,牽涉到你的電腦跟中間的交換器,路由器,數據機等等.</p><ol><li><p>物理層（Physical Layer）：負責傳輸數據位元流，定義物理介質和傳輸率等。</p></li><li><p>數據鏈路層（Data Link Layer）：負責在直接相連的兩個節點之間進行數據傳輸，提供了對物理層的抽象。</p></li><li><p>網絡層（Network Layer）：處理路由和轉發數據包，確保數據能在不同網絡間傳輸。</p></li><li><p>傳輸層（Transport Layer）：負責提供端到端的數據傳輸，確保數據的可靠性和流量控制。</p></li><li><p>會話層（Session Layer）：負責建立、管理和結束通信會話。</p></li><li><p>表示層（Presentation Layer）：處理數據的表示格式，確保不同系統之間的數據能夠正確解讀。</p></li><li><p>應用層（Application Layer）：提供各種應用服務，包括文件傳輸、電子郵件、網頁瀏覽等。</p></li></ol><p>ps: 常用的ping,是屬於icmp協議,一個輔助排查網路的協議,建立在網路層之上,但跟4,5,6,7層沒關係！</p><p>單看這七層一定還是不知道在幹嘛,這邊拿<a href="https://www.cloudflare.com/zh-tw/learning/ddos/glossary/open-systems-interconnection-model-osi/" target="_blank" rel="noopener noreferrer">cloudflare的教學</a>來改成以下範例.</p><div class="theme-admonition theme-admonition-info alert alert--info admonition_LlT9"><div class="admonitionHeading_tbUL"><span class="admonitionIcon_kALy"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_S0QG"><p>請求端是由上層往下層,接收端的解讀是由下層往上層！</p></div></div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="範例">範例<a href="#範例" class="hash-link" aria-label="Direct link to 範例" title="Direct link to 範例">​</a></h2><ol><li>Cooper 先生在他的電腦上撰寫了一封電子郵件並點選「傳送」。此時資料開始由應用層向下傳輸。</li><li>在傳輸層，資料被分割成一個個的區段，每個區段包含源和目標的端口號。</li><li>在網路層，每個區段被包裝進一個封包，每個封包包含源IP地址（Cooper 先生的電腦）和目標IP地址（Palmer 女士的電腦）。此時，Cooper 先生的電腦會進行IP地址的比較，判斷目標IP是否在同一個網段。發現目標IP在不同網段，因此決定透過預設閘道（路由器）進行通信。</li><li>如果為第一次連線,Cooper 先生的電腦並不知道預設閘道（路由器）的MAC地址，因此透過 ARP 請求來獲取。此時會將包含路由器IP的ARP請求廣播到網路上(如果有接交換器,會透過交換器把ARP請求轉發到每個端口)，路由器接收到此請求後會解析ARP請求並回應其MAC地址,電腦接收到ARP回應,並把該MAC地址加入快取,下次會先查快取資訊。</li><li>在資料連結層，每個封包被進一步包裝到一個數據幀中。每個數據幀包含源MAC地址（Cooper 先生的電腦）和目標MAC地址（已知的路由器MAC地址）。此外，還包含了一些其他控制資訊，如幀順序、錯誤檢查等。</li><li>最後，這些資料幀通過實體層被轉換成位元流，並通過網路傳送到路由器。</li><li>當路由器收到這些資料幀，它會查閱其路由表，確定將資料包發送到下一個網段的最佳路徑。然後將目標MAC地址更改為下一個目的地（另一個路由器或交換器）的MAC地址，將源MAC地址更改為自己的MAC地址，然後將資料幀發送出去。</li><li>這個過程會一直持續，直到資料到達 Palmer 女士的網段。在 Palmer 女士的網段中的交換器會將資料幀傳遞到具有目標MAC地址（即Palmer 女士的電腦）的設備。</li><li>最後，資料在 Palmer 女士的電腦上沿著OSI模型向上移動，從實體層到應用層，然後被她的電子郵件客戶端讀取和顯示。</li></ol>]]></content>
+        <author>
+            <name>zaxro</name>
+            <uri>https://github.com/suyuying</uri>
+        </author>
+        <category label="osi" term="osi"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Install filebeat through ansible]]></title>
         <id>https://suyuying.github.io/blog/2023/07/17/IaC/ansible/ansible-install-filebeat</id>
@@ -462,7 +475,7 @@ EC2 -&gt; Network &amp; Security -&gt; Security Groups -&gt; Create security gro
             <name>zaxro</name>
             <uri>https://github.com/suyuying</uri>
         </author>
-        <category label="curl" term="curl"/>
+        <category label="modem" term="modem"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[AWS Basic Introduction]]></title>

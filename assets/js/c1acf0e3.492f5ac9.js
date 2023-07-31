@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[3969],{35475:e=>{e.exports=JSON.parse('{"label":"Prometheus","permalink":"/blog/tags/prometheus","allTagsPath":"/blog/tags","count":2}')}}]);

@@ -1,18 +1,10 @@
 ---
 title: Prometheus,以及基礎介紹
-description: Prometheus及串接kibana基礎介紹跟使用之後的感想.
+description: Prometheus及串接kibana基礎介紹跟使用之後的感想.包含安裝prometheus,node_exporter,alertmanager等設定,以及其告警設定等！
 authors: suyuying
 image: https://github.com/suyuying.png
 tags: [Prometheus, Grafana]
-draft: true
 ---
-
-:::info
-
-1. 跑版測試
-2. ooooo
-
-:::
 
 ## prometheus
 
@@ -48,7 +40,7 @@ tar xvfz prometheus-*.tar.gz
 mv prometheus-2.44.0.linux-amd64 prometheuspackage
 chown -R prometheus:prometheus prometheuspackage
 ```
-
+<!--truncate-->
 搬移資料到目的
 
 ```bash
@@ -182,7 +174,7 @@ ps.你也可以用docker起,他也可以透過主機接口去取到主機硬體�
 
 主要要知道
 
-1. 怎麼scrape到你的主機,方法有很多
+1. 怎麼scrape到你的目標target,方法有很多
 2. 觸發告警要怎麼寫
 
 #### scrape設定
@@ -270,7 +262,7 @@ server-side label的使用,在之後於grafana製作dashboard時很重要,他可
 label還有分全局變量的label,會用externalLabels做標示,一般標示單一時間序列的會是一般label.
 
 - 如何設定觸發告警？
-你的prometheus.yml會分很多block,`global` block,`scrape_configs` block...,分別為全局設定,取得目標資料的設定,那設定告警的閾值是透過`rule_files`,當達到閾值後會透過`alert_manager`告警,alert_manager服務需要另外起,這邊要設定alert_manager服務起的ip跟port,！
+你的prometheus.yml會分很多block,`global` block,`scrape_configs` block...,分別為全局設定,取得目標資料的設定,那設定告警的閾值是透過`rule_files`,當達到閾值後會透過`alert_manager`告警,alert_manager服務需要另外起,這邊要設定alert_manager服務起的ip跟port！
 
 ```yml title="prometheus.yml"
 alerting:
@@ -366,6 +358,80 @@ node_memory_MemAvailable_bytes{instance="10.0.0.112:9100", job="node", origin_pr
 ```bash
 node_memory_MemAvailable_bytes{instance="10.0.0.112:9100", job="node", origin_prometheus="UAT", project="UAT"}....
 ```
+
+[以下提供設定在rule的告警範例](./linux-alert.rules.yml),用於設定達到怎樣條件會觸發告警並統整功能.
+
+1. 節點問題：
+
+- Node Down: 節點監控服務（monitoring-pi）中斷超過2分鐘。
+
+2. 記憶體問題：
+
+- HostOutOfMemory: 可用記憶體低於總記憶體的15％。
+- HostMemoryUnderMemoryPressure:
+
+3. 網路問題:
+
+- HostUnusualNetworkThroughputIn: 入網路流量超過100MB/s五分鐘以上。
+- HostUnusualNetworkThroughputOut: 出網路流量超過100MB/s五分鐘以上。
+
+4. 硬碟讀寫問題：
+
+- HostUnusualDiskReadRate: 磁碟讀取速度超過50MB/s五分鐘以上。
+- HostUnusualDiskWriteRate: 磁碟寫入速度超過50MB/s五分鐘以上。
+
+5. 硬碟空間問題：
+
+- DiskSpace10%Free: 硬碟剩餘空間少於10％。
+- HostDiskWillFillIn24Hours: 根據當前寫入速度，預測硬碟在24小時內將被填滿。
+- HostOutOfInodes: 硬碟剩餘 Inodes 少於10％。
+- HostInodesWillFillIn24Hours: 根據當前寫入速度，預測 Inodes 在24小時內將被用完。
+
+6. 硬碟延遲問題：
+
+- HostUnusualDiskReadLatency: 硬碟讀取延遲超過100毫秒。
+- HostUnusualDiskWriteLatency: 硬碟寫入延遲超過100毫秒。
+
+7. 處理器相關：
+
+- HostHighCpuLoad: CPU使用率超過80%。
+- HostCpuStealNoisyNeighbor: CPU虛擬化環境中的偷取時間超過10%，可能是虛擬機鄰居使用過多的資源或者Spot實例可能已經超出信用額度。
+
+8. 記憶體與交換空間：
+
+- HostSwapIsFillingUp: 虛擬記憶體交換空間使用率超過80%。
+- HostOomKillDetected: 檢測到OOM（Out of Memory）殺死進程的情況。
+
+9. 服務與系統狀態：
+
+- HostSystemdServiceCrashed: systemd服務崩潰。
+
+10. 硬體與溫度：
+
+- HostPhysicalComponentTooHot: 物理組件溫度超過100攝氏度。
+- HostNodeOvertemperatureAlarm: 主機溫度過熱警報。
+
+11. 磁盤陣列（RAID）：
+
+- HostRaidArrayGotInactive: RAID陣列變得不活躍，可能是由於一個或多個磁盤故障，並且沒有足夠的備用驅動器來自動修復問題。
+- HostRaidDiskFailure: RAID陣列中至少有一個設備失敗，可能需要更換磁盤。
+
+12. 記憶體錯誤：
+
+- HostEdacCorrectableErrorsDetected: 在過去的5分鐘內，由EDAC報告的可糾正的記憶體錯誤。
+- HostEdacUncorrectableErrorsDetected: 在過去的5分鐘內，由EDAC報告的不可糾正的記憶體錯誤。
+
+13. 網路問題：
+
+- HostNetworkReceiveErrors: 主機網路接收錯誤，過去五分鐘內接收錯誤的比例超過1%。
+- HostNetworkTransmitErrors: 主機網路傳輸錯誤，過去五分鐘內傳輸錯誤的比例超過1%。
+- HostNetworkInterfaceSaturated: 主機網路介面飽和，傳輸與接收的數據超過介面的80%。
+- HostConntrackLimit: 網路連接追蹤的數量接近限制，超過了80%。
+
+14. 時鐘與時間：
+
+- HostClockSkew: 檢測到主機時鐘偏移，時鐘不同步。
+- HostClockNotSynchronising: 主機時鐘無法同步，並且時鐘的最大誤差超過了16秒。
 
 :::info
 

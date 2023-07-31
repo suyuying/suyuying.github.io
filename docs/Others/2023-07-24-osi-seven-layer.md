@@ -1,6 +1,6 @@
 ---
 title: basic introudction of osi 7 layer  and their use
-description: 123
+description: osi七層基本介紹,以及運作範例.
 image: https://github.com/suyuying.png
 authors: suyuying
 tags: [osi]

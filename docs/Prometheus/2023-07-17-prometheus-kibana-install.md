@@ -1,5 +1,5 @@
 ---
-title: Prometheus跟kibana建置,以及基礎介紹
+title: Prometheus,以及基礎介紹
 description: Prometheus及串接kibana基礎介紹跟使用之後的感想.
 authors: suyuying
 image: https://github.com/suyuying.png
@@ -221,7 +221,131 @@ server-side label的使用,在之後於grafana製作dashboard時很重要,他可
 
 :::
 
+#### consul
+
+他做的事情就是起一個consul服務,接著你要註冊的target透過put請求,像consul註冊target,所以會變成要在每台主機上執行put請求並戴上資訊,之後你的prometheus要在設定接受consul服務給的target.
+[可以看這篇](https://cloud.tencent.com/developer/article/1536967).
+
+#### 雲端廠商
+
+[這個也是可以看官網](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ec2_sd_config),`雲端廠商`這個很重要,主要還是有IAM設定,ex.gce最少要有對compute resoruces的read-only等,ec2要有ec2:DescribeInstances permission.以下為ec2範例：
+
+```yaml
+  - job_name: 'dummy'
+    metrics_path: '/metrics'
+    ec2_sd_configs:
+    - region: us-west-1
+      port: 9100
+```
+
+他就會去偵測裡面有開放9100 port的,權限設定看前面連結
+
+#### 檔案自動發現
+
+基本上他原理就是一直去讀同一只檔案,不過也因為如此,一但他這次掃描沒有掃到該機器就會直接把該instance去除. 以下範例
+
+```yml
+  - job_name: 'my_job'
+    file_sd_configs:
+      - refresh_interval: 30s
+        files:
+        - ./test/test_sd.json
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '10\.0\.0\.\d+:\d+'
+        target_label: 'origin_prometheus'
+        replacement: 'UAT'
+        action: replace
+      - source_labels: [__address__]
+        regex: '10\.0\.1\.\d+:\d+'
+        target_label: 'origin_prometheus'
+        replacement: 'STAGE'
+        action: replace  
+```
+
+這邊的語句意思,建立一個job,然後讀`test/test_sd.json`,如果發現targets的ip是符合我的正則批配,就會做出一個label`origin_prometheus`然後把他的值換成replacement裡面的.
+
 #### 觸發告警
+
+label還有分全局變量的label,會用externalLabels做標示,一般標示單一時間序列的會是一般label.
+
+- 如何設定觸發告警？
+你的prometheus.yml會分很多block,`global` block,`scrape_configs` block...,分別為全局設定,取得目標資料的設定,那設定告警的閾值是透過`rule_files`,當達到閾值後會透過`alert_manager`告警,alert_manager服務需要另外起,這邊要設定alert_manager服務起的ip跟port,！
+
+```yml title="prometheus.yml"
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - "127.0.0.1:9093"
+      basic_auth:
+        username: admin
+        password: alloha
+
+rule_files:
+  - "rules/linux.rules.yml"
+```
+
+網路上很多對告警的參考設定.
+
+主要就設定規則,嚴重等級,條件,至於你是否在算式上用label就看需求,接著就看alernmanager設定.
+
+alertmanager我是用docker-compose起.
+先執行指令建立資料夾,這是給之後掛載資源用
+
+```bash
+mkdir -p alertmanager
+cd alertmanager
+mkdir -p data
+mkdir -p configs
+touch configs/alertmanager.yml
+touch docker-compose.yml
+```
+
+設定檔如以下,主要就receiver對到的話就會發通知過去,如果有一個嚴重性為'critical'的警告，並且與嚴重性為'warning'的警告在'alertname'和'instance'上匹配，則warning會被抑制.
+
+```yml title="configs/alertmanager.yml"
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: 'tg-test'
+receivers:
+  - name: 'tg-test'
+    telegram_configs:
+    - bot_token:  urs:urs
+      api_url: https://api.telegram.org
+      chat_id: urs
+      # parse_mode: ''
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'instance']
+```
+
+```yml title="docker-compose.yml"
+version: '3.3'
+services:
+  alertmanager:
+    image: prom/alertmanager:v0.25.0
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - "./config:/config"
+      - "./data:/data"
+    command: --config.file=/config/alertmanager.yml --storage.path=/alertmanager  --log.level=debug
+```
+
+如果你要加驗證的東東,docker-compose.yml要加--web.config.file=/config/web.yml這個command,另外你的web.yml長相會像這樣
+
+```yaml
+basic_auth_users:
+    admin: 這邊是用加密的.
+```
 
 ### 查詢語法
 
@@ -243,88 +367,11 @@ node_memory_MemAvailable_bytes{instance="10.0.0.112:9100", job="node", origin_pr
 node_memory_MemAvailable_bytes{instance="10.0.0.112:9100", job="node", origin_prometheus="UAT", project="UAT"}....
 ```
 
-`consul`網路上教學很多,可以自己找,他的優缺點寫在前面了.
+:::info
 
-`雲端廠商`這個很重要,主要還是有IAM設定,ex.gce最少要有對compute resoruces的read-only等,ec2要有ec2:DescribeInstances permission.以下為ec2範例：
+網路上很多對告警的參考設定.
 
-```yaml
-  - job_name: service-ec2
-    ec2_sd_configs:
-      - region: us-east-1
-        access_key: access
-        secret_key: mysecret
-        profile: profile
-        filters:
-          - name: tag:environment
-            values:
-              - prod
-
-          - name: tag:service
-            values:
-              - web
-```
-
-`file_sd_config`
-
-```yaml
-scrape_configs:
-  - job_name: prometheus
-
-    honor_labels: true
-    # scrape_interval is defined by the configured global (15s).
-    # scrape_timeout is defined by the global default (10s).
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
-    file_sd_configs:
-      - files:
-          - foo/*.slow.json
-          - foo/*.slow.yml
-          - single/file.yml
-        refresh_interval: 10m
-      - files:
-          - bar/*.yaml
-```
-
-## kibana
-
-這邊用docker-compose起服務,不過會有conatiner一個使用者,而非預設的root
-
-```bash
-mkdir -p ./data
-chown -R 472:472 ./data
-```
-
-```yaml
-version: "3.3"
-services:
-  grafana:
-    image: grafana/grafana-enterprise:9.5.6
-    user: "472"
-    container_name: grafana
-    restart: unless-stopped
-    environment:
-     - GF_SERVER_ROOT_URL=http://*.948787.store/
-     - GF_INSTALL_PLUGINS=grafana-clock-panel
-    ports:
-     - '3000:3000'
-    volumes:
-     - '$PWD/data:/var/lib/grafana'
-```
-
-基本上,grafana只要設定資料源去拉prometheues,然後知道怎麼找適合的dashboard,以及變數如何設定就差不多！
-![variable](image.png)
-
-```bash
-| Variable       | Definition |
-| -------------- | ---------- |
-| project        | `label_values(node_uname_info, project)` |
-| job            | `label_values(node_uname_info{project=~"$project"}, job)` |
-| node           | `label_values(node_uname_info{job=~"$job",nodename=~"$hostname"},instance)` |
-| hostname       | `label_values(node_uname_info{job=~"$job"}, nodename)` |
-| device         | `label_values(node_network_info{instance=~'$node',device!~'tap.*|veth.*|br.*|docker.*|virbr.*|lo.*|cni.*'},device)` |
-| maxmount       | `query_result(topk(1,sort_desc (max(node_filesystem_size_bytes{instance=~'$node',fstype=~"ext.?|xfs",mountpoint!~".*pods.*"}) by (mountpoint)))` |
-| show_hostname  | `label_values(node_uname_info{job=~"$job",instance=~"$node"}, nodename)` |
-
-```
+1. [基本硬體監控](https://gist.github.com/krisek/62a98e2645af5dce169a7b506e999cd8)
+2. [各軟體監控大全,包含db](https://github.com/samber/awesome-prometheus-alerts/blob/master/_data/rules.yml)
+3. [這是第二點的講解](https://samber.github.io/awesome-prometheus-alerts/rules#host-and-hardware)
+:::

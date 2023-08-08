@@ -28,4 +28,13 @@ warn phase:
 
 此外 副本分片提供高可用跟故障回覆,當主分片故障會把副本提升為主分片.所以他同時作為查詢跟提升可用性
 
-5. 
+集群安裝流程
+
+1. 先安裝elk指令,依據[官網建立自簽憑證](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-basic-setup-https.html)
+2. 將憑證放到[安裝elk cluster的ansible](https://github.com/elastic/ansible-elasticsearch/tree/main)的files資料夾
+3. 執行ansible指令！
+4. 驗證
+
+基本上,一開始3個變多目前測試ok,但是單一elk變多個目前測試失敗！ 目前在想是不是cluster.name有衝突,還是當初有做錯！
+
+1. 先建立ca簽發單位

@@ -19,7 +19,7 @@ curl https://get.acme.sh | sh
 - set email
 
 ```bash
-cp /root/acme.sh /sbin/
+cp /root/.acme.sh/acme.sh /sbin/
 acme.sh --register-account -m uremail@gmail.com
 ```
 
@@ -48,7 +48,7 @@ acme.sh --issue --dns dns_cf -d  "*.948787.store"  -d "948787.store"
 --reloadcmd "systemctl reload nginx"               # 如果是用 Apache 請自己修改
 ```
 
-- 以我為例,就會拿到'*.948787.store_ecc'這個folder,folder結構如下
+- 以我為例,就會在`/root/.acme.sh`拿到'*.948787.store_ecc'這個folder,folder結構如下
 
 ```bash
 *.948787.store_ecc

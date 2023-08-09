@@ -1,9 +1,9 @@
 ---
 title: Delete log file than recreate log file, will log still write into it? Besides,compare with logrotate
-description: 123
+description: 在logging紀錄log方式下,程式本身應該是認inode的.你把日誌刪除後,即使新增同樣檔名的空白檔,一樣不會寫入日誌！linux管理日誌系統避免其大小過大,並進行適當rotation的工具是`logrotate`,他也會遇到日誌檔名的修改問題！那是怎麽做到輪詢這件事？
+
 authors: suyuying
 tags: [file system]
-draft: true
 ---
 
 ## 基礎linux文件管理

@@ -138,6 +138,42 @@ mount -a
 6. 下 mount -a 檢查有沒有確實拿掉，這樣在下次重開機就不會在吃到的
 7. 從 AWS 上直接把那顆硬碟做刪除
 
+
+### how to extend disk in aws
+擴充硬碟可以透過熱擴展的方式,不用先停機！[以下是依據官網這篇操作](https://docs.aws.amazon.com/zh_tw/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html)
+
+- 先擴充硬碟空間(到EBS那邊針對你要擴充的硬碟做modify)
+- 到主機上使用以下指令
+  - 檢查是否有分割區,請使用`lsblk`指令
+```text
+xvda     202:0    0    22G  0 disk
+├─xvda1  202:1    0  21.9G  0 part /
+├─xvda14 202:14   0     4M  0 part
+└─xvda15 202:15   0   106M  0 part /boot/efi
+``` 
+舉以上為例,正常有分配完的磁碟區並具有分割區會長得像以上這樣
+```text
+xvda     202:0    0    22G  0 disk
+├─xvda1  202:1    0  8G  0 part /
+├─xvda14 202:14   0     4M  0 part
+└─xvda15 202:15   0   106M  0 part /boot/efi
+```
+沒有分配好的則會像這樣,可以看到/dev/xvda的空間是大於下方分割區加總.
+  - 擴充硬碟 `growpart /dev/xvda 1`
+  - 確認檔案系統格式是ext4還是xfs,已確認擴充檔案系統指令,請使用`df -hT`
+```text
+root@ip-10-0-0-83:~# df -hT
+Filesystem     Type     Size  Used Avail Use% Mounted on
+/dev/root      ext4      22G   15G  7.0G  68% /
+tmpfs          tmpfs    479M     0  479M   0% /dev/shm
+tmpfs          tmpfs    192M  952K  191M   1% /run
+tmpfs          tmpfs    5.0M     0  5.0M   0% /run/lock
+/dev/xvda15    vfat     105M  6.1M   99M   6% /boot/efi
+tmpfs          tmpfs     96M  4.0K   96M   1% /run/user/1000
+overlay        overlay   22G   15G  7.0G  68% /var/lib/docker/overlay2/5efc459a6424331257227c5f5152d25d735ed0b1ef6e4b68a781d0092f21e6e2/merged
+```
+  - 因為我擴充改root,檔案系統是ext4,所以會用`resize2fs`指令,對應到前面擴充的分割區`xvda1`,就會使用`resize2fs /dev/xvda1`.
+
 ### Brief summary
 
 各家申請硬碟方式不一樣,但是 linux command 是可以共用的！

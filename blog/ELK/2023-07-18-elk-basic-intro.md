@@ -38,3 +38,9 @@ warn phase:
 基本上,一開始3個變多目前測試ok,但是單一elk變多個目前測試失敗！ 目前在想是不是cluster.name有衝突,還是當初有做錯！
 
 1. 先建立ca簽發單位
+
+以下是看reject情況判斷elk是不是有硬體問題ex jvm memory耗盡問題
+
+```bash
+curl -k -u kibana_system:XXXXXXX -X GET "https://10.160.0.8:9200/_cat/thread_pool?v=true&h=id,name,active,rejected,completed"
+```

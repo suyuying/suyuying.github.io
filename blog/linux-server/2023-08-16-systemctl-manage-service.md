@@ -1,6 +1,6 @@
 ---
 title: Use systemctl to manage service properly and safely
-description: 主要邏輯就是會先:`建立系統帳號` -> `限制資料夾權限及owner` -> `建立service設定檔` -> `透過systemctl託管該service`.
+description: 主要邏輯就是會先:`建立系統帳號` -> `限制資料夾權限及owner` -> `建立service設定檔` -> `透過systemctl託管該service`.另外,之前在設定service時候都是設定`Type=simple`,不過自從在rsync設定daemon服務踢到鐵板就知道必須了解差異,如果程式執行的模式是父process產生子process之後就關閉父process,例如:`rsync` daemon程式會產生子process作為主要執行process(同理還有nginx這類服務),就必須用`Type=forking`,否則`systemctl`會把它當作主程式退出,之後就會hang住然後回報failure狀態. `rsync server`的service設定檔如下...
 
 authors: suyuying
 tags: [systemctl,linux]
@@ -52,6 +52,37 @@ WantedBy=multi-user.target
 ```
 
 `Type`預設simple,由ExecStart 接的指令啟動服務並常駐在記憶體！
+
+:::tip
+之前在設定service時候都是設定`Type=simple`,不過自從在rsync設定daemon服務踢到鐵板就知道必須了解差異,如果程式執行的模式是父process產生子process之後就關閉父process,例如: `rsync` daemon程式會產生子process作為主要執行process(同理還有nginx這類服務),就必須用`Type=forking`,否則`systemctl`會把它當作主程式退出,之後就會hang住然後回報failure狀態. `rsync server`的service設定檔如下.
+
+```text title="/usr/lib/systemd/system/rsyncd.service"
+[Unit]
+Description=rsyncd Server
+After=network.target
+
+[Service]
+Type=forking
+
+ExecStart=/bin/rsync  --daemon --config=/etc/rsyncd.conf
+TimeoutStopSec=20s
+
+
+[Install]
+WantedBy=multi-user.target
+```
+
+至於為啥會try出這段,是因為在把它改為forking就成功了,仔細看服務會發現
+
+```text
+    Process: 2740 ExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.conf (code=exited, status=0/SUCCE>
+   Main PID: 2741 (rsync)
+```
+
+也就是PID不同的部分,所以要用`forking`.
+
+:::
+
 `Restart`此選項決定當服務遭遇錯誤或崩潰時是否自動重新啟動服務。根據設定不同，Systemd 會在不同情況下執行重新啟動。例如，如果設定為 `on-failure`，表示只有在服務失敗時才會自動重啟。
 
 `User` `Group`這個選項確定服務以哪個使用者及群處身份運行。當設定為 `prometheus` 時，服務將以 `prometheus` 使用者的身份運行。

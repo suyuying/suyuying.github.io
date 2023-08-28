@@ -28,3 +28,8 @@ Cloud deploy會註冊並管理pipline跟targets(指的是staging and production 
 後續的lab會拿我自己寫的程式,它原本是部署在docker上,會把它改成gke版本,config的放入會試試看config map跟
 headless service等東西！
 
+## 使用cloud deploy執行環境
+1. cloud build worker pool 會讓deploy在該池中執行部署及驗證
+2. cloud deploy需調用執行操作的帳號
+3. cloud storage 的清單存放位置
+4. 

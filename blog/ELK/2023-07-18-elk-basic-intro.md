@@ -7,6 +7,8 @@ tags: [ELK]
 draft: true
 ---
 
+- 如果要確認filebeat把資料流入,可以去看`log-cluster.log`,另外filebeat要確認`/var/lib/filebeat`看是否指針有走,/`var/log/filebeat`看是否有報錯！
+
 1. 管理資料源- 7版之後在推使用elastic agent配合fleet做beats設定檔的集群管理,優點是可以用多個模板給機器,不需要裝很多beat就有各個beat的功能,不用一個個進去做filebeat.yml,不過這個優點對於很喜歡用跳板機的公司然後網路開通申請超麻煩的公司而言會很難用,要說資安疑慮可能就會是你的ELK系統會從原本的只負責接收資料,變成會透過fleet跟你的elastic agent主機做互動. 統一配置的問題點會在要亂搞配置很快.
 
 2. elk建立index邏輯-filebeat往elk送日誌,elk收到後根據設定建立index,細節在於filebeat建立日誌的邏輯,他是否會發送重複日誌的可能性？filebeat透過把曾經讀取並發送的日誌,以log記錄在registry資料夾,裡面會紀錄offset,所以你會有個json檔敘述之前讀到哪個位置,所以即使之後filebeat掛掉或重啟,他都會來這隻檔案確認offset位置,並依照這個位置繼續向下方送,所以即使elk的index會每天因日期而生成不同index,他裡面的資料理論上不會有包含昨天的！如果elk掛了,那資料就會先queue在filebeat這邊,等到正常以後才會繼續發送,不過因為這樣資料會先放在ram裏面,所以要注意filebeat得設定！

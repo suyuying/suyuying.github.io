@@ -36,7 +36,7 @@ sed -n "/2023-04-20 05:10/,/2023-04-20 05:21/p" chanxxxe*out* > /tmp/lyapi.log
 ```
 
 ## grep
-
+預設是case-sensitive的,如果要不區分大小寫要加`-i`選項！
 sort 排列
 uniq 去掉重複，要計數可以用 uniq -c
 

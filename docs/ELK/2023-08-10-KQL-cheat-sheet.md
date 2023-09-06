@@ -35,10 +35,14 @@ Elastic查詢是透過某個data view去查底下的field,一個應用程式的�
 
 以查詢以上為例
 
-- 查詢message field含有www關鍵字
+- 查詢message field含有www關鍵字,注意KQL語法是用完全匹配,沒有完全匹配就不回,如果只記得關鍵字要加*
 
 ```kql
 message:  *www*
+```
+如果你的關鍵字是中文,就不用加**,不然他會出不來
+```kql
+message:  路由
 ```
 
 - 查詢message field含有這兩個字眼info以及not found的句子(精確匹配)
@@ -66,3 +70,27 @@ message:  info OR message: "not found"
 2. [Kibana offical website](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)
 
 :::
+
+## 驗證
+
+要確認index是否建立,最直觀可以去看index有沒有跑出來！
+比較次之的方法,去看es_log_dir指定的log位置裏面的`log-cluster.log`他預設每天會壓縮當日的log一次. 
+
+如果沒發現有建立,那就要排查了,我一般都會做幾個方向排查
+
+1. 檢查filebeat之類轉發日誌的服務,他對elastic的網路有沒有通
+2. 檢查filebeat在/var/log/filebeat.log有沒有報錯,/var/lib/filebeat這邊的指針有沒有動(他原理是定時偵測檔案然後用指針方式標示他目前讀的位置,這樣才不會重複出去),如果發現指針根本沒動那一定是你日誌路徑錯了！
+3. 把以上打通,還是掛的就要去確認是不是elastich問題
+
+## ELK已知報錯
+
+- shard爆量報錯如下,預設每個node上限是建立1000個shard,爆了要做調整(這邊先不討論超過1000是否合理)
+
+```text 
+[ERROR][o.e.x.i.IndexLifecycleRunner] [elastic-1] policy [filebeat] for index [.xxxxxx] failed on step [{"phase":"hot","action":"rollover","name":"attempt-rollover"}]. Moving to ERROR step
+org.elasticsearch.common.ValidationException: Validation Failed: 1: this action would add [2] shards, but this cluster currently has [2999]/[3000] maximum normal shards open;
+```
+[解法就是去調整每個node上限shard](https://www.jianshu.com/p/8ea97bd0f037)
+
+- 記憶體不足報錯,調整`jvm.options`中的記憶體量！一般建議是用二分之一記憶體！
+

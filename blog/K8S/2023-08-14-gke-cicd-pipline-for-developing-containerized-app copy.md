@@ -32,4 +32,4 @@ headless service等東西！
 1. cloud build worker pool 會讓deploy在該池中執行部署及驗證
 2. cloud deploy需調用執行操作的帳號
 3. cloud storage 的清單存放位置
-4. 
+   

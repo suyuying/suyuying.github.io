@@ -107,6 +107,34 @@ for attribute in file_attributes:
 
 `dir()`函式列出物件的所有屬性名稱,return list[str],使用 for 打開並用 getattr(物件,屬性)去取得對應的值,最後就會得到屬性跟對應 value.
 
+## 字串處理
+
+1. 確認list裡面的每個字尾三碼符合crt or cer,使用列表生成式讀出每個元素字串的末三個字(切片值-3),匹配多個選項,使用`['crt','cer']`做or匹配
+
+```python3
+certs_possible_list=['gigi.cer', 'nono.txt', 'hihi.crt']
+certs_lists=[cert for cert in certs_possible_list if cert[-3::] in ["crt","cer"]]
+print(certs_lists)
+```
+也可以用endwith的寫法
+
+```python3
+certs_possible_list=['gigi.cer', 'nono.txt', 'hihi.crt']
+certs_lists = [cert for cert in certs_possible_list if cert.endswith((".crt", ".cer"))]
+print(certs_lists)
+```
+
+:::danger
+這是不正確的方式，因為 "crt" 和 "cer" 都會被視為True
+
+```python
+certs_possible_list=['gigi.cer', 'nono.txt', 'hihi.crt']
+certs_lists=[cert for cert in certs_possible_list if cert[-3::] in "crt" or "cer"]
+print(certs_lists)
+```
+
+:::
+
 ## 使用 virustotal 的 api 掃描檔案是否有病毒
 
 [官方文檔套件文檔](https://virustotal.github.io/vt-py/howtoinstall.html)

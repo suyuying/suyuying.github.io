@@ -36,9 +36,11 @@ sed -n "/2023-04-20 05:10/,/2023-04-20 05:21/p" chanxxxe*out* > /tmp/lyapi.log
 ```
 
 ## grep
-預設是case-sensitive的,如果要不區分大小寫要加`-i`選項！
-sort 排列
-uniq 去掉重複，要計數可以用 uniq -c
+預設是case-sensitive的,如果要不區分大小寫要加`-i`選項！另外要使用正則要注意用法,grep用*代表通配符,python正則要用`.*`才能才能做到同樣事情,要自己注意,不然會遇到像我在加jenkins做role patterm時候用錯方式,測半天發現都沒成功的慘劇！
+
+
+`sort` 排列
+`uniq` 去掉重複，要計數可以用 `uniq -c`
 
 ```
 grep -r "bin" * | grep -Eo "code\":[0-9]{0,}" |sort | uniq

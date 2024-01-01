@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsitev_1=self.webpackChunkwebsitev_1||[]).push([[3854],{83800:e=>{e.exports=JSON.parse('{"label":"GCP","permalink":"/blog/tags/gcp","allTagsPath":"/blog/tags","count":1}')}}]);

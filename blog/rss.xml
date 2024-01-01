@@ -4,10 +4,21 @@
         <title>Zaxro Blog Blog</title>
         <link>https://suyuying.github.io/blog</link>
         <description>Zaxro Blog Blog</description>
-        <lastBuildDate>Wed, 16 Aug 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 02 Jan 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[GCP設定IAM相關]]></title>
+            <link>https://suyuying.github.io/blog/2024/01/02/GCP/basic-iam-managment</link>
+            <guid>https://suyuying.github.io/blog/2024/01/02/GCP/basic-iam-managment</guid>
+            <pubDate>Tue, 02 Jan 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[IAM setting of IAM]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-gcp-iam-works">How Gcp IAM works<a href="#how-gcp-iam-works" class="hash-link" aria-label="Direct link to How Gcp IAM works" title="Direct link to How Gcp IAM works">​</a></h2><p>透過授予主體(principal)相關 role(對特定 resource 有操作權限)來執行操作(開 VM,調安全組規則等),而以上的 role binding 綁定關係被稱為 Policy.
+在 GCP 實體如以下</p><ul><li>Google Account: 例如<a href="mailto:examplefordtest@gmail.com" target="_blank" rel="noopener noreferrer">examplefordtest@gmail.com</a></li><li>Service account: 給程式用的,要額外驗證</li><li>Google group: 透過群組管理多個 google account,方便管理用,但不能驗證個人訊息.</li><li>Google Workspace account:指組織或企業使用 Google Workspace 的帳戶。每個 Google Workspace 帳戶都與組織的域名相關聯</li><li>Cloud Identity domain:組織 sso 用來做驗證成員身份用</li><li>All authenticated users</li><li>All users</li></ul><p>跟 aws 差別在於 aws 沒有特別結合 gmail,然後 gcp 設計的管理架構是 organization-&gt; Folder-&gt;Project-&gt;resources, 在每一個 Project 的 IAM 全限對 resource 是獨立的,在 aws 部分,則是透過 tag 或者正則表示法在 policy 那邊限制使用者對特定資源的操作.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="參考資料">參考資料<a href="#參考資料" class="hash-link" aria-label="Direct link to 參考資料" title="Direct link to 參考資料">​</a></h2><p><a href="https://cloud.google.com/iam/docs/overview" target="_blank" rel="noopener noreferrer">GCP 官網 IAM 介紹</a></p>]]></content:encoded>
+            <category>GCP</category>
+            <category>IAM</category>
+        </item>
         <item>
             <title><![CDATA[Use systemctl to manage service properly and safely]]></title>
             <link>https://suyuying.github.io/blog/2023/08/16/linux-server/systemctl-manage-service</link>
